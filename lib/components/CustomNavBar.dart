@@ -37,7 +37,7 @@ class CustomNavBar extends StatelessWidget {
           backgroundColor: Colors.purple,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.settings),
+          icon: Icon(Icons.pets),
           label: 'Breeds',
           backgroundColor: Colors.pink,
         ),
