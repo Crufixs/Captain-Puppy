@@ -3,6 +3,7 @@ import 'package:fap/pages/Expenses%20Page.dart';
 import 'package:fap/pages/Home%20Page.dart';
 import 'package:fap/pages/Notes%20Page.dart';
 import 'package:fap/pages/Profile%20Page.dart';
+import 'package:fap/utilities/constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomNavBar extends StatelessWidget {
@@ -20,35 +21,45 @@ class CustomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
+      unselectedItemColor: secondColor,
+      selectedItemColor: firstColor,
+      selectedFontSize: 12,
+      unselectedFontSize: 12,
+      showSelectedLabels: false,
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-          icon: Icon(Icons.home),
+          icon: Icon(Icons.home, size: 24),
+          activeIcon: Icon(Icons.home, size: 40),
           label: 'Home',
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.white,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.attach_money),
+          activeIcon: Icon(Icons.attach_money, size: 40),
           label: 'Expenses',
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.white,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.school),
+          icon: Icon(Icons.account_circle),
+          activeIcon: Icon(Icons.account_circle, size: 40),
           label: 'Profile',
-          backgroundColor: Colors.purple,
+          backgroundColor: Colors.white,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.pets),
+          activeIcon: Icon(Icons.pets, size: 40),
           label: 'Breeds',
-          backgroundColor: Colors.pink,
+          backgroundColor: Colors.white,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.note_alt_rounded),
+          activeIcon: Icon(Icons.note_alt_rounded, size: 40),
           label: 'Notes',
-          backgroundColor: Colors.pink,
+          backgroundColor: Colors.white,
         ),
       ],
       currentIndex: currentIndex,
-      selectedItemColor: Colors.amber[800],
       onTap: (index) => navigatePage(index),
     );
   }
