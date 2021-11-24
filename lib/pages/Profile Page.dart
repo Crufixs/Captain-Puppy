@@ -8,12 +8,9 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: Center(
-          child: Center(
-            child: Text("PROFILE", style: TextTitle),
-          ),
+          child: Text("PROFILE", style: TextTitle),
         ),
       ),
-      bottomNavigationBar: CustomNavBar(currentIndex: 2, context: context),
     );
   }
 }

@@ -11,7 +11,6 @@ class NotesPage extends StatelessWidget {
           child: Text("NOTES", style: TextTitle),
         ),
       ),
-      bottomNavigationBar: CustomNavBar(currentIndex: 4, context: context),
     );
   }
 }
