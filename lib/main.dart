@@ -1,67 +1,95 @@
+import 'package:fap/components/CustomNavBar.dart';
+import 'package:fap/pages/Breeds%20Page.dart';
 import 'package:fap/pages/Expenses%20Page.dart';
 import 'package:fap/pages/Home%20Page.dart';
+import 'package:fap/pages/Notes%20Page.dart';
+import 'package:fap/pages/Profile%20Page.dart';
+import 'package:fap/services/breed_brain.dart';
+import 'package:fap/utilities/constants.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MyHome());
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class MyHome extends StatelessWidget {
+  const MyHome({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      // PALIT PALITAN TO PARA PANGTESTING
-      home: ExpensesPage(),
-    );
+    return MaterialApp(home: MyApp());
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
-  final String title;
-
+class MyApp extends StatefulWidget {
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _MyAppState createState() => _MyAppState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class _MyAppState extends State<MyApp> {
+  int selectedPage = 0;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  final _pageOptions = [
+    HomePage(),
+    ExpensesPage(),
+    ProfilePage(),
+    BreedsPage(),
+    NotesPage(),
+    BreedsPage(),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
+      body: WillPopScope(
+        onWillPop: () async => false,
+        child: _pageOptions[selectedPage],
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        unselectedItemColor: secondColor,
+        selectedItemColor: firstColor,
+        selectedFontSize: 12,
+        unselectedFontSize: 12,
+        showSelectedLabels: false,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home, size: 24),
+            activeIcon: Icon(Icons.home, size: 40),
+            label: 'Home',
+            backgroundColor: Colors.white,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.attach_money),
+            activeIcon: Icon(Icons.attach_money, size: 40),
+            label: 'Expenses',
+            backgroundColor: Colors.white,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle),
+            activeIcon: Icon(Icons.account_circle, size: 40),
+            label: 'Profile',
+            backgroundColor: Colors.white,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.pets),
+            activeIcon: Icon(Icons.pets, size: 40),
+            label: 'Breeds',
+            backgroundColor: Colors.white,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.note_alt_rounded),
+            activeIcon: Icon(Icons.note_alt_rounded, size: 40),
+            label: 'Notes',
+            backgroundColor: Colors.white,
+          ),
+        ],
+        currentIndex: selectedPage,
+        onTap: (index) {
+          setState(() {
+            selectedPage = index;
+          });
+        },
       ),
     );
   }
