@@ -21,6 +21,8 @@ environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
+  fl_chart: ^0.40.2
+  http: ^0.13.4
   flutter:
     sdk: flutter
 
@@ -43,6 +45,9 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+    - icons/dog_icons/
+    - images/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
