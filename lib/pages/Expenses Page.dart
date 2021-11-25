@@ -1,3 +1,4 @@
+import 'package:fap/components/ExpensesDialog.dart';
 import 'package:fap/components/ReusableComponent.dart';
 import 'package:fap/services/expenses_brain.dart';
 import 'package:fap/utilities/constants.dart';
@@ -93,23 +94,13 @@ class _ExpensesPageState extends State<ExpensesPage> {
                     FlatButton(
                       color: Color(0x00000000),
                       onPressed: () {},
-                      child: Text(
-                        "<",
-                        style: TextStyle(
-                          fontSize: 30,
-                        ),
-                      ),
+                      child: Icon(Icons.arrow_back),
                     ),
                     Text("Octember", style: TextContent),
                     FlatButton(
                       color: Color(0x00000000),
                       onPressed: () {},
-                      child: Text(
-                        ">",
-                        style: TextStyle(
-                          fontSize: 30,
-                        ),
-                      ),
+                      child: Icon(Icons.arrow_forward),
                     ),
                   ],
                 ),
@@ -209,9 +200,19 @@ class _ExpensesPageState extends State<ExpensesPage> {
             )
           ],
         ),
+        function: showEditExpenseDialog,
         iconColor: iconColor,
         color: color,
-        breedName: "Rawr");
+        title: "Rawr");
+  }
+
+  void showEditExpenseDialog(context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return EditExpense();
+      },
+    );
   }
 
   Widget getSummarySection() {

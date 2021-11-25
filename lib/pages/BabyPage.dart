@@ -93,13 +93,10 @@ class _BabyPageState extends State<BabyPage> {
       floatingActionButton: selectedPage == 1
           ? FloatingActionButton(
               onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return ExpensesDialog(
-                      context: context,
-                    );
-                  },
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => AddExpense(context: context)),
                 );
               },
               child: const Icon(Icons.add),
@@ -107,37 +104,5 @@ class _BabyPageState extends State<BabyPage> {
             )
           : null,
     );
-  }
-
-  _openPopup(context) {
-    Alert(
-        context: context,
-        title: "LOGIN",
-        content: Column(
-          children: <Widget>[
-            TextField(
-              decoration: InputDecoration(
-                icon: Icon(Icons.account_circle),
-                labelText: 'Username',
-              ),
-            ),
-            TextField(
-              obscureText: true,
-              decoration: InputDecoration(
-                icon: Icon(Icons.lock),
-                labelText: 'Password',
-              ),
-            ),
-          ],
-        ),
-        buttons: [
-          DialogButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(
-              "LOGIN",
-              style: TextStyle(color: Colors.white, fontSize: 20),
-            ),
-          )
-        ]).show();
   }
 }
