@@ -100,7 +100,7 @@ class _BabyPageState extends State<BabyPage> {
                 );
               },
               child: const Icon(Icons.add),
-              backgroundColor: Colors.green,
+              backgroundColor: fourthColor,
             )
           : null,
     );
