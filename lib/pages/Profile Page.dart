@@ -1,4 +1,4 @@
-import 'package:fap/components/CustomNavBar.dart';
+
 import 'package:fap/utilities/constants.dart';
 import 'package:fap/components/User.dart';
 import 'package:fap/components/User_Details.dart';
