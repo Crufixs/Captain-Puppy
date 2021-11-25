@@ -21,10 +21,14 @@ class ReusableComponent extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
+          //color: Colors.blue,
           width: screenWidth * 0.80,
-          height: screenHeight * 0.15,
+          height: 135,
           child: ElevatedButton(
-            child: insideComponents,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 15),
+              child: insideComponents,
+            ),
             onPressed: () {},
             style: ButtonStyle(
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
