@@ -1,7 +1,9 @@
+import 'package:fap/components/ExpensesDialog.dart';
+import 'package:fap/services/expenses_brain.dart';
 import 'package:fap/utilities/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'Breeds Page.dart';
 import 'Expenses Page.dart';
 import 'Home Page.dart';
@@ -11,23 +13,26 @@ import 'Profile Page.dart';
 class BabyPage extends StatefulWidget {
   BabyPage({this.selectedPage});
   var selectedPage;
+  final ExpensesBrain eb = new ExpensesBrain();
 
   @override
-  _BabyPageState createState() => _BabyPageState(selectedPage: selectedPage);
+  _BabyPageState createState() =>
+      _BabyPageState(selectedPage: selectedPage, eb: eb);
 }
 
 class _BabyPageState extends State<BabyPage> {
-  _BabyPageState({this.selectedPage});
+  _BabyPageState({this.selectedPage, required this.eb}) {
+    _pageOptions = [
+      Container(),
+      ExpensesPage(eb: eb),
+      ProfilePage(),
+      BreedsPage(),
+      NotesPage(),
+    ];
+  }
+  var _pageOptions;
   var selectedPage;
-
-  final _pageOptions = [
-    Container(),
-    ExpensesPage(),
-    ProfilePage(),
-    BreedsPage(),
-    NotesPage(),
-    BreedsPage(),
-  ];
+  final ExpensesBrain eb;
 
   @override
   Widget build(BuildContext context) {
@@ -85,6 +90,54 @@ class _BabyPageState extends State<BabyPage> {
           });
         },
       ),
+      floatingActionButton: selectedPage == 1
+          ? FloatingActionButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return ExpensesDialog(
+                      context: context,
+                    );
+                  },
+                );
+              },
+              child: const Icon(Icons.add),
+              backgroundColor: Colors.green,
+            )
+          : null,
     );
+  }
+
+  _openPopup(context) {
+    Alert(
+        context: context,
+        title: "LOGIN",
+        content: Column(
+          children: <Widget>[
+            TextField(
+              decoration: InputDecoration(
+                icon: Icon(Icons.account_circle),
+                labelText: 'Username',
+              ),
+            ),
+            TextField(
+              obscureText: true,
+              decoration: InputDecoration(
+                icon: Icon(Icons.lock),
+                labelText: 'Password',
+              ),
+            ),
+          ],
+        ),
+        buttons: [
+          DialogButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(
+              "LOGIN",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+          )
+        ]).show();
   }
 }
