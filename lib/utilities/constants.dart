@@ -23,8 +23,8 @@ const TextContent = TextStyle(
   fontSize: 20,
 );
 
-const TextButton = TextStyle(
+const TextForButton = TextStyle(
   //fontFamily:
-  fontSize: 15,
+  fontSize: 20,
   color: Colors.white,
 );
