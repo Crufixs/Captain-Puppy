@@ -1,21 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class BreedButton extends StatelessWidget {
-  BreedButton(
+class ReusableComponent extends StatelessWidget {
+  ReusableComponent(
       {required this.breedName,
       required this.color,
       required this.iconColor,
-      required this.picture,
-      required this.insideComponents,
-      required this.function});
+      required this.insideComponents});
 
   final String breedName;
   final Color color;
   final Color iconColor;
-  final String picture;
   final Row insideComponents;
-  final Function function;
 
   @override
   Widget build(BuildContext context) {
