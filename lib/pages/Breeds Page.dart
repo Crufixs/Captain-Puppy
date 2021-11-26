@@ -1,19 +1,63 @@
 import 'dart:math';
-
-import 'package:fap/components/CustomNavBar.dart';
+import 'package:fap/model/breed.dart';
 import 'package:fap/services/breed_brain.dart';
+import 'package:fap/services/database_services.dart';
 import 'package:fap/utilities/constants.dart' as constants;
 import 'package:fap/utilities/constants.dart';
 import 'package:flutter/material.dart';
 
 class BreedsPage extends StatefulWidget {
-
   @override
   _BreedsPageState createState() => _BreedsPageState();
 }
 
 class _BreedsPageState extends State<BreedsPage> {
-  var breedData;
+
+  List<Breed> breeds = [];
+  List<Breed> breedDuplicate = [];
+
+  dynamic getData() async {
+    BreedBrain breedBrain = BreedBrain();
+    await breedBrain.generateBreedData();
+    breeds = breedBrain.getBreedList();
+    breedDuplicate.addAll(breeds);
+    return breedDuplicate;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: getData(), // getting the breed data
+      builder: (BuildContext context, AsyncSnapshot snap) {
+        if (snap.data == null) {
+          return Center(
+            child: Text("LOADING", style: TextTitle),
+          );
+        } else {
+          return ListBreed(breeds: breeds, breedDuplicate: breedDuplicate,);
+        }
+      },
+    );
+  }
+}
+
+
+class ListBreed extends StatefulWidget {
+  ListBreed({required this.breeds, required this.breedDuplicate});
+
+  final List<Breed> breeds;
+  final List<Breed> breedDuplicate;
+
+  @override
+  _ListBreedState createState() => _ListBreedState();
+}
+
+class _ListBreedState extends State<ListBreed> {
+
+  List<Breed> breeds = [];
+  List<Breed> breedDuplicate = [];
+
+  TextEditingController editingController = TextEditingController();
 
   List<Color> colors = [
     constants.firstColor,
@@ -29,29 +73,19 @@ class _BreedsPageState extends State<BreedsPage> {
     constants.fourthTransparentColor
   ];
 
-  dynamic getData() async {
-    BreedBrain breedBrain = BreedBrain();
-    await breedBrain.generateBreedData();
-    return breedData = breedBrain.getBreedData();
+  @override
+  void initState() {
+    // TODO: implement initState
+    breeds = widget.breeds;
+    breedDuplicate = widget.breedDuplicate;
   }
 
   @override
   Widget build(BuildContext context) {
+
     double screenWidth = MediaQuery.of(context).size.width;
 
-    return FutureBuilder(
-        future:
-            getData(), // the function to get your data from firebase or firestore
-        builder: (BuildContext context, AsyncSnapshot snap) {
-          if (snap.data == null) {
-            return Center(
-              child: Text("LOADING", style: TextTitle),
-            );
-          } else {
-            return generateScreenContent(screenWidth);
-          }
-        },
-    );
+    return generateScreenContent(screenWidth);
   }
 
   generateScreenContent(double screenWidth) {
@@ -76,6 +110,10 @@ class _BreedsPageState extends State<BreedsPage> {
           child: Container(
             width: screenWidth * 0.75,
             child: TextField(
+              controller: editingController,
+              onChanged: (query){
+                filterSearchResults(query);
+              },
               decoration: InputDecoration(
                 hintText: "Search a specific breed",
                 border: OutlineInputBorder(
@@ -89,25 +127,50 @@ class _BreedsPageState extends State<BreedsPage> {
     );
 
     int colorIndex = 0;
+    print(breedDuplicate.length);
 
-    for (var i = 0; i < 172; i++) {
+    for (var i = 0; i < breedDuplicate.length; i++) {
       children.add(
         BreedButton(
-          breedName: breedData[i]['name'],
+          // breedName: breedData[i]['name'],
+          breedName: breedDuplicate[i].name,
           color: transparentColors[colorIndex],
           iconColor: colors[colorIndex],
-          picture: (Random().nextInt(10) + 1).toString() + "dog",
+          picture: breedDuplicate[i].imageURL,
         ),
       );
 
       colorIndex++;
-      if (colorIndex == 4)
-        colorIndex = 0;
+      if (colorIndex == 4) colorIndex = 0;
     }
 
     return ListView(
       children: children,
     );
+  }
+
+  void filterSearchResults(String query){
+    List<Breed> dummySearchList = [];
+    dummySearchList.addAll(breeds);
+
+    if(query.isNotEmpty) {
+      List<Breed> dummyData = [];
+      dummySearchList.forEach((item) {
+        if(item.name.toLowerCase().contains(query.toLowerCase())) {
+          dummyData.add(item);
+        }
+      });
+      setState(() {
+        breedDuplicate.clear();
+        breedDuplicate.addAll(dummyData);
+      });
+      return;
+    } else {
+      setState(() {
+        breedDuplicate.clear();
+        breedDuplicate.addAll(breeds);
+      });
+    }
   }
 }
 
@@ -141,8 +204,8 @@ class BreedButton extends StatelessWidget {
                     padding: const EdgeInsets.all(8.00),
                     width: 70,
                     height: 70,
-                    child: Image.asset(
-                      'icons/dog_icons/$picture.png',
+                    child: CircleAvatar(
+                      backgroundImage: NetworkImage(picture),
                     ),
                   ),
                   decoration: BoxDecoration(
@@ -171,7 +234,7 @@ class BreedButton extends StatelessWidget {
                           "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
                           style: TextStyle(
                             fontSize: 15,
-                            color: Colors.grey,
+                            color: constants.fifthColor,
                             fontWeight: FontWeight.normal,
                           ),
                         ),

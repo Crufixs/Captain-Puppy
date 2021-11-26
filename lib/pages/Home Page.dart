@@ -1,4 +1,3 @@
-import 'package:fap/components/CustomNavBar.dart';
 import 'package:fap/main.dart';
 import 'package:fap/utilities/constants.dart' as constants;
 import 'package:flutter/material.dart';

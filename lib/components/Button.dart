@@ -16,15 +16,16 @@ class Button extends StatelessWidget {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         padding: EdgeInsets.symmetric(
-          vertical: 12,
-          horizontal: 20,
+          vertical: 15,
+          horizontal: 50,
         ),
         shape: StadiumBorder(),
         onPrimary: Colors.white,
+        primary: firstColor,
       ),
       child: Text(text,
           style: TextStyle(
-            fontSize: 15,
+            fontSize: 18,
           )),
       onPressed: onClicked,
     );

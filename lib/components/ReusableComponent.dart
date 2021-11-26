@@ -3,15 +3,17 @@ import 'package:flutter/material.dart';
 
 class ReusableComponent extends StatelessWidget {
   ReusableComponent(
-      {required this.breedName,
+      {required this.title,
       required this.color,
       required this.iconColor,
-      required this.insideComponents});
+      required this.insideComponents,
+      required this.function});
 
-  final String breedName;
+  final String title;
   final Color color;
   final Color iconColor;
   final Row insideComponents;
+  Function function = () {};
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +23,17 @@ class ReusableComponent extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
+          //color: Colors.blue,
           width: screenWidth * 0.80,
-          height: screenHeight * 0.15,
+          height: 135,
           child: ElevatedButton(
-            child: insideComponents,
-            onPressed: () {},
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 15),
+              child: insideComponents,
+            ),
+            onPressed: () {
+              function.call(context);
+            },
             style: ButtonStyle(
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
