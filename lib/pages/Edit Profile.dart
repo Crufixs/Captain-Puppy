@@ -1,5 +1,5 @@
-import 'package:fap/components/User.dart';
-import 'package:fap/components/User_Details.dart';
+import 'package:fap/model//User.dart';
+import 'package:fap/model/User_Details.dart';
 import 'package:fap/components/Profile_Modify.dart';
 import 'package:fap/components/EditProfile_Modify.dart';
 import 'package:fap/components/TextField_Modify.dart';
@@ -9,13 +9,14 @@ import 'package:fap/components/OptionSelect.dart';
 import 'package:fap/utilities/constants.dart';
 import 'package:flutter/material.dart';
 
+
 class EditProfile extends StatefulWidget {
   @override
   _EditProfileState createState() => _EditProfileState();
 }
 
 class _EditProfileState extends State<EditProfile> {
-  User user = UserDetails.userRecord;
+  // User user = UserDetails.userRecord;
 
   @override
   Widget build(BuildContext context) {
@@ -32,20 +33,20 @@ class _EditProfileState extends State<EditProfile> {
             child: Column(
               children: [
                 EditProfileModify(
-                  petImage: user.petImage,
+                  petImage: User.pet.petImage,
                   isEdit: true,
                   onClicked: () async {},
                 ),
                 const SizedBox(height: 15),
                 TextFieldModify(
                     label: 'Your Name',
-                    value: user.userName,
+                    value: User.userName,
                     onChanged: (userName) {}
                 ),
                 const SizedBox(height: 20),
                 TextFieldModify(
                     label: 'Pet\'s Name',
-                    value: user.petName,
+                    value: User.pet.petName,
                     onChanged: (petName) {}
                 ),
                 const SizedBox(height: 20),
@@ -59,7 +60,7 @@ class _EditProfileState extends State<EditProfile> {
                           child: TextFieldModify(
                             // NUMBER FIELD TO DAPAT
                               label: 'Pet\'s Age',
-                              value: user.petName,
+                              value: User.pet.petName,
                               onChanged: (petName) {}
                           ),
                         ),
@@ -71,7 +72,7 @@ class _EditProfileState extends State<EditProfile> {
                       child: Container(
                         child: TextFieldModify(
                             label: 'Pet\'s Breed',
-                            value: user.breed,
+                            value: User.pet.breed,
                             onChanged: (breed) {}
                         ),
                       ),
@@ -90,7 +91,7 @@ class _EditProfileState extends State<EditProfile> {
                           child: TextFieldModify(
                             // NUMBER FIELD TO DAPAT + SLIDER T^T
                               label: 'Pet\'s Weight',
-                              value: user.userName,
+                              value: User.userName,
                               onChanged: (userName) {}
                           ),
                         ),
@@ -138,7 +139,11 @@ class _EditProfileState extends State<EditProfile> {
   }
 
   saveButton() => Button(
-    text: 'Save Changes',
-    onClicked: () {}
+      text: 'Save Changes',
+      vPadding: 5,
+      hPadding: 5,
+      onClicked: () {}
   );
+
 }
+
