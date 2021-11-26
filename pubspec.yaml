@@ -23,6 +23,8 @@ environment:
 dependencies:
   fl_chart: ^0.40.2
   http: ^0.13.4
+  sqflite:
+  path:
   flutter:
     sdk: flutter
 

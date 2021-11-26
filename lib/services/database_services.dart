@@ -11,7 +11,6 @@ class DatabaseServices {
 
   Future<Database> getDatabase () async{
     if(_database!=null) {
-      print('HINDI');
       return _database;
     }
     _database = await _initiateDatabase();
@@ -50,6 +49,7 @@ class DatabaseServices {
   Future<List<Breed>> generateBreedList() async{
     final db = await getDatabase();
     final List<Map<String, dynamic>> maps = await db.query('breed');
+    print(maps.length.toString() + "HEHEHEHE");
 
     List<Breed> breedList = [];
     for(int i=0; i<maps.length; i++){
