@@ -12,6 +12,11 @@ const thirdTransparentColor = Color(0x80F2B366); //lighter orange
 const fourthTransparentColor = Color(0x80F2865E); //darker orange
 const fifthTransparentColor = Color(0x80F2F2F2); //w
 
+const pieChartColor1 = Color(0xff9BBFE0);
+const pieChartColor2 = Color(0xffE8A09A);
+const pieChartColor3 = Color(0xffFBE29F);
+const pieChartColor4 = Color(0xffC6D68F);
+
 const TextTitle = TextStyle(
   //fontFamily:
   fontSize: 50,
