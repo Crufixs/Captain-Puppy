@@ -20,8 +20,8 @@ class Button extends StatelessWidget {
           horizontal: 50,
         ),
         shape: StadiumBorder(),
-        onPrimary: Colors.white,
         primary: firstColor,
+        onPrimary: Colors.white,
       ),
       child: Text(text,
           style: TextStyle(
