@@ -10,7 +10,7 @@ const firstTransparentColor = Color(0x807D79F2); //darker purple
 const secondTransparentColor = Color(0x808D92F2); //lighter purple
 const thirdTransparentColor = Color(0x80F2B366); //lighter orange
 const fourthTransparentColor = Color(0x80F2865E); //darker orange
-const fifthTransparentColor = Color(0x80F2F2F2); //w
+const fifthTransparentColor = Color(0x80F2F2F2); //white
 
 const pieChartColor1 = Color(0xff9BBFE0);
 const pieChartColor2 = Color(0xffE8A09A);
@@ -32,4 +32,25 @@ const TextForButton = TextStyle(
   //fontFamily:
   fontSize: 20,
   color: Colors.white,
+);
+
+const TextContentHeading1 = TextStyle(
+  //fontFamily:
+  fontSize: 25,
+  color: Colors.black,
+  fontWeight: FontWeight.bold,
+);
+
+const TextContentHeading2 = TextStyle(
+  //fontFamily:
+  fontSize: 20,
+  color: Colors.black,
+  fontWeight: FontWeight.w500,
+);
+
+const TextContentNormal = TextStyle(
+  //fontFamily:
+  fontSize: 20,
+  fontWeight: FontWeight.normal,
+  color: Colors.black
 );

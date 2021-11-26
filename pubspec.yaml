@@ -26,6 +26,8 @@ dependencies:
   sqflite:
   path:
   http: ^0.13.4
+  sqflite:
+  path:
   flutter:
     sdk: flutter
 

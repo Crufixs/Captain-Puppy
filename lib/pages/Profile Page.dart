@@ -1,4 +1,5 @@
-
+import 'package:fap/components/CustomNavBar.dart';
+import 'package:fap/pages/Edit%20Profile.dart';
 import 'package:fap/utilities/constants.dart';
 import 'package:fap/components/User.dart';
 import 'package:fap/components/User_Details.dart';
@@ -15,32 +16,38 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-    final user = UserDetails.userRecord;
-    return SafeArea(
-      child: Column(
-        // ListView
-        // physics: BouncingScrollPhysics(),
-        children: [
-          ProfileModify(
-            petimage: user.petimage,
-            // onClicked: () async {},
+    final user = UserDetails.userRecord; // access the User_Details
+    return MaterialApp(
+        home: Scaffold(
+          body: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+            // ListView
+            // physics: BouncingScrollPhysics(),
+              children: [
+                ProfileModify(
+                  petImage: user.petImage,
+                // onClicked: () async {},
+                ),
+                const SizedBox(height: 15),
+                petName(user),
+                const SizedBox(height: 20),
+                Center(
+                child: editButton(),
+                ),
+                // Button(
+                //
+                // ),
+                const SizedBox(height: 10),
+                Information(),
+                const SizedBox(height: 15),
+                petAbout(user),
+              ],
+            ),
           ),
-          const SizedBox(height: 15),
-          petName(user),
-          const SizedBox(height: 20),
-          Center(
-            child: editButton(),
-          ),
-          // Button(
-          //
-          // ),
-          const SizedBox(height: 10),
-          Information(),
-          const SizedBox(height: 15),
-          petAbout(user),
-        ],
+        ),
       ),
-      // bottomNavigationBar: CustomNavBar(currentIndex: 2, context: context),
+        // bottomNavigationBar: CustomNavBar(currentIndex: 2, context: context),
     );
   }
 
@@ -48,7 +55,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return Column(
       children: [
         Text(
-          user.petname,
+          user.petName,
           style: TextTitle,
         ),
         //const SizedBox(height: 1),
@@ -56,7 +63,7 @@ class _ProfilePageState extends State<ProfilePage> {
           user.breed,
           style: TextStyle(
             color: firstColor,
-            fontSize: 20,
+            fontSize: 18,
           ),
         ),
       ],
@@ -65,12 +72,16 @@ class _ProfilePageState extends State<ProfilePage> {
 
   editButton() => Button(
         text: 'Edit Profile',
-        onClicked: () {},
-  );
+        onClicked: () {
+          Navigator.push(
+            context, MaterialPageRoute(builder: (context) => EditProfile()),
+          );
+        },
+      );
 
   petAbout(User user) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 30),
+      padding: EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

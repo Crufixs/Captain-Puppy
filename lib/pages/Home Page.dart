@@ -7,58 +7,64 @@ import 'BabyPage.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        //EXPANDED 1
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Expanded(
-            flex: 2,
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Hi, Taylor!',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 30,
-                          ),
-                        ),
-                        Text(
-                          'Your dog misses you today',
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
-                      ]),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: Column(
-                    children: [
-                      ClipOval(
-                        child: Image.asset(
-                          'images/FluffyPuppy.png',
-                          height: 120.0,
-                          width: 120.0,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
 
-          //EXPANDED 2
-          Expanded(
-            flex: 1,
-            child: Container(
-              width: 350,
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
+          //EXPANDED 1
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              width: screenWidth * 0.9,
+              // height: 120,
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Hi, Taylor!',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 30,
+                            ),
+                          ),
+                          Text(
+                            'Your dog misses you today',
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
+                          ),
+                        ]),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Column(
+                      children: [
+                        ClipOval(
+                          child: Image.asset(
+                            'images/FluffyPuppy.png',
+                            height: 120,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            SizedBox(
+              height: 10,
+            ),
+
+            //EXPANDED 2
+            Container(
+              width: screenWidth * 0.9,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -123,18 +129,20 @@ class HomePage extends StatelessWidget {
                 ],
               ),
             ),
-          ),
-          // EXPANDED 3
-          Expanded(
-            flex: 6,
-            child: Column(
+
+            SizedBox(
+              height: 10,
+            ),
+
+            // EXPANDED 3
+            Column(
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      width: 150,
-                      height: 200,
+                      width: screenWidth * 0.4,
+                      height: screenWidth * 0.47,
                       child: ElevatedButton(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -174,8 +182,8 @@ class HomePage extends StatelessWidget {
                       width: 20,
                     ),
                     Container(
-                      width: 150,
-                      height: 200,
+                      width: screenWidth * 0.4,
+                      height: screenWidth * 0.47,
                       child: ElevatedButton(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -220,8 +228,8 @@ class HomePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      width: 150,
-                      height: 200,
+                      width: screenWidth * 0.4,
+                      height: screenWidth * 0.47,
                       child: ElevatedButton(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -261,8 +269,8 @@ class HomePage extends StatelessWidget {
                       width: 20,
                     ),
                     Container(
-                      width: 150,
-                      height: 200,
+                      width: screenWidth * 0.4,
+                      height: screenWidth * 0.47,
                       child: ElevatedButton(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -302,12 +310,9 @@ class HomePage extends StatelessWidget {
                 ),
               ],
             ),
-          ),
 
-          //EXPANDED 4
-          Expanded(
-            flex: 1,
-            child: Row(
+            //EXPANDED 4
+            Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Padding(
@@ -332,6 +337,7 @@ class HomePage extends StatelessWidget {
                                     color: Colors.black,
                                   ),
                                 ),
+
                               ],
                             ),
                             style: ButtonStyle(
@@ -347,9 +353,9 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ],
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
