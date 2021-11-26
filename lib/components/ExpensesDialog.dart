@@ -130,6 +130,8 @@ class _AddExpense extends State<AddExpense> {
                         top: vPadding * 0.1,
                       ),
                       child: Button(
+                        vPadding: 15,
+                        hPadding: 40,
                         text: "Submit",
                         onClicked: () {},
                       ),
@@ -186,6 +188,8 @@ class EditExpensePopUp extends StatelessWidget {
                 Expanded(
                   flex: 1,
                   child: Button(
+                    vPadding: 15,
+                    hPadding: 40,
                     text: "Edit",
                     onClicked: () {},
                   ),
@@ -195,6 +199,8 @@ class EditExpensePopUp extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 8.0),
                     child: Button(
+                      vPadding: 15,
+                      hPadding: 40,
                       text: "Delete",
                       onClicked: () {},
                     ),
@@ -357,6 +363,8 @@ class _EditExpenseState extends State<EditExpense> {
                       ),
                       child: Button(
                         text: "Submit",
+                        vPadding: 15,
+                        hPadding: 40,
                         onClicked: () {},
                       ),
                     ),
