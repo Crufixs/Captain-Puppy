@@ -360,6 +360,8 @@ class BreedInfoAlert extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Button(
+                        vPadding: 5,
+                        hPadding: 5,
                         text: 'BACK',
                         onClicked: () {
                           Navigator.pop(context);

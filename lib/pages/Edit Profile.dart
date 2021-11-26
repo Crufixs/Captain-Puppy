@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class EditProfilePage extends StatelessWidget {
+class EditProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

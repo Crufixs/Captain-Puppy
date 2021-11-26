@@ -1,8 +1,9 @@
-import 'package:fap/components/CustomNavBar.dart';
+// import 'package:fap/components/CustomNavBar.dart';
+import 'package:fap/model/Pet.dart';
 import 'package:fap/pages/Edit%20Profile.dart';
 import 'package:fap/utilities/constants.dart';
-import 'package:fap/components/User.dart';
-import 'package:fap/components/User_Details.dart';
+import 'package:fap/model/User.dart';
+import 'package:fap/model/User_Details.dart';
 import 'package:fap/components/Profile_Modify.dart';
 import 'package:fap/components/Button.dart';
 import 'package:fap/components/Information.dart';
@@ -16,7 +17,23 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-    final user = UserDetails.userRecord; // access the User_Details
+    final Pet pet = Pet(
+      petImage: 'https://i.imgur.com/13wGXx5.jpg',
+      petName: 'Koa',
+      breed: 'Pomeranian',
+      gender: 'Male',
+      age: 1,
+      weight: 3.8,
+      about: '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor '
+          'incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud '
+          'exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."',
+    );
+
+    User.userName = 'someone';
+    User.pet = pet;
+
+    // access the User_Details
+
     return MaterialApp(
         home: Scaffold(
           body: SafeArea(
@@ -26,11 +43,11 @@ class _ProfilePageState extends State<ProfilePage> {
             // physics: BouncingScrollPhysics(),
               children: [
                 ProfileModify(
-                  petImage: user.petImage,
+                  petImage: User.pet.petImage,
                 // onClicked: () async {},
                 ),
                 const SizedBox(height: 15),
-                petName(user),
+                petName(),
                 const SizedBox(height: 20),
                 Center(
                 child: editButton(),
@@ -41,7 +58,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 const SizedBox(height: 10),
                 Information(),
                 const SizedBox(height: 15),
-                petAbout(user),
+                petAbout(),
               ],
             ),
           ),
@@ -51,16 +68,16 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  petName(User user) {
+  petName() {
     return Column(
       children: [
         Text(
-          user.petName,
+          User.pet.petName,
           style: TextTitle,
         ),
         //const SizedBox(height: 1),
         Text(
-          user.breed,
+          User.pet.breed,
           style: TextStyle(
             color: firstColor,
             fontSize: 18,
@@ -71,6 +88,8 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   editButton() => Button(
+    hPadding: 5,
+        vPadding: 5,
         text: 'Edit Profile',
         onClicked: () {
           Navigator.push(
@@ -79,7 +98,7 @@ class _ProfilePageState extends State<ProfilePage> {
         },
       );
 
-  petAbout(User user) {
+  petAbout() {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20),
       child: Column(
@@ -94,7 +113,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           SizedBox(height: 10),
           Text(
-            user.about,
+            User.pet.about,
             textAlign: TextAlign.justify,
             style: TextStyle(
               fontSize: 15,

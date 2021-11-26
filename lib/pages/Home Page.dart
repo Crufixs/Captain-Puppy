@@ -1,4 +1,5 @@
 import 'package:fap/main.dart';
+import 'package:fap/model/User.dart';
 import 'package:fap/utilities/constants.dart' as constants;
 import 'package:flutter/material.dart';
 
@@ -27,7 +28,7 @@ class HomePage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'Hi, Taylor!',
+                            'Hi, ' + User.userName + "!",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 30,
