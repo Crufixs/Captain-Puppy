@@ -1,11 +1,4 @@
-import 'package:fap/components/CustomNavBar.dart';
-import 'package:fap/pages/Breeds%20Page.dart';
-import 'package:fap/pages/Expenses%20Page.dart';
 import 'package:fap/pages/Home%20Page.dart';
-import 'package:fap/pages/Notes%20Page.dart';
-import 'package:fap/pages/Profile%20Page.dart';
-import 'package:fap/services/breed_brain.dart';
-import 'package:fap/utilities/constants.dart';
 import 'package:flutter/material.dart';
 
 void main() {

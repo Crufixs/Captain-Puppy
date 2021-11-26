@@ -3,12 +3,12 @@ import 'package:fap/utilities/constants.dart';
 import 'package:flutter/material.dart';
 
 class ProfileModify extends StatelessWidget {
-  final String petimage;
+  final String petImage;
   // final VoidCallback onClicked;
 
   const ProfileModify({
     Key? key,
-    required this.petimage,
+    required this.petImage,
     // required this.onClicked,
   }) : super(key: key);
 
@@ -16,25 +16,24 @@ class ProfileModify extends StatelessWidget {
   Widget build(BuildContext context) {
     final color =
         Theme.of(context).colorScheme.primary; // should comment this out ata
-
     return Center(
       child: Stack(
         // Overlap multiple widgets on top of each other
         children: [
           profileImage(),
-          Positioned(
-            // Positions the edit icon
-            bottom: 0,
-            right: 4,
-            child: editIcon(color),
-          ),
+          // Positioned(
+          //   // Positions the edit icon
+          //   bottom: 0,
+          //   right: 4,
+          //   child: editIcon(color),
+          // ),
         ],
       ),
     );
   }
 
   profileImage() {
-    final image = NetworkImage(petimage);
+    final image = NetworkImage(petImage);
     return ClipOval(
       child: Material(
         // must be implemented for ClipOval
@@ -52,25 +51,27 @@ class ProfileModify extends StatelessWidget {
     );
   }
 
-  editIcon(Color color) => circleContainer(
-        color: Colors.white,
-        all: 3,
-        child: circleContainer(
-          color: color,
-          all: 8, // padding
-          child: Icon(
-            Icons.edit,
-            color: Colors.white,
-            size: 20,
-          ),
-        ),
-      );
-
-  circleContainer({required Widget child, required double all, required Color color}) => ClipOval(
-        child: Container(
-          child: child,
-          color: color,
-          padding: EdgeInsets.all(all),
-        ),
-  );
+  // editIcon(Color color) => circleContainer(
+  //       color: Colors.white,
+  //       all: 3,
+  //       child: circleContainer(
+  //         color: firstColor,
+  //         all: 8, // padding
+  //         child: Icon(
+  //           Icons.edit,
+  //           color: Colors.white,
+  //           size: 20,
+  //         ),
+  //       ),
+  //     );
+  //
+  // circleContainer(
+  //         {required Widget child, required double all, required Color color}) =>
+  //     ClipOval(
+  //       child: Container(
+  //         child: child,
+  //         color: firstColor,
+  //         padding: EdgeInsets.all(all),
+  //       ),
+  //     );
 }

@@ -1,17 +1,23 @@
-import 'package:fap/components/CustomNavBar.dart';
+import 'package:fap/components/ExpensesDialog.dart';
 import 'package:fap/components/ReusableComponent.dart';
+import 'package:fap/services/expenses_brain.dart';
 import 'package:fap/utilities/constants.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 
 class ExpensesPage extends StatefulWidget {
+  ExpensesPage({required this.eb});
+  ExpensesBrain eb;
   @override
-  _ExpensesPageState createState() => _ExpensesPageState();
+  _ExpensesPageState createState() => _ExpensesPageState(eb: eb);
 }
 
 enum ExpensesMode { summary, list }
 
 class _ExpensesPageState extends State<ExpensesPage> {
+  _ExpensesPageState({required this.eb});
+  ExpensesBrain eb;
   @override
   ExpensesMode current = ExpensesMode.summary;
   int touchedIndex = -1;
@@ -88,23 +94,13 @@ class _ExpensesPageState extends State<ExpensesPage> {
                     FlatButton(
                       color: Color(0x00000000),
                       onPressed: () {},
-                      child: Text(
-                        "<",
-                        style: TextStyle(
-                          fontSize: 30,
-                        ),
-                      ),
+                      child: Icon(Icons.arrow_back),
                     ),
                     Text("Octember", style: TextContent),
                     FlatButton(
                       color: Color(0x00000000),
                       onPressed: () {},
-                      child: Text(
-                        ">",
-                        style: TextStyle(
-                          fontSize: 30,
-                        ),
-                      ),
+                      child: Icon(Icons.arrow_forward),
                     ),
                   ],
                 ),
@@ -125,16 +121,20 @@ class _ExpensesPageState extends State<ExpensesPage> {
     );
   }
 
-  Widget getListComponents(String picture, iconColor, color, breedName) {
+  Widget getListComponents(String type, String cost, String date,
+      String productName, String picture, iconColor, color) {
     print("RAWR INSIDE");
     return ReusableComponent(
         insideComponents: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             DecoratedBox(
               child: Container(
+                //color: Colors.deepOrangeAccent,
                 padding: const EdgeInsets.all(8.00),
-                width: 70,
-                height: 70,
+                width: 100,
+                height: 100,
                 child: Image.asset(
                   'icons/dog_icons/$picture.png',
                 ),
@@ -144,40 +144,75 @@ class _ExpensesPageState extends State<ExpensesPage> {
                 color: iconColor,
               ),
             ),
-            SizedBox(
-              width: 20,
-            ),
-            Flexible(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    breedName,
-                    style: TextStyle(
-                      fontSize: 23,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                  Flexible(
-                    child: Text(
-                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+            Expanded(
+              flex: 2,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      productName,
                       style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.grey,
+                        fontSize: 16,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    Text(
+                      type,
+                      textAlign: TextAlign.right,
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.black,
                         fontWeight: FontWeight.normal,
                       ),
                     ),
-                  ),
-                ],
+                    Text(
+                      cost,
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.black,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
+            Expanded(
+              child: Container(
+                //color: Colors.red,
+                child: Align(
+                  alignment: Alignment.topRight,
+                  child: Text(
+                    date,
+                    textAlign: TextAlign.right,
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.normal,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ),
+            )
           ],
         ),
+        function: showEditExpenseDialog,
         iconColor: iconColor,
         color: color,
-        breedName: "Rawr");
+        title: "Rawr");
+  }
+
+  void showEditExpenseDialog(context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return EditExpense();
+      },
+    );
   }
 
   Widget getSummarySection() {
@@ -218,10 +253,14 @@ class _ExpensesPageState extends State<ExpensesPage> {
     return SizedBox(
       child: Column(
         children: [
-          getListComponents("1dog", firstColor, firstTransparentColor, "Rawr"),
-          getListComponents("1dog", firstColor, firstTransparentColor, "Rawr"),
-          getListComponents("1dog", firstColor, firstTransparentColor, "Rawr"),
-          getListComponents("1dog", firstColor, firstTransparentColor, "Rawr")
+          getListComponents("Type", "Cost", "Date", "ProductName", "1dog",
+              firstColor, firstTransparentColor),
+          getListComponents("Type", "Cost", "Date", "ProductName", "1dog",
+              firstColor, firstTransparentColor),
+          getListComponents("Type", "Cost", "Date", "ProductName", "1dog",
+              firstColor, firstTransparentColor),
+          getListComponents("Type", "Cost", "Date", "ProductName", "1dog",
+              firstColor, firstTransparentColor)
         ],
       ),
     );
