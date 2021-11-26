@@ -26,7 +26,7 @@ class BreedBrain {
     breedData = breedList;
 
     int numberOfBreed = breedData.length;
-    print(numberOfBreed);
+    print(numberOfBreed.toString() + "WAKWAKWWW");
 
     for (int i = 0; i < numberOfBreed; i++) {
       int id = breedData[i]['id'];
