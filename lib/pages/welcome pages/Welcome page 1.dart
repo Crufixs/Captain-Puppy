@@ -25,10 +25,11 @@ class _WelcomePageState extends State<WelcomePage> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment:MainAxisAlignment.center,
+          // mainAxisAlignment:MainAxisAlignment.center,
           children: [
             CarouselSlider(
               options: CarouselOptions(
+                  viewportFraction: 1,
                   height: MediaQuery.of(context).size.height,
                   onPageChanged: (index, reason) {
                     setState(() {
@@ -42,7 +43,7 @@ class _WelcomePageState extends State<WelcomePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          width: MediaQuery.of(context).size.width,
+                          // width: MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(
                             color: Colors.white,
                           ),
@@ -50,6 +51,26 @@ class _WelcomePageState extends State<WelcomePage> {
                         ),
                         Flexible(
                           child: Text(messages[i]),
+                        ),
+                        Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: messages.map((urlOfItem) {
+                              int index = messages.indexOf(urlOfItem);
+                              return Container(
+                                width: 10.0,
+                                height: 10.0,
+                                margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: _currentIndex == index
+                                      ? Color.fromRGBO(0, 0, 0, 0.8)
+                                      : Color.fromRGBO(0, 0, 0, 0.3),
+                                ),
+                              );
+                            }).toList(),
+                          ),
                         )
                       ],
                     );
@@ -57,23 +78,6 @@ class _WelcomePageState extends State<WelcomePage> {
                 );
               }).toList(),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: messages.map((urlOfItem) {
-                int index = messages.indexOf(urlOfItem);
-                return Container(
-                  width: 10.0,
-                  height: 10.0,
-                  margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: _currentIndex == index
-                        ? Color.fromRGBO(0, 0, 0, 0.8)
-                        : Color.fromRGBO(0, 0, 0, 0.3),
-                  ),
-                );
-              }).toList(),
-            )
           ],
         ),
       ),
