@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fap/utilities/constants.dart';
-import 'package:fap/components/User.dart';
-import 'package:fap/components/User_Details.dart';
+import 'package:fap/model/User.dart';
+import 'package:fap/model/User_Details.dart';
 
 class Information extends StatelessWidget {
   @override

@@ -5,13 +5,13 @@ class ReusableComponent extends StatelessWidget {
   ReusableComponent(
       {required this.title,
       required this.color,
-      required this.iconColor,
       required this.insideComponents,
-      required this.function});
+      required this.function,
+      required this.height});
 
+  final double height;
   final String title;
   final Color color;
-  final Color iconColor;
   final Row insideComponents;
   Function function = () {};
 
@@ -23,9 +23,8 @@ class ReusableComponent extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
-          //color: Colors.blue,
           width: screenWidth * 0.80,
-          height: 135,
+          height: height,
           child: ElevatedButton(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 15),

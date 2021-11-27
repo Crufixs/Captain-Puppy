@@ -95,12 +95,11 @@ class _BabyPageState extends State<BabyPage> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => AddExpense(context: context)),
+                  MaterialPageRoute(builder: (context) => AddExpense(eb: eb)),
                 );
               },
               child: const Icon(Icons.add),
-              backgroundColor: Colors.green,
+              backgroundColor: fourthColor,
             )
           : null,
     );

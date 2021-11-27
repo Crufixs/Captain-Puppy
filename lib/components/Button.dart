@@ -4,11 +4,15 @@ import 'package:flutter/material.dart';
 class Button extends StatelessWidget {
   final String text;
   final VoidCallback onClicked;
+  final double vPadding;
+  final double hPadding;
 
   const Button({
     Key? key,
     required this.text,
     required this.onClicked,
+    required this.vPadding,
+    required this.hPadding,
   }) : super(key: key);
 
   @override
@@ -16,15 +20,16 @@ class Button extends StatelessWidget {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         padding: EdgeInsets.symmetric(
-          vertical: 12,
-          horizontal: 20,
+          vertical: vPadding,
+          horizontal: hPadding,
         ),
         shape: StadiumBorder(),
+        primary: firstColor,
         onPrimary: Colors.white,
       ),
       child: Text(text,
           style: TextStyle(
-            fontSize: 15,
+            fontSize: 18,
           )),
       onPressed: onClicked,
     );

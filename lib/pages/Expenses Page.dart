@@ -122,28 +122,13 @@ class _ExpensesPageState extends State<ExpensesPage> {
   }
 
   Widget getListComponents(String type, String cost, String date,
-      String productName, String picture, iconColor, color) {
+      String productName, String picture) {
     print("RAWR INSIDE");
     return ReusableComponent(
         insideComponents: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            DecoratedBox(
-              child: Container(
-                //color: Colors.deepOrangeAccent,
-                padding: const EdgeInsets.all(8.00),
-                width: 100,
-                height: 100,
-                child: Image.asset(
-                  'icons/dog_icons/$picture.png',
-                ),
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25.0),
-                color: iconColor,
-              ),
-            ),
             Expanded(
               flex: 2,
               child: Padding(
@@ -155,7 +140,7 @@ class _ExpensesPageState extends State<ExpensesPage> {
                     Text(
                       productName,
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 18,
                         color: Colors.black,
                         fontWeight: FontWeight.w800,
                       ),
@@ -164,7 +149,7 @@ class _ExpensesPageState extends State<ExpensesPage> {
                       type,
                       textAlign: TextAlign.right,
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 15,
                         color: Colors.black,
                         fontWeight: FontWeight.normal,
                       ),
@@ -172,7 +157,7 @@ class _ExpensesPageState extends State<ExpensesPage> {
                     Text(
                       cost,
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 15,
                         color: Colors.black,
                         fontWeight: FontWeight.normal,
                       ),
@@ -190,7 +175,7 @@ class _ExpensesPageState extends State<ExpensesPage> {
                     date,
                     textAlign: TextAlign.right,
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 15,
                       fontWeight: FontWeight.normal,
                       color: Colors.black,
                     ),
@@ -200,9 +185,9 @@ class _ExpensesPageState extends State<ExpensesPage> {
             )
           ],
         ),
+        height: 100,
         function: showEditExpenseDialog,
-        iconColor: iconColor,
-        color: color,
+        color: thirdTransparentColor,
         title: "Rawr");
   }
 
@@ -210,7 +195,7 @@ class _ExpensesPageState extends State<ExpensesPage> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return EditExpense();
+        return EditExpensePopUp();
       },
     );
   }
@@ -253,14 +238,34 @@ class _ExpensesPageState extends State<ExpensesPage> {
     return SizedBox(
       child: Column(
         children: [
-          getListComponents("Type", "Cost", "Date", "ProductName", "1dog",
-              firstColor, firstTransparentColor),
-          getListComponents("Type", "Cost", "Date", "ProductName", "1dog",
-              firstColor, firstTransparentColor),
-          getListComponents("Type", "Cost", "Date", "ProductName", "1dog",
-              firstColor, firstTransparentColor),
-          getListComponents("Type", "Cost", "Date", "ProductName", "1dog",
-              firstColor, firstTransparentColor)
+          getListComponents(
+            "Type",
+            "Cost",
+            "Date",
+            "ProductName",
+            "1dog",
+          ),
+          getListComponents(
+            "Type",
+            "Cost",
+            "Date",
+            "ProductName",
+            "1dog",
+          ),
+          getListComponents(
+            "Type",
+            "Cost",
+            "Date",
+            "ProductName",
+            "1dog",
+          ),
+          getListComponents(
+            "Type",
+            "Cost",
+            "Date",
+            "ProductName",
+            "1dog",
+          )
         ],
       ),
     );
