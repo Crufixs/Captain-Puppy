@@ -1,4 +1,5 @@
 import 'package:fap/components/Button.dart';
+import 'package:fap/model/expenses.dart';
 import 'package:fap/services/expenses_brain.dart';
 import 'package:fap/utilities/constants.dart';
 import 'package:flutter/material.dart';
@@ -15,9 +16,30 @@ class _AddExpense extends State<AddExpense> {
   _AddExpense({required this.eb});
   final _formKey = GlobalKey<FormState>();
   ExpensesBrain eb;
+
   String productName = "";
   String productType = "";
-  double price = 0.0;
+  String price = "";
+  late final productNameListener;
+  late final productCostListener;
+  late final int index;
+
+  void initState() {
+    index = eb.getListOfExpenses().length;
+
+    super.initState();
+    productNameListener = TextEditingController(text: productName);
+    productCostListener = TextEditingController(text: price.toString());
+
+    productNameListener.addListener(() {
+      productName = productNameListener.text;
+      //print("Current Value: ${productNameListener.text}");
+    });
+    productCostListener.addListener(() {
+      price = productCostListener.text;
+      //print("Current Type ${productCostListener.text}");
+    });
+  }
 
   Widget build(BuildContext context) {
     double hPadding = MediaQuery.of(context).size.width;
@@ -69,6 +91,7 @@ class _AddExpense extends State<AddExpense> {
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                           ),
                         ),
+                        controller: productNameListener,
                         validator: (String? value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter some text';
@@ -91,6 +114,7 @@ class _AddExpense extends State<AddExpense> {
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                           ),
                         ),
+                        controller: productCostListener,
                         validator: (String? value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter numbers';
@@ -111,8 +135,12 @@ class _AddExpense extends State<AddExpense> {
                           labelText: 'Product Type',
                           icon: Icon(Icons.person, color: fourthColor),
                         ),
-                        items: <String>['Food', 'Utilities', 'Toys', 'Health']
-                            .map((String value) {
+                        items: <String>[
+                          'Food',
+                          'Utilities',
+                          'Toys',
+                          'Healthcare'
+                        ].map((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
                             child: new Text(value),
@@ -133,7 +161,13 @@ class _AddExpense extends State<AddExpense> {
                         vPadding: 15,
                         hPadding: 40,
                         text: "Submit",
-                        onClicked: () {},
+                        onClicked: () {
+                          if (_formKey.currentState!.validate()) {
+                            eb.addExpense(
+                                productName, productType, double.parse(price));
+                            Navigator.pop(context);
+                          }
+                        },
                       ),
                     ),
                   ],
@@ -148,28 +182,23 @@ class _AddExpense extends State<AddExpense> {
 }
 
 class EditExpensePopUp extends StatelessWidget {
-  const EditExpensePopUp({Key? key}) : super(key: key);
+  final ExpensesBrain eb;
+  final int index;
+
+  EditExpensePopUp(this.eb, this.index) {
+    price = eb.getExpenseAt(index).getCost().toString();
+    productName = eb.getExpenseAt(index).getProductName();
+  }
+  late Function updateState;
+  late String price;
+  late String productName;
 
   @override
   Widget build(BuildContext context) {
-    print("XD");
     return AlertDialog(
       content: Stack(
         overflow: Overflow.visible,
         children: <Widget>[
-          Positioned(
-            right: -40.0,
-            top: -40.0,
-            child: InkResponse(
-              onTap: () {
-                Navigator.of(context).pop();
-              },
-              child: CircleAvatar(
-                child: Icon(Icons.close),
-                backgroundColor: fourthColor,
-              ),
-            ),
-          ),
           Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -188,10 +217,17 @@ class EditExpensePopUp extends StatelessWidget {
                 Expanded(
                   flex: 1,
                   child: Button(
-                    vPadding: 15,
-                    hPadding: 40,
+                    vPadding: 10,
+                    hPadding: 30,
                     text: "Edit",
-                    onClicked: () {},
+                    onClicked: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return EditExpense(eb, index);
+                        },
+                      );
+                    },
                   ),
                 ),
                 Expanded(
@@ -199,10 +235,80 @@ class EditExpensePopUp extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 8.0),
                     child: Button(
-                      vPadding: 15,
-                      hPadding: 40,
+                      vPadding: 10,
+                      hPadding: 30,
                       text: "Delete",
-                      onClicked: () {},
+                      onClicked: () async {
+                        await showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return ReconfirmationDeleteExpense(
+                              eb: eb,
+                              index: index,
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ])
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ReconfirmationDeleteExpense extends StatelessWidget {
+  ReconfirmationDeleteExpense({
+    required this.eb,
+    required this.index,
+  });
+  final int index;
+  final ExpensesBrain eb;
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      content: Stack(
+        overflow: Overflow.visible,
+        children: <Widget>[
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                child: Text("Are you sure you want to delete this?",
+                    style: TextStyle(fontSize: 20)),
+              ),
+              Row(children: <Widget>[
+                Expanded(
+                  flex: 1,
+                  child: Button(
+                    vPadding: 10,
+                    hPadding: 30,
+                    text: "Cancel",
+                    onClicked: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Button(
+                      vPadding: 10,
+                      hPadding: 30,
+                      text: "Confirm",
+                      onClicked: () {
+                        eb.deleteExpense(index);
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+                      },
                     ),
                   ),
                 ),
@@ -216,36 +322,56 @@ class EditExpensePopUp extends StatelessWidget {
 }
 
 class EditExpense extends StatefulWidget {
-  EditExpense(
-      {required this.productName,
-      required this.productType,
-      required this.price,
-      required this.eb});
-  ExpensesBrain eb;
-  String productName;
-  String productType;
-  double price;
+  final ExpensesBrain eb;
+  final int index;
+
+  EditExpense(this.eb, this.index);
+
   @override
   _EditExpenseState createState() => _EditExpenseState(
         eb: eb,
-        productName: productName,
-        productType: productType,
-        price: price,
+        index: index,
       );
 }
 
 class _EditExpenseState extends State<EditExpense> {
-  _EditExpenseState(
-      {required this.productName,
-      required this.productType,
-      required this.price,
-      required this.eb});
+  _EditExpenseState({required this.eb, required this.index});
   final _formKey = GlobalKey<FormState>();
-
+  late final productNameListener;
+  late final productCostListener;
+  int index;
   ExpensesBrain eb;
-  String productName;
-  String productType;
-  double price;
+  late String productName;
+  late String productType;
+  late String price;
+
+  @override
+  void dispose() {
+    productNameListener.dispose();
+    productCostListener.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    productName = eb.getExpenseAt(index).getProductName();
+    productType = eb.TypeToString(eb.getExpenseAt(index).getProductType());
+    price = eb.getExpenseAt(index).getCost().toString();
+
+    super.initState();
+    productNameListener = TextEditingController(text: productName);
+    productCostListener = TextEditingController(text: price.toString());
+
+    // Start listening to changes.
+    productNameListener.addListener(() {
+      productName = productNameListener.text;
+      print("Current Name: ${productNameListener.text}");
+    });
+    productCostListener.addListener(() {
+      price = productCostListener.text;
+      print("Current Type ${productCostListener.text}");
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -276,7 +402,7 @@ class _EditExpenseState extends State<EditExpense> {
                           padding: EdgeInsets.all(25.0),
                           child: Center(
                             child: Text(
-                              "New Expense",
+                              "Edit Expense",
                               style: TextContent,
                             ),
                           ),
@@ -298,7 +424,7 @@ class _EditExpenseState extends State<EditExpense> {
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                           ),
                         ),
-                        initialValue: productName,
+                        controller: productNameListener,
                         validator: (String? value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter some text';
@@ -321,7 +447,7 @@ class _EditExpenseState extends State<EditExpense> {
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                           ),
                         ),
-                        initialValue: price.toString(),
+                        controller: productCostListener,
                         validator: (String? value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter numbers';
@@ -343,8 +469,12 @@ class _EditExpenseState extends State<EditExpense> {
                           labelText: 'Product Type',
                           icon: Icon(Icons.person, color: fourthColor),
                         ),
-                        items: <String>['Food', 'Utilities', 'Toys', 'Health']
-                            .map((String value) {
+                        items: <String>[
+                          'Food',
+                          'Utilities',
+                          'Toys',
+                          'Healthcare'
+                        ].map((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
                             child: new Text(value),
@@ -365,7 +495,15 @@ class _EditExpenseState extends State<EditExpense> {
                         text: "Submit",
                         vPadding: 15,
                         hPadding: 40,
-                        onClicked: () {},
+                        onClicked: () {
+                          if (_formKey.currentState!.validate()) {
+                            Expense e = eb.getExpenseAt(index);
+                            e.setProductName(productName);
+                            e.setProductType(eb.StringToType(productType));
+                            e.setCost(double.parse(price));
+                            Navigator.pop(context);
+                          }
+                        },
                       ),
                     ),
                   ],

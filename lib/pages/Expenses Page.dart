@@ -1,26 +1,35 @@
 import 'package:fap/components/ExpensesDialog.dart';
+import 'package:fap/components/Indicator.dart';
 import 'package:fap/components/ReusableComponent.dart';
+import 'package:fap/model/expenses.dart';
 import 'package:fap/services/expenses_brain.dart';
 import 'package:fap/utilities/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:intl/intl.dart';
 
 class ExpensesPage extends StatefulWidget {
-  ExpensesPage({required this.eb});
+  ExpensesPage({required this.eb, Key? key}) : super(key: key);
+
   ExpensesBrain eb;
   @override
-  _ExpensesPageState createState() => _ExpensesPageState(eb: eb);
+  ExpensesPageState createState() => ExpensesPageState(eb: eb);
 }
 
 enum ExpensesMode { summary, list }
 
-class _ExpensesPageState extends State<ExpensesPage> {
-  _ExpensesPageState({required this.eb});
+class ExpensesPageState extends State<ExpensesPage> {
+  ExpensesPageState({required this.eb});
   ExpensesBrain eb;
   @override
   ExpensesMode current = ExpensesMode.summary;
   int touchedIndex = -1;
+
+  void updateState() {
+    setState(() {});
+  }
+
   Widget build(BuildContext context) {
     return SafeArea(
       child: SingleChildScrollView(
@@ -85,31 +94,17 @@ class _ExpensesPageState extends State<ExpensesPage> {
               ),
             ),
             Center(
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.75,
-                child: Row(
-                  //crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    FlatButton(
-                      color: Color(0x00000000),
-                      onPressed: () {},
-                      child: Icon(Icons.arrow_back),
-                    ),
-                    Text("Octember", style: TextContent),
-                    FlatButton(
-                      color: Color(0x00000000),
-                      onPressed: () {},
-                      child: Icon(Icons.arrow_forward),
-                    ),
-                  ],
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "Total Expenses: \$" +
+                      (eb.getTotalHealthCare() +
+                              eb.getTotalToy() +
+                              eb.getTotalUtilities() +
+                              eb.getTotalFood())
+                          .toStringAsFixed(2),
+                  style: TextContent,
                 ),
-              ),
-            ),
-            Center(
-              child: Text(
-                "Total Expenses: 0",
-                style: TextContent,
               ),
             ),
             current == ExpensesMode.summary
@@ -121,9 +116,23 @@ class _ExpensesPageState extends State<ExpensesPage> {
     );
   }
 
-  Widget getListComponents(String type, String cost, String date,
-      String productName, String picture) {
-    print("RAWR INSIDE");
+  Widget getListComponents(
+      int index, String productName, String type, String cost, String date) {
+    Color color = Colors.red;
+    switch (eb.StringToType(type)) {
+      case ProductType.Toys:
+        color = secondColor;
+        break;
+      case ProductType.Healthcare:
+        color = fourthColor;
+        break;
+      case ProductType.Utilities:
+        color = thirdColor;
+        break;
+      case ProductType.Food:
+        color = pieChartColor4;
+        break;
+    }
     return ReusableComponent(
         insideComponents: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -185,143 +194,182 @@ class _ExpensesPageState extends State<ExpensesPage> {
             )
           ],
         ),
+        index: index,
         height: 100,
         function: showEditExpenseDialog,
-        color: thirdTransparentColor,
+        color: color,
         title: "Rawr");
   }
 
-  void showEditExpenseDialog(context) {
-    showDialog(
+  Future<void> showEditExpenseDialog(context, int index) async {
+    await showDialog(
       context: context,
       builder: (BuildContext context) {
-        return EditExpensePopUp();
+        return EditExpensePopUp(eb, index);
       },
     );
+    setState(() {});
   }
 
   Widget getSummarySection() {
-    return SizedBox(
-      height: MediaQuery.of(context).size.width * 0.90,
-      child: Container(
-        child: PieChart(
-          PieChartData(
-            pieTouchData: PieTouchData(
-                touchCallback: (FlTouchEvent event, pieTouchResponse) {
-              setState(() {
-                if (!event.isInterestedForInteractions ||
-                    pieTouchResponse == null ||
-                    pieTouchResponse.touchedSection == null) {
-                  touchedIndex = -1;
-                  return;
-                }
-                touchedIndex =
-                    pieTouchResponse.touchedSection!.touchedSectionIndex;
-              });
-            }),
-            borderData: FlBorderData(
-              show: false,
+    return Column(
+      children: [
+        SizedBox(
+          height: MediaQuery.of(context).size.width * 0.75,
+          child: PieChart(
+            PieChartData(
+              pieTouchData: PieTouchData(
+                  touchCallback: (FlTouchEvent event, pieTouchResponse) {
+                setState(() {
+                  if (!event.isInterestedForInteractions ||
+                      pieTouchResponse == null ||
+                      pieTouchResponse.touchedSection == null) {
+                    touchedIndex = -1;
+                    return;
+                  }
+                  touchedIndex =
+                      pieTouchResponse.touchedSection!.touchedSectionIndex;
+                });
+              }),
+              borderData: FlBorderData(
+                show: false,
+              ),
+              sectionsSpace: 0,
+              centerSpaceRadius: 30,
+              sections: showingSections(),
             ),
-            sectionsSpace: 0,
-            centerSpaceRadius: 0,
-            sections: showingSections(),
+            swapAnimationDuration: Duration(milliseconds: 150), // Optional
+            swapAnimationCurve: Curves.linear, // Optional
           ),
-          swapAnimationDuration: Duration(milliseconds: 150), // Optional
-          swapAnimationCurve: Curves.linear, // Optional
         ),
-      ),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 16.0),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Indicator(
+                color: secondColor,
+                text: 'Toys',
+                isSquare: false,
+                size: touchedIndex == 0 ? 18 : 16,
+                textWeight:
+                    touchedIndex == 0 ? FontWeight.bold : FontWeight.normal,
+              ),
+              Indicator(
+                color: fourthColor,
+                text: 'Utilities',
+                isSquare: false,
+                size: touchedIndex == 1 ? 18 : 16,
+                textWeight:
+                    touchedIndex == 1 ? FontWeight.bold : FontWeight.normal,
+              ),
+              Indicator(
+                color: thirdColor,
+                text: 'Food',
+                isSquare: false,
+                size: touchedIndex == 2 ? 18 : 16,
+                textWeight:
+                    touchedIndex == 2 ? FontWeight.bold : FontWeight.normal,
+              ),
+              Indicator(
+                color: pieChartColor4,
+                text: 'Healthcare',
+                isSquare: false,
+                size: touchedIndex == 3 ? 18 : 16,
+                textWeight:
+                    touchedIndex == 3 ? FontWeight.bold : FontWeight.normal,
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 
   Widget getListSection() {
-    print("rawr");
+    final ListChildren = <Widget>[];
+    for (Expense e in eb.getListOfExpenses()) {
+      int index = e.getIndex();
+      String productName = e.getProductName();
+      String type = eb.TypeToString(e.getProductType());
+      String cost = "\$" + e.getCost().toStringAsFixed(2);
+      String date = DateFormat.yMMMd().format(e.getDate());
+      print("$index " + productName);
+      ListChildren.add(getListComponents(index, productName, type, cost, date));
+    }
     return SizedBox(
       child: Column(
-        children: [
-          getListComponents(
-            "Type",
-            "Cost",
-            "Date",
-            "ProductName",
-            "1dog",
-          ),
-          getListComponents(
-            "Type",
-            "Cost",
-            "Date",
-            "ProductName",
-            "1dog",
-          ),
-          getListComponents(
-            "Type",
-            "Cost",
-            "Date",
-            "ProductName",
-            "1dog",
-          ),
-          getListComponents(
-            "Type",
-            "Cost",
-            "Date",
-            "ProductName",
-            "1dog",
-          )
-        ],
+        children: ListChildren,
       ),
     );
   }
 
   List<PieChartSectionData> showingSections() {
+    double totalFood = eb.getTotalFood();
+    double totalUtilities = eb.getTotalUtilities();
+    double totalToys = eb.getTotalToy();
+    double totalHealth = eb.getTotalHealthCare();
+    double totaltotal = totalHealth + totalUtilities + totalToys + totalHealth;
+
     return List.generate(4, (i) {
       final isTouched = i == touchedIndex;
-      final fontSize = isTouched ? 15.0 : 12.0;
+      final fontSize = isTouched ? 20.0 : 18.0;
       final radius = isTouched
-          ? MediaQuery.of(context).size.width * 0.35
-          : MediaQuery.of(context).size.width * 0.325;
+          ? MediaQuery.of(context).size.width * 0.25
+          : MediaQuery.of(context).size.width * 0.225;
       switch (i) {
         case 0:
+          //TOYS
           return PieChartSectionData(
-            color: const Color(0xff0293ee),
-            value: 40,
-            title: 'Food\n300 Pesos',
+            color: secondColor,
+            value: totalToys,
+            title: (totalToys / totaltotal * 100).toStringAsFixed(2) + '%',
             radius: radius,
             titleStyle: TextStyle(
-                fontSize: fontSize,
-                fontWeight: FontWeight.bold,
-                color: const Color(0xffffffff)),
+              color: Colors.white,
+              fontWeight: FontWeight.w700,
+              fontSize: fontSize,
+            ),
           );
         case 1:
+          //UTILITIES
           return PieChartSectionData(
-            color: const Color(0xfff8b250),
-            value: 30,
-            title: 'Utilities\n300 Pesos',
+            color: fourthColor,
+            value: totalUtilities,
+            title: (totalUtilities / totaltotal * 100).toStringAsFixed(2) + '%',
             radius: radius,
             titleStyle: TextStyle(
-                fontSize: fontSize,
-                fontWeight: FontWeight.bold,
-                color: const Color(0xffffffff)),
+              color: Colors.white,
+              fontWeight: FontWeight.w700,
+              fontSize: fontSize,
+            ),
           );
         case 2:
+          //FOOD
           return PieChartSectionData(
-            color: const Color(0xff845bef),
-            value: 15,
-            title: 'Toys\n300 Pesos',
+            color: thirdColor,
+            value: totalFood,
+            title: (totalFood / totaltotal * 100).toStringAsFixed(2) + '%',
             radius: radius,
             titleStyle: TextStyle(
-                fontSize: fontSize,
-                fontWeight: FontWeight.bold,
-                color: const Color(0xffffffff)),
+              color: Colors.white,
+              fontWeight: FontWeight.w700,
+              fontSize: fontSize,
+            ),
           );
         case 3:
+          //HEALTHCARE
           return PieChartSectionData(
-            color: const Color(0xff13d38e),
-            value: 15,
-            title: 'Health Care\n300 Pesos',
+            color: pieChartColor4,
+            value: totalHealth,
+            title: (totalHealth / totaltotal * 100).toStringAsFixed(2) + '%',
             radius: radius,
             titleStyle: TextStyle(
-                fontSize: fontSize,
-                fontWeight: FontWeight.bold,
-                color: const Color(0xffffffff)),
+              color: Colors.white,
+              fontWeight: FontWeight.w700,
+              fontSize: fontSize,
+            ),
           );
         default:
           throw Error();
