@@ -21,15 +21,14 @@ environment:
   sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
-  rflutter_alert: ^2.0.4
   fl_chart: ^0.40.2
   sqflite:
   path:
   http: ^0.13.4
-  sqflite:
-  path:
   flutter:
     sdk: flutter
+  carousel_slider: ^4.0.0
+  rflutter_alert: ^2.0.4
 
 
 

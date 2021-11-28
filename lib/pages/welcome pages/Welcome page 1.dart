@@ -21,11 +21,11 @@ class _WelcomePageState extends State<WelcomePage> {
     "Brief description Brief description 1Brief description 1Brief "
         "description 1Brief description 1Brief description 1Brief "
         "description 1Brief description 1Brief description 1Brief "
-        "description 1Brief description 1 ",
+        "description 1Brief description 2 ",
     "Brief description Brief description 1Brief description 1Brief "
         "description 1Brief description 1Brief description 1Brief "
         "description 1Brief description 1Brief description 1Brief "
-        "description 1Brief description 1 ",
+        "description 1Brief description 3 ",
     " "
   ];
   int _currentIndex = 0;
