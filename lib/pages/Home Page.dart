@@ -346,6 +346,12 @@ class HomePage extends StatelessWidget {
                                   Colors.transparent),
                               shadowColor: MaterialStateProperty.all<Color>(
                                   Colors.transparent),
+                              shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(50.0),
+                                ),
+                              ),
                             ),
                           ),
                         ],
