@@ -24,12 +24,14 @@ class _BabyPageState extends State<BabyPage> {
   _BabyPageState({this.selectedPage, required this.eb}) {
     _pageOptions = [
       Container(),
-      ExpensesPage(eb: eb),
+      ExpensesPage(eb: eb, key: _key),
       ProfilePage(),
       BreedsPage(),
       NotesPage(),
     ];
   }
+  final GlobalKey<ExpensesPageState> _key = GlobalKey();
+
   var _pageOptions;
   var selectedPage;
   final ExpensesBrain eb;
@@ -96,7 +98,9 @@ class _BabyPageState extends State<BabyPage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => AddExpense(eb: eb)),
-                );
+                ).then((value) {
+                  _key.currentState!.updateState();
+                });
               },
               child: const Icon(Icons.add),
               backgroundColor: fourthColor,

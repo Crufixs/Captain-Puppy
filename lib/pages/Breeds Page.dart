@@ -360,6 +360,7 @@ class BreedInfoAlert extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Button(
+                        color: firstColor,
                         vPadding: 5,
                         hPadding: 5,
                         text: 'BACK',
