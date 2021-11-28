@@ -14,12 +14,18 @@ class WelcomePage extends StatefulWidget {
 
 class _WelcomePageState extends State<WelcomePage> {
   List messages = [
-    "Lorem Ipsum is simply dummy text of the printing "
-        "and typesetting industry. Lorem Ipsum has been the industry's ",
-    "standard dummy text ever since the 1500s, when an unknown printer "
-        "took a galley of type and scrambled it to make a type specimen book.",
-    "and typesetting industry. Lorem Ipsum has been the industry's "
-        "standard dummy text ever since the 1500s, when an unknown printer ",
+    "Brief description Brief description 1Brief description 1Brief "
+        "description 1Brief description 1Brief description 1Brief "
+        "description 1Brief description 1Brief description 1Brief "
+        "description 1Brief description 1 ",
+    "Brief description Brief description 1Brief description 1Brief "
+        "description 1Brief description 1Brief description 1Brief "
+        "description 1Brief description 1Brief description 1Brief "
+        "description 1Brief description 1 ",
+    "Brief description Brief description 1Brief description 1Brief "
+        "description 1Brief description 1Brief description 1Brief "
+        "description 1Brief description 1Brief description 1Brief "
+        "description 1Brief description 1 ",
     ""
   ];
   int _currentIndex = 0;
@@ -38,7 +44,7 @@ class _WelcomePageState extends State<WelcomePage> {
         },
         hPadding: 10,
         vPadding: 10,
-        text: 'Let\'s Get Started!',
+        text: 'Arf Arf',
       );
     }
   }
