@@ -1,3 +1,4 @@
+import 'package:fap/components/Button.dart';
 import 'package:fap/components/ExpensesDialog.dart';
 import 'package:fap/components/Indicator.dart';
 import 'package:fap/components/ReusableComponent.dart';
@@ -52,40 +53,36 @@ class ExpensesPageState extends State<ExpensesPage> {
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.only(right: 4),
-                        child: FlatButton(
-                          height: 55,
+                        child: Button(
+                          hPadding: 10,
+                          vPadding: 20,
                           color: current == ExpensesMode.summary
                               ? firstColor
                               : firstTransparentColor,
-                          onPressed: () {
+                          onClicked: () {
                             setState(() {
                               current = ExpensesMode.summary;
                             });
                           },
-                          child: Text(
-                            "Summary",
-                            style: TextForButton,
-                          ),
+                          text: "Summary",
                         ),
                       ),
                     ),
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.only(left: 4),
-                        child: FlatButton(
-                          height: 55,
+                        child: Button(
+                          hPadding: 10,
+                          vPadding: 20,
                           color: current == ExpensesMode.list
                               ? firstColor
                               : firstTransparentColor,
-                          onPressed: () {
+                          onClicked: () {
                             setState(() {
                               current = ExpensesMode.list;
                             });
                           },
-                          child: Text(
-                            "List",
-                            style: TextForButton,
-                          ),
+                          text: "List",
                         ),
                       ),
                     ),

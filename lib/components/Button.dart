@@ -26,7 +26,7 @@ class Button extends StatelessWidget {
           horizontal: hPadding,
         ),
         shape: StadiumBorder(),
-        primary: firstColor,
+        primary: color,
         onPrimary: Colors.white,
       ),
       child: Text(text,
