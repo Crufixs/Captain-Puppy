@@ -14,12 +14,18 @@ class WelcomePage extends StatefulWidget {
 
 class _WelcomePageState extends State<WelcomePage> {
   List messages = [
-    "Lorem Ipsum is simply dummy text of the printing "
-        "and typesetting industry. Lorem Ipsum has been the industry's ",
-    "standard dummy text ever since the 1500s, when an unknown printer "
-        "took a galley of type and scrambled it to make a type specimen book.",
-    "and typesetting industry. Lorem Ipsum has been the industry's "
-        "standard dummy text ever since the 1500s, when an unknown printer ",
+    "Brief description Brief description 1Brief description 1Brief "
+        "description 1Brief description 1Brief description 1Brief "
+        "description 1Brief description 1Brief description 1Brief "
+        "description 1Brief description 1 ",
+    "Brief description Brief description 1Brief description 1Brief "
+        "description 1Brief description 1Brief description 1Brief "
+        "description 1Brief description 1Brief description 1Brief "
+        "description 1Brief description 1 ",
+    "Brief description Brief description 1Brief description 1Brief "
+        "description 1Brief description 1Brief description 1Brief "
+        "description 1Brief description 1Brief description 1Brief "
+        "description 1Brief description 1 ",
     " "
   ];
   int _currentIndex = 0;
@@ -27,18 +33,27 @@ class _WelcomePageState extends State<WelcomePage> {
   generateTextOrButton(int index){
     if(index != 3){
       return Flexible(
-        child: Text(messages[index]),
+        child: Container(
+          width: 300,
+          child: Padding(
+            padding: const EdgeInsets.only(top:40),
+            child: Text(messages[index]),
+          ),
+        ),
       );
     } else {
-      return Button(
-        onClicked: () {
-          Navigator.push(
-            context, MaterialPageRoute(builder: (context) => EditProfile()),
-          );
-        },
-        hPadding: 10,
-        vPadding: 10,
-        text: 'Let\'s Get Started!',
+      return Padding(
+        padding: const EdgeInsets.only(top:40),
+        child: Button(
+          onClicked: () {
+            Navigator.push(
+              context, MaterialPageRoute(builder: (context) => EditProfile()),
+            );
+          },
+          hPadding: 10,
+          vPadding: 10,
+          text: 'Let\'s Get Started!',
+        ),
       );
     }
   }
@@ -74,7 +89,14 @@ class _WelcomePageState extends State<WelcomePage> {
                             decoration: BoxDecoration(
                               color: Colors.white,
                             ),
-                            child: Image.asset("images/page$i.png"),
+                            child: Container(
+                              height: 500,
+                                width: 500,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(top: 80),
+                                  child: Image.asset("images/page$i.png"),
+                                )
+                            ),
                           ),
                           generateTextOrButton(i),
                           Expanded(
