@@ -20,7 +20,7 @@ class _WelcomePageState extends State<WelcomePage> {
         "took a galley of type and scrambled it to make a type specimen book.",
     "and typesetting industry. Lorem Ipsum has been the industry's "
         "standard dummy text ever since the 1500s, when an unknown printer ",
-    ""
+    " "
   ];
   int _currentIndex = 0;
 
