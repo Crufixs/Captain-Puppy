@@ -1,13 +1,13 @@
-import 'package:fap/model//User.dart';
-import 'package:fap/model/User_Details.dart';
-import 'package:fap/components/Profile_Modify.dart';
 import 'package:fap/components/EditProfile_Modify.dart';
 import 'package:fap/components/TextField_Modify.dart';
 import 'package:fap/components/Button.dart';
 import 'package:fap/components/Slider.dart';
 import 'package:fap/components/OptionSelect.dart';
-import 'package:fap/utilities/constants.dart';
+import 'package:fap/model/Pet.dart';
+import 'package:fap/model/User.dart';
+import 'package:fap/utilities/constants.dart' as constants;
 import 'package:flutter/material.dart';
+
 
 class EditProfile extends StatefulWidget {
   @override
@@ -15,11 +15,13 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfile> {
-  // User user = UserDetails.userRecord;
-
   @override
   Widget build(BuildContext context) {
-    final color = Theme.of(context).colorScheme.primary;
+    final color =
+        Theme
+            .of(context)
+            .colorScheme
+            .primary;
     return MaterialApp(
       home: Scaffold(
         body: SafeArea(
@@ -35,13 +37,15 @@ class _EditProfileState extends State<EditProfile> {
                 const SizedBox(height: 15),
                 TextFieldModify(
                     label: 'Your Name',
-                    value: User.userName,
-                    onChanged: (userName) {}),
+                    value: User.userName.toString(),
+                    onChanged: (userName) {}
+                ),
                 const SizedBox(height: 20),
                 TextFieldModify(
                     label: 'Pet\'s Name',
                     value: User.pet.petName,
-                    onChanged: (petName) {}),
+                    onChanged: (petName) {}
+                ),
                 const SizedBox(height: 20),
                 Row(
                   children: [
@@ -51,10 +55,11 @@ class _EditProfileState extends State<EditProfile> {
                         padding: const EdgeInsets.only(right: 8),
                         child: Container(
                           child: TextFieldModify(
-                              // NUMBER FIELD TO DAPAT
+                            // NUMBER FIELD TO DAPAT
                               label: 'Pet\'s Age',
                               value: User.pet.petName,
-                              onChanged: (petName) {}),
+                              onChanged: (petName) {}
+                          ),
                         ),
                       ),
                     ),
@@ -65,7 +70,8 @@ class _EditProfileState extends State<EditProfile> {
                         child: TextFieldModify(
                             label: 'Pet\'s Breed',
                             value: User.pet.breed,
-                            onChanged: (breed) {}),
+                            onChanged: (breed) {}
+                        ),
                       ),
                     ),
                   ],
@@ -80,10 +86,11 @@ class _EditProfileState extends State<EditProfile> {
                         padding: const EdgeInsets.only(right: 8),
                         child: Container(
                           child: TextFieldModify(
-                              // NUMBER FIELD TO DAPAT + SLIDER T^T
+                            // NUMBER FIELD TO DAPAT + SLIDER T^T
                               label: 'Pet\'s Weight',
-                              value: User.userName,
-                              onChanged: (userName) {}),
+                              value: User.userName.toString(),
+                              onChanged: (userName) {}
+                          ),
                         ),
                       ),
                     ),
@@ -129,9 +136,12 @@ class _EditProfileState extends State<EditProfile> {
   }
 
   saveButton() => Button(
-      color: firstColor,
       text: 'Save Changes',
       vPadding: 5,
       hPadding: 5,
-      onClicked: () {});
+      onClicked: () {},
+    color: constants.secondColor,
+  );
+
 }
+

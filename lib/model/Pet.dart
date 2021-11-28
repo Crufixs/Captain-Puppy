@@ -1,11 +1,11 @@
 class Pet{
-  final String petImage;
-  final String petName;
-  final String breed;
-  final String gender;
-  final int age;
-  final double weight;
-  final String about;
+  String petImage;
+  String petName;
+  String breed;
+  String gender;
+  int age;
+  double weight;
+  String about;
 
   Pet({
     required this.petImage,

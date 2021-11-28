@@ -1,9 +1,11 @@
 import 'package:fap/components/Button.dart';
+import 'package:fap/utilities/constants.dart' as constants;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 import '../Edit Profile.dart';
+
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({Key? key}) : super(key: key);
@@ -26,11 +28,13 @@ class _WelcomePageState extends State<WelcomePage> {
         "description 1Brief description 1Brief description 1Brief "
         "description 1Brief description 1Brief description 1Brief "
         "description 1Brief description 3 ",
-    " "
+    "dummy"
   ];
+
   int _currentIndex = 0;
 
   generateTextOrButton(int index){
+    // print(index.toString() + " - HEHE");
     if(index != 3){
       return Flexible(
         child: Container(
@@ -45,6 +49,7 @@ class _WelcomePageState extends State<WelcomePage> {
       return Padding(
         padding: const EdgeInsets.only(top:40),
         child: Button(
+            color: constants.fifthColor,
           onClicked: () {
             Navigator.push(
               context, MaterialPageRoute(builder: (context) => EditProfile()),
@@ -103,8 +108,10 @@ class _WelcomePageState extends State<WelcomePage> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.end,
-                              children: messages.map((urlOfItem) {
-                                int index = messages.indexOf(urlOfItem);
+                              children: messages.map((text) {
+                                // print(urlOfItem);
+                                int index = messages.indexOf(text);
+                                // print("HERE NA " + index.toString());
                                 return Container(
                                   width: 10.0,
                                   height: 10.0,
