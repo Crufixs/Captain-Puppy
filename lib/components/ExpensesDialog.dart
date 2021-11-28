@@ -158,6 +158,7 @@ class _AddExpense extends State<AddExpense> {
                         top: vPadding * 0.1,
                       ),
                       child: Button(
+                        color: firstColor,
                         vPadding: 15,
                         hPadding: 40,
                         text: "Submit",
@@ -217,6 +218,7 @@ class EditExpensePopUp extends StatelessWidget {
                 Expanded(
                   flex: 1,
                   child: Button(
+                    color: firstColor,
                     vPadding: 10,
                     hPadding: 30,
                     text: "Edit",
@@ -235,6 +237,7 @@ class EditExpensePopUp extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 8.0),
                     child: Button(
+                      color: firstColor,
                       vPadding: 10,
                       hPadding: 30,
                       text: "Delete",
@@ -288,6 +291,7 @@ class ReconfirmationDeleteExpense extends StatelessWidget {
                 Expanded(
                   flex: 1,
                   child: Button(
+                    color: firstColor,
                     vPadding: 10,
                     hPadding: 30,
                     text: "Cancel",
@@ -301,6 +305,7 @@ class ReconfirmationDeleteExpense extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 8.0),
                     child: Button(
+                      color: firstColor,
                       vPadding: 10,
                       hPadding: 30,
                       text: "Confirm",
@@ -492,6 +497,7 @@ class _EditExpenseState extends State<EditExpense> {
                         top: vPadding * 0.1,
                       ),
                       child: Button(
+                        color: firstColor,
                         text: "Submit",
                         vPadding: 15,
                         hPadding: 40,

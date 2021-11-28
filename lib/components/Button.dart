@@ -6,14 +6,16 @@ class Button extends StatelessWidget {
   final VoidCallback onClicked;
   final double vPadding;
   final double hPadding;
+  final Color color;
 
-  const Button({
-    Key? key,
-    required this.text,
-    required this.onClicked,
-    required this.vPadding,
-    required this.hPadding,
-  }) : super(key: key);
+  const Button(
+      {Key? key,
+      required this.text,
+      required this.onClicked,
+      required this.vPadding,
+      required this.hPadding,
+      required this.color})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

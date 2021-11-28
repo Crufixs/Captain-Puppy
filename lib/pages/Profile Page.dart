@@ -24,7 +24,8 @@ class _ProfilePageState extends State<ProfilePage> {
       gender: 'Male',
       age: 1,
       weight: 3.8,
-      about: '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor '
+      about:
+          '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor '
           'incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud '
           'exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."',
     );
@@ -35,22 +36,22 @@ class _ProfilePageState extends State<ProfilePage> {
     // access the User_Details
 
     return MaterialApp(
-        home: Scaffold(
-          body: SafeArea(
+      home: Scaffold(
+        body: SafeArea(
           child: SingleChildScrollView(
             child: Column(
-            // ListView
-            // physics: BouncingScrollPhysics(),
+              // ListView
+              // physics: BouncingScrollPhysics(),
               children: [
                 ProfileModify(
                   petImage: User.pet.petImage,
-                // onClicked: () async {},
+                  // onClicked: () async {},
                 ),
                 const SizedBox(height: 15),
                 petName(),
                 const SizedBox(height: 20),
                 Center(
-                child: editButton(),
+                  child: editButton(),
                 ),
                 // Button(
                 //
@@ -64,7 +65,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ),
       ),
-        // bottomNavigationBar: CustomNavBar(currentIndex: 2, context: context),
+      // bottomNavigationBar: CustomNavBar(currentIndex: 2, context: context),
     );
   }
 
@@ -88,12 +89,14 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   editButton() => Button(
-    hPadding: 5,
+        color: firstColor,
+        hPadding: 5,
         vPadding: 5,
         text: 'Edit Profile',
         onClicked: () {
           Navigator.push(
-            context, MaterialPageRoute(builder: (context) => EditProfile()),
+            context,
+            MaterialPageRoute(builder: (context) => EditProfile()),
           );
         },
       );
