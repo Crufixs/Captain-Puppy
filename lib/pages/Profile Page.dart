@@ -1,7 +1,7 @@
 // import 'package:fap/components/CustomNavBar.dart';
 import 'package:fap/model/Pet.dart';
 import 'package:fap/pages/Edit%20Profile.dart';
-import 'package:fap/utilities/constants.dart';
+import 'package:fap/utilities/constants.dart' as constants;
 import 'package:fap/model/User.dart';
 import 'package:fap/model/User_Details.dart';
 import 'package:fap/components/Profile_Modify.dart';
@@ -56,13 +56,13 @@ class _ProfilePageState extends State<ProfilePage> {
       children: [
         Text(
           User.pet.petName,
-          style: TextTitle,
+          style: constants.TextTitle,
         ),
         //const SizedBox(height: 1),
         Text(
           User.pet.breed,
           style: TextStyle(
-            color: firstColor,
+            color: constants.firstColor,
             fontSize: 18,
           ),
         ),
@@ -71,6 +71,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   editButton() => Button(
+    color: constants.secondColor,
     hPadding: 5,
         vPadding: 5,
         text: 'Edit Profile',

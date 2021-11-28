@@ -5,6 +5,7 @@ import 'package:fap/components/Slider.dart';
 import 'package:fap/components/OptionSelect.dart';
 import 'package:fap/model/Pet.dart';
 import 'package:fap/model/User.dart';
+import 'package:fap/utilities/constants.dart' as constants;
 import 'package:flutter/material.dart';
 
 
@@ -138,7 +139,8 @@ class _EditProfileState extends State<EditProfile> {
       text: 'Save Changes',
       vPadding: 5,
       hPadding: 5,
-      onClicked: () {}
+      onClicked: () {},
+    color: constants.secondColor,
   );
 
 }
