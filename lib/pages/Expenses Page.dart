@@ -295,7 +295,6 @@ class ExpensesPageState extends State<ExpensesPage> {
       String type = eb.TypeToString(e.getProductType());
       String cost = "\$" + e.getCost().toStringAsFixed(2);
       String date = DateFormat.yMMMd().format(e.getDate());
-      print("$index " + productName);
       ListChildren.add(getListComponents(index, productName, type, cost, date));
     }
     return SizedBox(

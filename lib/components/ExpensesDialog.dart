@@ -365,11 +365,11 @@ class _EditExpenseState extends State<EditExpense> {
     // Start listening to changes.
     productNameListener.addListener(() {
       productName = productNameListener.text;
-      print("Current Name: ${productNameListener.text}");
+      //print("Current Name: ${productNameListener.text}");
     });
     productCostListener.addListener(() {
       price = productCostListener.text;
-      print("Current Type ${productCostListener.text}");
+      //print("Current Type ${productCostListener.text}");
     });
   }
 
