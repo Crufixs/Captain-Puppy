@@ -26,8 +26,9 @@ dependencies:
   sqflite:
   path:
   http: ^0.13.4
-  sqflite:
-  path:
+  carousel_slider: ^4.0.0
+  shared_preferences: ^2.0.9
+  date_format: ^2.0.4
   flutter:
     sdk: flutter
 

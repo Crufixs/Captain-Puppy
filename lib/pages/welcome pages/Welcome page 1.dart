@@ -21,16 +21,18 @@ class _WelcomePageState extends State<WelcomePage> {
     "Brief description Brief description 1Brief description 1Brief "
         "description 1Brief description 1Brief description 1Brief "
         "description 1Brief description 1Brief description 1Brief "
-        "description 1Brief description 1 ",
+        "description 1Brief description 2 ",
     "Brief description Brief description 1Brief description 1Brief "
         "description 1Brief description 1Brief description 1Brief "
         "description 1Brief description 1Brief description 1Brief "
-        "description 1Brief description 1 ",
-    " "
+        "description 1Brief description 3 ",
+    "dummy"
   ];
+
   int _currentIndex = 0;
 
   generateTextOrButton(int index){
+    // print(index.toString() + " - HEHE");
     if(index != 3){
       return Flexible(
         child: Container(
@@ -103,8 +105,10 @@ class _WelcomePageState extends State<WelcomePage> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.end,
-                              children: messages.map((urlOfItem) {
-                                int index = messages.indexOf(urlOfItem);
+                              children: messages.map((text) {
+                                // print(urlOfItem);
+                                int index = messages.indexOf(text);
+                                // print("HERE NA " + index.toString());
                                 return Container(
                                   width: 10.0,
                                   height: 10.0,

@@ -1,12 +1,10 @@
-import 'package:fap/model//User.dart';
-import 'package:fap/model/User_Details.dart';
-import 'package:fap/components/Profile_Modify.dart';
 import 'package:fap/components/EditProfile_Modify.dart';
 import 'package:fap/components/TextField_Modify.dart';
 import 'package:fap/components/Button.dart';
 import 'package:fap/components/Slider.dart';
 import 'package:fap/components/OptionSelect.dart';
-import 'package:fap/utilities/constants.dart';
+import 'package:fap/model/Pet.dart';
+import 'package:fap/model/User.dart';
 import 'package:flutter/material.dart';
 
 
@@ -16,8 +14,6 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfile> {
-  // User user = UserDetails.userRecord;
-
   @override
   Widget build(BuildContext context) {
     final color =
@@ -40,7 +36,7 @@ class _EditProfileState extends State<EditProfile> {
                 const SizedBox(height: 15),
                 TextFieldModify(
                     label: 'Your Name',
-                    value: User.userName,
+                    value: User.userName.toString(),
                     onChanged: (userName) {}
                 ),
                 const SizedBox(height: 20),
@@ -91,7 +87,7 @@ class _EditProfileState extends State<EditProfile> {
                           child: TextFieldModify(
                             // NUMBER FIELD TO DAPAT + SLIDER T^T
                               label: 'Pet\'s Weight',
-                              value: User.userName,
+                              value: User.userName.toString(),
                               onChanged: (userName) {}
                           ),
                         ),
