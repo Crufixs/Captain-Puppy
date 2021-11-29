@@ -1,29 +1,37 @@
 import 'dart:convert';
-
+import 'package:fap/components/package/change_theme_button_widget.dart';
 import 'package:fap/main.dart';
 import 'package:fap/model/Pet.dart';
 import 'package:fap/model/User.dart';
 import 'package:fap/utilities/constants.dart' as constants;
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'BabyPage.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
 
-  dynamic loadData() async{
+class _HomePageState extends State<HomePage> {
+  dynamic loadData() async {
     return User.userName;
   }
 
   @override
   Widget build(BuildContext context) {
+    final text = MediaQuery.of(context).platformBrightness == Brightness.dark
+        ? 'DarkTheme'
+        : 'LightTheme';
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
     return FutureBuilder(
         future: loadData(), // getting the user data
         builder: (BuildContext context, AsyncSnapshot snap) {
-          if(snap.data == null){
+          if (snap.data == null) {
             return Scaffold();
           } else {
             return Scaffold(
@@ -42,22 +50,22 @@ class HomePage extends StatelessWidget {
                             Expanded(
                               flex: 2,
                               child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'Hi, ' + User.userName.toString() + "!",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 30,
-                                      ),
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Hi, ' + User.userName.toString() + "!",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 30,
                                     ),
-                                    Text(
-                                      'Your dog misses you today',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                      ),
+                                  ),
+                                  Text(
+                                    'Your dog misses you today',
+                                    style: TextStyle(
+                                      fontSize: 20,
                                     ),
-                                  ],
+                                  ),
+                                ],
                               ),
                             ),
                             Expanded(
@@ -109,10 +117,11 @@ class HomePage extends StatelessWidget {
                                   width: 40,
                                   height: 40,
                                 ),
-                                Text('Male',
-                                    style: TextStyle(
-                                      color: Color(0xff7D79F2),
-                                    ),
+                                Text(
+                                  'Male',
+                                  style: TextStyle(
+                                    color: Color(0xff7D79F2),
+                                  ),
                                 )
                               ],
                             ),
@@ -184,14 +193,16 @@ class HomePage extends StatelessWidget {
                                     ],
                                   ),
                                   style: ButtonStyle(
-                                    shape:
-                                    MaterialStateProperty.all<RoundedRectangleBorder>(
+                                    shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
                                       RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(25.0),
+                                        borderRadius:
+                                            BorderRadius.circular(25.0),
                                       ),
                                     ),
-                                    backgroundColor: MaterialStateProperty.all<Color>(
-                                        constants.fourthColor),
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            constants.fourthColor),
                                   ),
                                   onPressed: () {
                                     changePage(context, 2);
@@ -225,14 +236,16 @@ class HomePage extends StatelessWidget {
                                     ],
                                   ),
                                   style: ButtonStyle(
-                                    shape:
-                                    MaterialStateProperty.all<RoundedRectangleBorder>(
+                                    shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
                                       RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(25.0),
+                                        borderRadius:
+                                            BorderRadius.circular(25.0),
                                       ),
                                     ),
-                                    backgroundColor: MaterialStateProperty.all<Color>(
-                                        constants.secondColor),
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            constants.secondColor),
                                   ),
                                   onPressed: () {
                                     changePage(context, 4);
@@ -271,14 +284,16 @@ class HomePage extends StatelessWidget {
                                     ],
                                   ),
                                   style: ButtonStyle(
-                                    shape:
-                                    MaterialStateProperty.all<RoundedRectangleBorder>(
+                                    shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
                                       RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(25.0),
+                                        borderRadius:
+                                            BorderRadius.circular(25.0),
                                       ),
                                     ),
-                                    backgroundColor: MaterialStateProperty.all<Color>(
-                                        constants.firstColor),
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            constants.firstColor),
                                   ),
                                   onPressed: () {
                                     changePage(context, 3);
@@ -312,14 +327,16 @@ class HomePage extends StatelessWidget {
                                     ],
                                   ),
                                   style: ButtonStyle(
-                                    shape:
-                                    MaterialStateProperty.all<RoundedRectangleBorder>(
+                                    shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
                                       RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(25.0),
+                                        borderRadius:
+                                            BorderRadius.circular(25.0),
                                       ),
                                     ),
-                                    backgroundColor: MaterialStateProperty.all<Color>(
-                                        constants.thirdColor),
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            constants.thirdColor),
                                   ),
                                   onPressed: () {
                                     changePage(context, 1);
@@ -331,45 +348,67 @@ class HomePage extends StatelessWidget {
                         ],
                       ),
 
-                      SizedBox(
-                        height: 10,
-                      ),
                       //Help
                       Container(
                         // height: screenHeight * 0.1,
                         width: screenWidth * 0.9,
                         child: Padding(
                           padding: const EdgeInsets.all(2.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              ElevatedButton(
-                                onPressed: () {},
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
+                          child: Container(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
                                   children: [
-                                    Image.asset(
-                                      "images/qmarkFinal.png",
-                                      height: 30.0,
-                                      width: 30.0,
+                                    Column(
+                                      children: [
+                                        // Icon(CupertinoIcons.moon_stars,
+                                        //     size: 30,
+                                        //    color: Color(0xff7D79F2),
+                                        // ),
+                                        ChangeThemeButtonWidget(),
+                                      ],
                                     ),
-                                    Text(
-                                      'Help',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                      ),
-                                    ),
-
                                   ],
                                 ),
-                                style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all<Color>(
-                                      Colors.transparent),
-                                  shadowColor: MaterialStateProperty.all<Color>(
-                                      Colors.transparent),
+
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    ElevatedButton(
+                                      onPressed: () {},
+                                      child: Row(
+                                        children: [
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: [
+                                              Image.asset(
+                                                "images/qmarkFinal.png",
+                                                height: 30.0,
+                                                width: 30.0,
+                                              ),
+
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.all<Color>(
+                                                Colors.transparent),
+                                        shadowColor:
+                                            MaterialStateProperty.all<Color>(
+                                                Colors.transparent),
+                                      ),
+                                    ),
+                                    Text(
+                                        'Help'
+                                    ),
+                                  ],
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       )
@@ -379,8 +418,7 @@ class HomePage extends StatelessWidget {
               ),
             );
           }
-        }
-    );
+        });
   }
 
   void changePage(BuildContext context, int pageNo) {
