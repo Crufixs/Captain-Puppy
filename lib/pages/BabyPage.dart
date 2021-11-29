@@ -92,7 +92,7 @@ class _BabyPageState extends State<BabyPage> {
           });
         },
       ),
-      floatingActionButton: selectedPage == 1
+      floatingActionButton: (selectedPage == 1)
           ? FloatingActionButton(
               onPressed: () {
                 Navigator.push(
