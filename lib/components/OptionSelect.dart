@@ -1,5 +1,6 @@
 import 'package:fap/utilities/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:fap/model/User.dart';
 
 class OptionSelect extends StatefulWidget {
   @override
@@ -9,29 +10,32 @@ class OptionSelect extends StatefulWidget {
 class _OptionSelectState extends State<OptionSelect> {
   final items = ['Male', 'Female'];
   String? value;
+  String selectedGender = User.pet.gender;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 200,
-      height: 60,
+      width: 225,
+      height: 59,
       child: InputDecorator(
         decoration: InputDecoration(
           hintText: value,
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
+            // borderRadius: BorderRadius.circular(10),
           )
         ),
         // children: [
           child: ButtonTheme(
-            alignedDropdown: true,
+            // alignedDropdown: true,
             child: DropdownButtonHideUnderline(
                 child: DropdownButton<String>(
-                  value: value,
+                  value: selectedGender,
                   iconSize: 25,
                   icon: Icon(Icons.arrow_drop_down, color: Colors.black),
                   items: items.map(itemSelect).toList(),
-                  onChanged: (value) => setState(() => this.value = value),
+                  onChanged: (value) => setState(() {
+                    selectedGender = value.toString();
+                  }),
                 ),
             ),
           ),
@@ -45,7 +49,7 @@ class _OptionSelectState extends State<OptionSelect> {
       child: Text(
         item,
         style: TextStyle(
-          fontSize: 15,
+          fontSize: 16,
         ),
       ),
     );
