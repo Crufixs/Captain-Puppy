@@ -86,7 +86,9 @@ class _ListBreedState extends State<ListBreed> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
 
-    return generateScreenContent(screenWidth);
+    return SafeArea(
+      child: generateScreenContent(screenWidth),
+    );
   }
 
   generateScreenContent(double screenWidth) {
@@ -321,18 +323,21 @@ class BreedInfoAlert extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.8,
-                    height: MediaQuery.of(context).size.height * 0.4,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(25.0),
-                          bottom: Radius.circular(25.0),
-                        ),
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: NetworkImage(breed.imageURL),
-                        )),
+                  AspectRatio(
+                    aspectRatio: 4 / 3,
+                    child: Container(
+                      // width: MediaQuery.of(context).size.width * 0.9,
+                      // height: MediaQuery.of(context).size.height * 0.5,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(25.0),
+                            bottom: Radius.circular(25.0),
+                          ),
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(breed.imageURL),
+                          )),
+                    ),
                   ),
                   SizedBox(
                     height: 20,
@@ -360,6 +365,7 @@ class BreedInfoAlert extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Button(
+                        color: firstColor,
                         vPadding: 5,
                         hPadding: 5,
                         text: 'BACK',

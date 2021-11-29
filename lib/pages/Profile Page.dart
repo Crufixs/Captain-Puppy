@@ -1,7 +1,7 @@
 // import 'package:fap/components/CustomNavBar.dart';
 import 'package:fap/model/Pet.dart';
 import 'package:fap/pages/Edit%20Profile.dart';
-import 'package:fap/utilities/constants.dart';
+import 'package:fap/utilities/constants.dart' as constants;
 import 'package:fap/model/User.dart';
 import 'package:fap/model/User_Details.dart';
 import 'package:fap/components/Profile_Modify.dart';
@@ -17,23 +17,6 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-    final Pet pet = Pet(
-      petImage: 'https://i.imgur.com/13wGXx5.jpg',
-      petName: 'Koa',
-      breed: 'Pomeranian',
-      gender: 'Male',
-      age: 1,
-      weight: 3.8,
-      about: '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor '
-          'incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud '
-          'exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."',
-    );
-
-    User.userName = 'someone';
-    User.pet = pet;
-
-    // access the User_Details
-
     return MaterialApp(
         home: Scaffold(
           body: SafeArea(
@@ -73,13 +56,13 @@ class _ProfilePageState extends State<ProfilePage> {
       children: [
         Text(
           User.pet.petName,
-          style: TextTitle,
+          style: constants.TextTitle,
         ),
         //const SizedBox(height: 1),
         Text(
           User.pet.breed,
           style: TextStyle(
-            color: firstColor,
+            color: constants.firstColor,
             fontSize: 18,
           ),
         ),
@@ -88,6 +71,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   editButton() => Button(
+    color: constants.secondColor,
     hPadding: 5,
         vPadding: 5,
         text: 'Edit Profile',

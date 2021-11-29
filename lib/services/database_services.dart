@@ -23,7 +23,8 @@ class DatabaseServices {
         join(await getDatabasesPath(), _dbName),
       onCreate: (db, version){
           return db.execute(
-            'CREATE TABLE breed(breed_id INT PRIMARY KEY, name TEXT, life_span TEXT, temperament TEXT, weight TEXT, height TEXT, image_url TEXT)'
+            'CREATE TABLE breed(breed_id INT PRIMARY KEY, name TEXT, life_span TEXT, temperament TEXT, weight TEXT, height TEXT, image_url TEXT);'
+                'Cre'
           );
       },
       version: _dbVersion,
