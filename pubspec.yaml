@@ -34,6 +34,8 @@ dependencies:
   intl: ^0.17.0
   flutter:
     sdk: flutter
+  provider: ^5.0.0
+
 
 
 

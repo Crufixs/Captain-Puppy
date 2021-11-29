@@ -1,19 +1,21 @@
 import 'dart:convert';
-
 import 'package:fap/model/Note.dart';
 import 'package:fap/pages/Edit%20Note%20Page.dart';
 import 'package:fap/pages/Home%20Page.dart';
 import 'package:fap/pages/Notes%20Page.dart';
 import 'package:fap/pages/welcome%20pages/Welcome%20page%201.dart';
+import 'package:fap/providers/theme_provide.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'model/Pet.dart';
 import 'model/User.dart';
+import 'package:provider/provider.dart';
+import 'package:fap/providers/theme_provide.dart';
+
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await loadData();
   runApp(MyHome());
 }
@@ -87,10 +89,27 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
-  @override
-  Widget build(BuildContext context) {
-    return HomePage();
-    // return WelcomePage();
-  }
+// class _MyAppState extends State<MyApp> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return HomePage();
+//     // return WelcomePage();
+//   }
+// }
+
+class _MyAppState extends State<MyApp>{
+  Widget build(BuildContext context) => ChangeNotifierProvider(
+    create: (context) => ThemeProvider(),
+    builder: (context,_){
+      final themeProvider = Provider.of<ThemeProvider>(context, listen: true);
+      return MaterialApp(
+          themeMode: themeProvider.themeMode,
+          theme: MyThemes.lightTheme,
+          darkTheme: MyThemes.darkTheme,
+          home: HomePage(),
+      );
+    },
+  );
 }
+
+
