@@ -1,14 +1,16 @@
 import 'dart:io';
-import 'package:fap/utilities/constants.dart';
+
 import 'package:flutter/material.dart';
 
 class ProfileModify extends StatelessWidget {
-  final String petImage;
+  final File petImage;
+  final Function func;
   // final VoidCallback onClicked;
 
   const ProfileModify({
     Key? key,
     required this.petImage,
+    required this.func,
     // required this.onClicked,
   }) : super(key: key);
 
@@ -33,19 +35,24 @@ class ProfileModify extends StatelessWidget {
   }
 
   profileImage() {
-    final image = NetworkImage(petImage);
-    return ClipOval(
+    return ElevatedButton(
+      onPressed: () => func.call(),
+      style: ElevatedButton.styleFrom(
+        shape: CircleBorder(),
+      ),
       child: Material(
         // must be implemented for ClipOval
         color: Colors.transparent,
-        child: Ink.image(
-          // widget that shows an image obtained from an ImageProvider
-          image: image,
-          fit: BoxFit.cover,
-          width: 170,
-          height: 170,
-          // child: InkWell(
-          //   onTap: onClicked),       // splash effect when clicking
+        child: ClipOval(
+          child: Image.file(
+            // widget that shows an image obtained from an ImageProvider
+            petImage,
+            fit: BoxFit.cover,
+            width: 170,
+            height: 170,
+            // child: InkWell(
+            //   onTap: onClicked),       // splash effect when clicking
+          ),
         ),
       ),
     );

@@ -47,6 +47,16 @@ class Expense {
   void setCost(double cost) {
     this._cost = cost;
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'index': _index,
+      'productName': _productName,
+      'productType': _productType,
+      'date': _date,
+      'cost': _cost,
+    };
+  }
 }
 
 enum ProductType { Food, Healthcare, Utilities, Toys, ERROR }

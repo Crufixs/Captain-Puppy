@@ -3,11 +3,13 @@ import 'dart:convert';
 
 import 'Note.dart';
 import 'Pet.dart';
+import 'expenses.dart';
 
 class User {
   static String? userName;
   static late Pet pet;
   static List<Note> notes = [];
+  static List<Expense> expenses = [];
 
   // const User({
   //   required this.userName,
@@ -53,7 +55,8 @@ class User {
     var decodedNotes = json['notes'];
     for (int i = 0; i < decodedNotes.length; i++) {
       notes.add(
-        new Note(decodedNotes[i]['title'], decodedNotes[i]['content'], decodedNotes[i]['date']),
+        new Note(decodedNotes[i]['title'], decodedNotes[i]['content'],
+            decodedNotes[i]['date']),
       );
     }
   }
