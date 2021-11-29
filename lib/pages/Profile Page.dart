@@ -1,6 +1,9 @@
 // import 'package:fap/components/CustomNavBar.dart';
+import 'dart:io';
+
 import 'package:fap/model/Pet.dart';
 import 'package:fap/pages/Edit%20Profile.dart';
+import 'package:fap/services/import_image.dart';
 import 'package:fap/utilities/constants.dart' as constants;
 import 'package:fap/model/User.dart';
 import 'package:fap/model/User_Details.dart';
@@ -8,6 +11,7 @@ import 'package:fap/components/Profile_Modify.dart';
 import 'package:fap/components/Button.dart';
 import 'package:fap/components/Information.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -15,25 +19,43 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  File? image;
+  ImageImportBrain imb = new ImageImportBrain();
+
+  Future<void> getImage() async {
+    ImageSource? rawr = await imb.showImageSource(context);
+    image = await imb.pickImage(rawr!);
+    print(image!.path);
+    setState(() {});
+  }
+
+  @override
+  void dispose() {}
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: Scaffold(
-          body: SafeArea(
+      home: Scaffold(
+        body: SafeArea(
           child: SingleChildScrollView(
             child: Column(
-            // ListView
-            // physics: BouncingScrollPhysics(),
+              // ListView
+              // physics: BouncingScrollPhysics(),
               children: [
-                ProfileModify(
-                  petImage: User.pet.petImage,
-                // onClicked: () async {},
+                image == null
+                    ? Container()
+                    : ProfileModify(petImage: image!, func: getImage),
+                Button(
+                  text: "TEST",
+                  onClicked: getImage,
+                  vPadding: 10,
+                  hPadding: 10,
+                  color: constants.firstColor,
                 ),
                 const SizedBox(height: 15),
                 petName(),
                 const SizedBox(height: 20),
                 Center(
-                child: editButton(),
+                  child: editButton(),
                 ),
                 // Button(
                 //
@@ -47,7 +69,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ),
       ),
-        // bottomNavigationBar: CustomNavBar(currentIndex: 2, context: context),
+      // bottomNavigationBar: CustomNavBar(currentIndex: 2, context: context),
     );
   }
 
@@ -71,13 +93,14 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   editButton() => Button(
-    color: constants.secondColor,
-    hPadding: 5,
+        color: constants.secondColor,
+        hPadding: 5,
         vPadding: 5,
         text: 'Edit Profile',
         onClicked: () {
           Navigator.push(
-            context, MaterialPageRoute(builder: (context) => EditProfile()),
+            context,
+            MaterialPageRoute(builder: (context) => EditProfile()),
           );
         },
       );

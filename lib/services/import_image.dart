@@ -8,11 +8,11 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
 class ImageImportBrain {
-  //UNG RETURN NG PICKIMAGE
+  //Returns file yan tas dapat store as a global variable
   //image != null ? Image.file(image!) : Container(),
   Future<File?> pickImage(ImageSource src) async {
     try {
-      final image = await ImagePicker /*()*/ .pickImage(source: src);
+      final image = await ImagePicker().pickImage(source: src);
       if (image == null) return null;
       //final imageTemporary = File(image.path);
       final imagePermanent = await saveImagePermanently(image.path);
