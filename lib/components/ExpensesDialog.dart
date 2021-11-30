@@ -1,4 +1,5 @@
 import 'package:fap/components/Button.dart';
+import 'package:fap/model/User.dart';
 import 'package:fap/model/expenses.dart';
 import 'package:fap/services/expenses_brain.dart';
 import 'package:fap/utilities/constants.dart';
@@ -25,7 +26,7 @@ class _AddExpense extends State<AddExpense> {
   late final int index;
 
   void initState() {
-    index = eb.getListOfExpenses().length;
+    index = User.expenses.length;
 
     super.initState();
     productNameListener = TextEditingController(text: productName);
