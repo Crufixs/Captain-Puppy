@@ -1,3 +1,4 @@
+import 'package:fap/model/User.dart';
 import 'package:fap/model/expenses.dart';
 import 'package:fap/pages/Expenses%20Page.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -9,18 +10,12 @@ class ExpensesBrain {
   double _totalHealthCareExpense = 0;
   double _totalToyExpense = 0;
 
-  List<Expense> _listOfExpenses = [];
-
   ExpensesBrain() {
-    addExpense("productName1", "Food", 12);
-    addExpense("productName2", "Utilities", 15);
-    addExpense("productName3", "Healthcare", 19);
-    addExpense("productName4", "Toys", 24);
     setTotal();
   }
 
   void setTotal() {
-    for (Expense e in _listOfExpenses) {
+    for (Expense e in User.expenses) {
       ProductType type = e.getProductType();
       switch (type) {
         case ProductType.Food:
@@ -40,16 +35,16 @@ class ExpensesBrain {
   }
 
   void addExpense(String productName, String productType, double cost) {
-    Expense e = new Expense(
-        _listOfExpenses.length, productName, StringToType(productType), cost);
-    _listOfExpenses.add(e);
+    Expense e = new Expense(User.expenses.length, productName,
+        StringToType(productType), cost, DateTime.now());
+    User.expenses.add(e);
     setTotal();
   }
 
   void deleteExpense(int index) {
-    _listOfExpenses.removeAt(index);
-    for (int i = index; i < _listOfExpenses.length; i++) {
-      _listOfExpenses[i].decrementId();
+    User.expenses.removeAt(index);
+    for (int i = index; i < User.expenses.length; i++) {
+      User.expenses[i].decrementId();
     }
     setTotal();
   }
@@ -85,11 +80,7 @@ class ExpensesBrain {
   }
 
   Expense getExpenseAt(int index) {
-    return _listOfExpenses[index];
-  }
-
-  List getListOfExpenses() {
-    return _listOfExpenses;
+    return User.expenses[index];
   }
 
   double getTotalToy() {
