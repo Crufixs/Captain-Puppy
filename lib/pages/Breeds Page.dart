@@ -220,7 +220,7 @@ class BreedButton extends StatelessWidget {
                   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100.0),
-                    color: iconColor,
+                    color: Colors.black,
                   ),
                 ),
                 SizedBox(
@@ -263,9 +263,9 @@ class BreedButton extends StatelessWidget {
                     borderRadius: BorderRadius.circular(25.0),
                   ),
                 ),
-                shadowColor:
-                    MaterialStateProperty.all<Color>(Colors.transparent),
-                backgroundColor: MaterialStateProperty.all<Color>(color),
+               // shadowColor:
+                //   MaterialStateProperty.all<Color>(Colors.),
+                backgroundColor: MaterialStateProperty.all<Color>(iconColor),
                 side: MaterialStateProperty.all(BorderSide(
                   width: 3,
                   color: iconColor,

@@ -15,6 +15,11 @@ class MyThemes{
   static final darkTheme = ThemeData(
     scaffoldBackgroundColor: Colors.grey.shade900,
     colorScheme: ColorScheme.dark(),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all(Colors.white),
+      ),
+    ),
   );
   static final lightTheme = ThemeData(
     scaffoldBackgroundColor: Colors.white,

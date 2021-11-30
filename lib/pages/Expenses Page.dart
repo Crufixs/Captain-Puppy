@@ -130,6 +130,10 @@ class ExpensesPageState extends State<ExpensesPage> {
         color = pieChartColor4;
         break;
     }
+
+    var brightness = MediaQuery.of(context).platformBrightness;
+    print(brightness);
+
     return ReusableComponent(
         insideComponents: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -147,7 +151,7 @@ class ExpensesPageState extends State<ExpensesPage> {
                       productName,
                       style: TextStyle(
                         fontSize: 18,
-                        color: Colors.black,
+                        color: brightness == Brightness.dark ? Colors.white : Colors.black,
                         fontWeight: FontWeight.w800,
                       ),
                     ),
