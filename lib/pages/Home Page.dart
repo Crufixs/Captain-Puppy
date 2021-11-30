@@ -103,7 +103,7 @@ class _HomePageState extends State<HomePage> {
                                   size: 40,
                                 ),
                                 Text(
-                                  'Pomeranian',
+                                  User.pet.breed,
                                   style: TextStyle(
                                     color: Color(0xff7d79f2),
                                   ),
@@ -118,7 +118,7 @@ class _HomePageState extends State<HomePage> {
                                   height: 40,
                                 ),
                                 Text(
-                                  'Male',
+                                  User.pet.gender,
                                   style: TextStyle(
                                     color: Color(0xff7D79F2),
                                   ),
@@ -133,7 +133,7 @@ class _HomePageState extends State<HomePage> {
                                   size: 40,
                                 ),
                                 Text(
-                                  '1 y/o',
+                                  User.pet.age.toString() + ' y/o',
                                   style: TextStyle(
                                     color: Color(0xff7d79f2),
                                   ),
@@ -148,7 +148,7 @@ class _HomePageState extends State<HomePage> {
                                   height: 40,
                                 ),
                                 Text(
-                                  '3.5 kg',
+                                  User.pet.weight.toString() + ' kg',
                                   style: TextStyle(
                                     color: Color(0xff7d79f2),
                                   ),
@@ -427,6 +427,6 @@ class _HomePageState extends State<HomePage> {
       MaterialPageRoute(
         builder: (context) => BabyPage(selectedPage: pageNo),
       ),
-    );
+    ).then((value) => setState(() {}));
   }
 }

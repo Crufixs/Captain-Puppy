@@ -74,7 +74,6 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
       ),
     );
-    // bottomNavigationBar: CustomNavBar(currentIndex: 2, context: context),
   }
 
   profileImage() {

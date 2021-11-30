@@ -33,7 +33,7 @@ class EditProfileModify extends StatelessWidget {
   }
 
   profileImage() {
-    final image = NetworkImage(petImage);
+    final image = AssetImage(petImage);
     return ClipOval(
       child: Material(
         // must be implemented for ClipOval

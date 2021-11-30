@@ -5,7 +5,7 @@ import 'Note.dart';
 import 'Pet.dart';
 
 class User {
-  static String? userName;
+  static late String userName;
   static late Pet pet;
   static List<Note> notes = [];
 

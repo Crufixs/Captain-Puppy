@@ -10,23 +10,15 @@ import 'package:fap/utilities/constants.dart';
 import 'package:flutter/material.dart';
 
 class EditProfile extends StatefulWidget {
-  // final String label;
-  // final String value;
-  // final ValueChanged<String> onChanged;
-  //
-  // const EditProfile({
-  //   Key? key,
-  //   required this.label,
-  //   required this.value,
-  //   required this.onChanged,
-  // }) : super(key: key);
+
+  // EditProfile({required this.isNew});
+  // final bool isNew;
 
   @override
   _EditProfileState createState() => _EditProfileState();
 }
 
 class _EditProfileState extends State<EditProfile> {
-  // User user = UserDetails.userRecord;
   double weightValue = User.pet.weight;
   TextEditingController userNameController = new TextEditingController(text: User.userName);
   TextEditingController petNameController = new TextEditingController(text: User.pet.petName);
@@ -40,13 +32,16 @@ class _EditProfileState extends State<EditProfile> {
   @override
   void initState() {
     super.initState();
-     // userNameController = new TextEditingController(text: User.userName);
-     // petNameController = new TextEditingController(text: User.pet.petName);
-     // petAgeController = new TextEditingController(text: User.pet.age.toString());
-     // petBreedController = new TextEditingController(text: User.pet.breed);
-     // petWeightController = new TextEditingController(text: weightValue.toString());
-     // petGenderController = new TextEditingController(text: User.pet.gender);
-     // petAboutController = new TextEditingController(text: User.pet.about);
+    // if(!widget.isNew) {
+    //   double weightValue = User.pet.weight;
+    //   userNameController.text = User.userName;
+    //   petNameController.text = User.pet.petName;
+    //   petAgeController.text = User.pet.age.toString();
+    //   petBreedController.text = User.pet.breed;
+    //   petWeightController.text = weightValue.toString();
+    //   petGenderController.text = User.pet.gender;
+    //   petAboutController.text = User.pet.about;
+    // }
   }
 
   @override
@@ -62,13 +57,6 @@ class _EditProfileState extends State<EditProfile> {
   }
 
   void saveChanges() {
-    // Navigator.of(context).pop(userNameController.text);
-    // Navigator.of(context).pop(petNameController.text);
-    // Navigator.of(context).pop(petAgeController.text);
-    // Navigator.of(context).pop(petBreedController.text);
-    // Navigator.of(context).pop(petWeightController.text);
-    // Navigator.of(context).pop(petGenderController.text);
-    // Navigator.of(context).pop(petAboutController.text);
     User.userName = userNameController.text;
     User.pet.petName = petNameController.text;
     User.pet.age = int.parse(petAgeController.text);
