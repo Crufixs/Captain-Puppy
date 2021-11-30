@@ -202,7 +202,7 @@ class BreedButton extends StatelessWidget {
         child: Container(
           width: screenWidth * 0.80,
           height: screenHeight * 0.15,
-          child: TextButton(
+          child: ElevatedButton(
             onPressed: () => showDialog(
               context: context,
               builder: (BuildContext context) => BreedInfoAlert(breed: breed),
@@ -220,7 +220,7 @@ class BreedButton extends StatelessWidget {
                   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100.0),
-                    color: iconColor,
+                    color: Colors.white,
                   ),
                 ),
                 SizedBox(
@@ -235,7 +235,7 @@ class BreedButton extends StatelessWidget {
                         breed.name,
                         style: TextStyle(
                           fontSize: 23,
-                          color: Colors.black,
+                          color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -247,7 +247,7 @@ class BreedButton extends StatelessWidget {
                           softWrap: false,
                           style: TextStyle(
                             fontSize: 15,
-                            color: Colors.black,
+                            color: Colors.white,
                             fontWeight: FontWeight.normal,
                           ),
                         ),
@@ -258,20 +258,18 @@ class BreedButton extends StatelessWidget {
               ],
             ),
             style: ButtonStyle(
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25.0),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25.0),
+                  ),
                 ),
-              ),
-              // shadowColor: MaterialStateProperty.all<Color>(Colors.transparent),
-              // backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-              side: MaterialStateProperty.all(
-                BorderSide(
+                // shadowColor:
+                //   MaterialStateProperty.all<Color>(Colors.),
+                backgroundColor: MaterialStateProperty.all<Color>(iconColor),
+                side: MaterialStateProperty.all(BorderSide(
                   width: 3,
                   color: iconColor,
-                ),
-              ),
-            ),
+                ))),
           ),
         ),
       ),

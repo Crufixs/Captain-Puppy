@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:fap/components/EditProfile_Modify.dart';
 import 'package:fap/components/TextField_Modify.dart';
 import 'package:fap/components/Button.dart';
@@ -6,42 +8,55 @@ import 'package:fap/components/OptionSelect.dart';
 import 'package:fap/model/Pet.dart';
 import 'package:fap/model/User.dart';
 import 'package:fap/pages/Profile%20Page.dart';
+import 'package:fap/services/import_image.dart';
 import 'package:fap/utilities/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class EditProfile extends StatefulWidget {
-
-  // EditProfile({required this.isNew});
-  // final bool isNew;
+  // final String label;
+  // final String value;
+  // final ValueChanged<String> onChanged;
+  //
+  // const EditProfile({
+  //   Key? key,
+  //   required this.label,
+  //   required this.value,
+  //   required this.onChanged,
+  // }) : super(key: key);
 
   @override
   _EditProfileState createState() => _EditProfileState();
 }
 
 class _EditProfileState extends State<EditProfile> {
+  // User user = UserDetails.userRecord;
   double weightValue = User.pet.weight;
-  TextEditingController userNameController = new TextEditingController(text: User.userName);
-  TextEditingController petNameController = new TextEditingController(text: User.pet.petName);
-  TextEditingController petAgeController = new TextEditingController(text: User.pet.age.toString());
-  TextEditingController petBreedController = new TextEditingController(text: User.pet.breed);
-  TextEditingController petWeightController = new TextEditingController(text: User.pet.weight.toString());
-  TextEditingController petGenderController = new TextEditingController(text: User.pet.gender);
-  TextEditingController petAboutController = new TextEditingController(text: User.pet.about);
+  TextEditingController userNameController =
+      new TextEditingController(text: User.userName);
+  TextEditingController petNameController =
+      new TextEditingController(text: User.pet.petName);
+  TextEditingController petAgeController =
+      new TextEditingController(text: User.pet.age.toString());
+  TextEditingController petBreedController =
+      new TextEditingController(text: User.pet.breed);
+  TextEditingController petWeightController =
+      new TextEditingController(text: User.pet.weight.toString());
+  TextEditingController petGenderController =
+      new TextEditingController(text: User.pet.gender);
+  TextEditingController petAboutController =
+      new TextEditingController(text: User.pet.about);
   // List<Text> controllers = [];
-
   @override
   void initState() {
     super.initState();
-    // if(!widget.isNew) {
-    //   double weightValue = User.pet.weight;
-    //   userNameController.text = User.userName;
-    //   petNameController.text = User.pet.petName;
-    //   petAgeController.text = User.pet.age.toString();
-    //   petBreedController.text = User.pet.breed;
-    //   petWeightController.text = weightValue.toString();
-    //   petGenderController.text = User.pet.gender;
-    //   petAboutController.text = User.pet.about;
-    // }
+    // userNameController = new TextEditingController(text: User.userName);
+    // petNameController = new TextEditingController(text: User.pet.petName);
+    // petAgeController = new TextEditingController(text: User.pet.age.toString());
+    // petBreedController = new TextEditingController(text: User.pet.breed);
+    // petWeightController = new TextEditingController(text: weightValue.toString());
+    // petGenderController = new TextEditingController(text: User.pet.gender);
+    // petAboutController = new TextEditingController(text: User.pet.about);
   }
 
   @override
@@ -57,6 +72,13 @@ class _EditProfileState extends State<EditProfile> {
   }
 
   void saveChanges() {
+    // Navigator.of(context).pop(userNameController.text);
+    // Navigator.of(context).pop(petNameController.text);
+    // Navigator.of(context).pop(petAgeController.text);
+    // Navigator.of(context).pop(petBreedController.text);
+    // Navigator.of(context).pop(petWeightController.text);
+    // Navigator.of(context).pop(petGenderController.text);
+    // Navigator.of(context).pop(petAboutController.text);
     User.userName = userNameController.text;
     User.pet.petName = petNameController.text;
     User.pet.age = int.parse(petAgeController.text);
@@ -64,6 +86,13 @@ class _EditProfileState extends State<EditProfile> {
     User.pet.weight = double.parse(petWeightController.text);
     User.pet.gender = petGenderController.text;
     User.pet.about = petAboutController.text;
+  }
+
+  void getImage() async {
+    ImageImportBrain imb = ImageImportBrain();
+    ImageSource? source = await imb.showImageSource(context);
+    File? img = await imb.pickImage(source!);
+    User.pet.petImage = img!.path;
   }
 
   @override
@@ -96,7 +125,10 @@ class _EditProfileState extends State<EditProfile> {
                 EditProfileModify(
                   petImage: User.pet.petImage,
                   isEdit: true,
-                  onClicked: () async {},
+                  onClicked: () async {
+                    getImage();
+                    setState(() {});
+                  },
                 ),
                 const SizedBox(height: 15),
                 userNameInput(),
@@ -192,317 +224,270 @@ class _EditProfileState extends State<EditProfile> {
   }
 
   saveButton() => Button(
-    text: 'Save Changes',
-    vPadding: 10,
-    hPadding: 15,
-    onClicked: () {
-      // Text(TextFieldModify.textController.value);
-      saveChanges();
-      print(userNameController.text +
-          petNameController.text +
-          petAgeController.text +
-          petBreedController.text +
-          petWeightController.text +
-          petGenderController.text +
-          petAboutController.text);
-      Navigator.pop(
-          context
+        text: 'Save Changes',
+        vPadding: 10,
+        hPadding: 15,
+        onClicked: () {
+          // Text(TextFieldModify.textController.value);
+          saveChanges();
+          print(userNameController.text +
+              petNameController.text +
+              petAgeController.text +
+              petBreedController.text +
+              petWeightController.text +
+              petGenderController.text +
+              petAboutController.text);
+          Navigator.pop(context);
+        },
+        color: secondColor,
       );
-    },
-    color: secondColor,
-
-  );
 
   userNameInput() => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        'Your Name',
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 15,
-        ),
-      ),
-      const SizedBox(height: 5),
-      TextFormField(
-        // onChanged: (value) => setState(() {
-        //   this.textController = value;
-        // });
-        controller: userNameController,
-        decoration: InputDecoration(
-          hintStyle: TextStyle(
-            color: Colors.black,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Your Name',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 15,
+            ),
           ),
-          // labelText: 'Your Name',
-          hintText: User.userName,
-          // icon: Icon(Icons.mail),
-          // prefixIcon: Icon(Icons.account_box),
-          suffixIcon: userNameController.text
-              .isEmpty //icon only appears when clicked on the text field
-              ? Container(width: 0)
-              : IconButton(
-            icon: Icon(Icons.close),
-            onPressed: () {
-              userNameController
-                  .clear(); //clears the text inside the tf
-            },
+          const SizedBox(height: 5),
+          TextFormField(
+            // onChanged: (value) => setState(() {
+            //   this.textController = value;
+            // });
+            controller: userNameController,
+            decoration: InputDecoration(
+              hintStyle: TextStyle(
+                color: Colors.black,
+              ),
+              // labelText: 'Your Name',
+              hintText: User.userName,
+              // icon: Icon(Icons.mail),
+              // prefixIcon: Icon(Icons.account_box),
+              suffixIcon: userNameController.text
+                      .isEmpty //icon only appears when clicked on the text field
+                  ? Container(width: 0)
+                  : IconButton(
+                      icon: Icon(Icons.close),
+                      onPressed: () {
+                        userNameController
+                            .clear(); //clears the text inside the tf
+                      },
+                    ),
+              border: OutlineInputBorder(),
+            ),
+            // textInputAction: TextInputAction.done,
           ),
-          border: OutlineInputBorder(),
-        ),
-        // textInputAction: TextInputAction.done,
-      ),
-    ],
-  );
+        ],
+      );
 
   petNameInput() => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        'Pet\'s Name',
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 15,
-        ),
-      ),
-      const SizedBox(height: 5),
-      TextFormField(
-        controller: petNameController,
-        decoration: InputDecoration(
-          hintStyle: TextStyle(
-            color: Colors.black,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Pet\'s Name',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 15,
+            ),
           ),
-          // labelText: 'Pet\'s Name',
-          hintText: User.pet.petName,
-          // prefixIcon: Icon(Icons.pets),
-          suffixIcon: petNameController.text
-              .isEmpty //icon only appears when clicked on the text field
-              ? Container(width: 0)
-              : IconButton(
-            icon: Icon(Icons.close),
-            onPressed: () {
-              petNameController
-                  .clear(); //clears the text inside the tf
-            },
+          const SizedBox(height: 5),
+          TextFormField(
+            controller: petNameController,
+            decoration: InputDecoration(
+              hintStyle: TextStyle(
+                color: Colors.black,
+              ),
+              // labelText: 'Pet\'s Name',
+              hintText: User.pet.petName,
+              // prefixIcon: Icon(Icons.pets),
+              suffixIcon: petNameController.text
+                      .isEmpty //icon only appears when clicked on the text field
+                  ? Container(width: 0)
+                  : IconButton(
+                      icon: Icon(Icons.close),
+                      onPressed: () {
+                        petNameController
+                            .clear(); //clears the text inside the tf
+                      },
+                    ),
+              border: OutlineInputBorder(),
+            ),
+            textInputAction: TextInputAction.done,
           ),
-          border: OutlineInputBorder(),
-        ),
-        textInputAction: TextInputAction.done,
-      ),
-    ],
-  );
+        ],
+      );
 
   petAgeInput() => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        'Pet\'s Age',
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 15,
-        ),
-      ),
-      const SizedBox(height: 5),
-      TextField(
-        controller: petAgeController,
-        decoration: InputDecoration(
-          hintStyle: TextStyle(
-            color: Colors.black,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Pet\'s Age',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 15,
+            ),
           ),
-          // prefixIcon: Icon(Icons.pets),
-          // labelText: 'Pet\'s Age',
-          hintText: '${User.pet.age}',
-          border: OutlineInputBorder(),
-        ),
-        keyboardType: TextInputType.number,
-      ),
-    ],
-  );
+          const SizedBox(height: 5),
+          TextField(
+            controller: petAgeController,
+            decoration: InputDecoration(
+              hintStyle: TextStyle(
+                color: Colors.black,
+              ),
+              // prefixIcon: Icon(Icons.pets),
+              // labelText: 'Pet\'s Age',
+              hintText: '${User.pet.age}',
+              border: OutlineInputBorder(),
+            ),
+            keyboardType: TextInputType.number,
+          ),
+        ],
+      );
 
   petBreedInput() => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        'Pet\'s Breed',
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 15,
-        ),
-      ),
-      const SizedBox(height: 5),
-      TextFormField(
-        controller: petBreedController,
-        decoration: InputDecoration(
-          hintStyle: TextStyle(
-            color: Colors.black,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Pet\'s Breed',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 15,
+            ),
           ),
-          // labelText: 'Pet\'s Breed',
-          hintText: User.pet.breed,
-          // icon: Icon(Icons.mail),
-          // prefixIcon: Icon(Icons.pets),
-          suffixIcon: petBreedController.text
-              .isEmpty //icon only appears when clicked on the text field
-              ? Container(width: 0)
-              : IconButton(
-            icon: Icon(Icons.close),
-            onPressed: () {
-              petBreedController
-                  .clear(); //clears the text inside the tf
-            },
+          const SizedBox(height: 5),
+          TextFormField(
+            controller: petBreedController,
+            decoration: InputDecoration(
+              hintStyle: TextStyle(
+                color: Colors.black,
+              ),
+              // labelText: 'Pet\'s Breed',
+              hintText: User.pet.breed,
+              // icon: Icon(Icons.mail),
+              // prefixIcon: Icon(Icons.pets),
+              suffixIcon: petBreedController.text
+                      .isEmpty //icon only appears when clicked on the text field
+                  ? Container(width: 0)
+                  : IconButton(
+                      icon: Icon(Icons.close),
+                      onPressed: () {
+                        petBreedController
+                            .clear(); //clears the text inside the tf
+                      },
+                    ),
+              border: OutlineInputBorder(),
+            ),
+            textInputAction: TextInputAction.done,
           ),
-          border: OutlineInputBorder(),
-        ),
-        textInputAction: TextInputAction.done,
-      ),
-    ],
-  );
+        ],
+      );
 
   petWeightInput() => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        'Pet\'s Weight',
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 15,
-        ),
-      ),
-      const SizedBox(height: 5),
-      TextField(
-        controller: petWeightController,
-        decoration: InputDecoration(
-          hintStyle: TextStyle(
-            color: Colors.black,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Pet\'s Weight',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 15,
+            ),
           ),
-          // prefixIcon: Icon(Icons.pets),
-          // labelText: 'Pet\'s Weight',
-          // hintText: '${User.pet.weight}',
-          hintText: weightValue.toString(),
-          border: OutlineInputBorder(),
-        ),
-        keyboardType: TextInputType.number,
-        onChanged: (text) => {weightValue.toString()},
-      ),
-    ],
-  );
+          const SizedBox(height: 5),
+          TextField(
+            controller: petWeightController,
+            decoration: InputDecoration(
+              hintStyle: TextStyle(
+                color: Colors.black,
+              ),
+              // prefixIcon: Icon(Icons.pets),
+              // labelText: 'Pet\'s Weight',
+              // hintText: '${User.pet.weight}',
+              hintText: weightValue.toString(),
+              border: OutlineInputBorder(),
+            ),
+            keyboardType: TextInputType.number,
+            onChanged: (text) => {weightValue.toString()},
+          ),
+        ],
+      );
 
   petGenderInput() => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        'Pet\'s Gender',
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 15,
-        ),
-      ),
-      const SizedBox(height: 5),
-      TextFormField(
-        controller: petGenderController,
-        decoration: InputDecoration(
-          hintStyle: TextStyle(
-            color: Colors.black,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Pet\'s Gender',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 15,
+            ),
           ),
-          // labelText: 'Pet\'s Gender',
-          hintText: User.pet.gender,
-          // prefixIcon: Icon(Icons.pets),
-          suffixIcon: petGenderController.text
-              .isEmpty //icon only appears when clicked on the text field
-              ? Container(width: 0)
-              : IconButton(
-            icon: Icon(Icons.close),
-            onPressed: () {
-              petGenderController
-                  .clear(); //clears the text inside the tf
-            },
+          const SizedBox(height: 5),
+          TextFormField(
+            controller: petGenderController,
+            decoration: InputDecoration(
+              hintStyle: TextStyle(
+                color: Colors.black,
+              ),
+              // labelText: 'Pet\'s Gender',
+              hintText: User.pet.gender,
+              // prefixIcon: Icon(Icons.pets),
+              suffixIcon: petGenderController.text
+                      .isEmpty //icon only appears when clicked on the text field
+                  ? Container(width: 0)
+                  : IconButton(
+                      icon: Icon(Icons.close),
+                      onPressed: () {
+                        petGenderController
+                            .clear(); //clears the text inside the tf
+                      },
+                    ),
+              border: OutlineInputBorder(),
+            ),
+            textInputAction: TextInputAction.done,
           ),
-          border: OutlineInputBorder(),
-        ),
-        textInputAction: TextInputAction.done,
-      ),
-    ],
-  );
+        ],
+      );
 
   petAboutInput() => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        'About Your Pet',
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 15,
-        ),
-      ),
-      const SizedBox(height: 5),
-      TextFormField(
-        controller: petAboutController,
-        decoration: InputDecoration(
-          hintStyle: TextStyle(
-            color: Colors.black,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'About Your Pet',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 15,
+            ),
           ),
-          // labelText: 'About Your Pet',
-          hintText: User.pet.about,
-          // prefixIcon: Icon(Icons.pets),
-          suffixIcon: petAboutController.text
-              .isEmpty //icon only appears when clicked on the text field
-              ? Container(width: 0)
-              : IconButton(
-            icon: Icon(Icons.close),
-            onPressed: () {
-              petAboutController
-                  .clear(); //clears the text inside the tf
-            },
+          const SizedBox(height: 5),
+          TextFormField(
+            controller: petAboutController,
+            decoration: InputDecoration(
+              hintStyle: TextStyle(
+                color: Colors.black,
+              ),
+              // labelText: 'About Your Pet',
+              hintText: User.pet.about,
+              // prefixIcon: Icon(Icons.pets),
+              suffixIcon: petAboutController.text
+                      .isEmpty //icon only appears when clicked on the text field
+                  ? Container(width: 0)
+                  : IconButton(
+                      icon: Icon(Icons.close),
+                      onPressed: () {
+                        petAboutController
+                            .clear(); //clears the text inside the tf
+                      },
+                    ),
+              border: OutlineInputBorder(),
+            ),
+            textInputAction: TextInputAction.done,
           ),
-          border: OutlineInputBorder(),
-        ),
-        textInputAction: TextInputAction.done,
-      ),
-    ],
-  );
+        ],
+      );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import 'package:fap/components/EditProfile_Modify.dart';
 // import 'package:fap/components/TextField_Modify.dart';

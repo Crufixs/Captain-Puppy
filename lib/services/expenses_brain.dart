@@ -1,26 +1,26 @@
+import 'dart:convert';
+
+import 'package:fap/model/User.dart';
 import 'package:fap/model/expenses.dart';
-import 'package:fap/pages/Expenses%20Page.dart';
-import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ExpensesBrain {
   double _totalFoodExpense = 0;
   double _totalUtilityExpense = 0;
-  double _totalHealthCareExpense = 0;
+  double _totalHealthExpense = 0;
   double _totalToyExpense = 0;
 
-  List<Expense> _listOfExpenses = [];
-
   ExpensesBrain() {
-    addExpense("productName1", "Food", 12);
-    addExpense("productName2", "Utilities", 15);
-    addExpense("productName3", "Healthcare", 19);
-    addExpense("productName4", "Toys", 24);
     setTotal();
   }
 
   void setTotal() {
-    for (Expense e in _listOfExpenses) {
+    _totalFoodExpense = 0;
+    _totalUtilityExpense = 0;
+    _totalHealthExpense = 0;
+    _totalToyExpense = 0;
+    for (Expense e in User.expenses) {
       ProductType type = e.getProductType();
       switch (type) {
         case ProductType.Food:
@@ -29,8 +29,8 @@ class ExpensesBrain {
         case ProductType.Utilities:
           _totalUtilityExpense += e.getCost();
           break;
-        case ProductType.Healthcare:
-          _totalHealthCareExpense += e.getCost();
+        case ProductType.Health:
+          _totalHealthExpense += e.getCost();
           break;
         case ProductType.Toys:
           _totalToyExpense += e.getCost();
@@ -39,29 +39,39 @@ class ExpensesBrain {
     }
   }
 
-  void addExpense(String productName, String productType, double cost) {
+  void addExpense(String productName, String productType, double cost) async {
     Expense e = new Expense(
-        _listOfExpenses.length, productName, StringToType(productType), cost);
-    _listOfExpenses.add(e);
+        User.expenses.length,
+        productName,
+        StringToType(productType),
+        cost,
+        DateFormat.yMMMd().format(DateTime.now()));
+    SharedPreferences roar = await SharedPreferences.getInstance();
+    User.expenses.add(e);
+    String json = jsonEncode(User.toJson());
+    roar.setString("userData", json);
     setTotal();
   }
 
-  void deleteExpense(int index) {
-    _listOfExpenses.removeAt(index);
-    for (int i = index; i < _listOfExpenses.length; i++) {
-      _listOfExpenses[i].decrementId();
+  void deleteExpense(int index) async {
+    User.expenses.removeAt(index);
+    for (int i = index; i < User.expenses.length; i++) {
+      User.expenses[i].decrementId();
     }
+    SharedPreferences roar = await SharedPreferences.getInstance();
+    String json = jsonEncode(User.toJson());
+    roar.setString("userData", json);
     setTotal();
   }
 
-  ProductType StringToType(String pt) {
+  static ProductType StringToType(String pt) {
     switch (pt) {
       case "Food":
         return ProductType.Food;
       case "Utilities":
         return ProductType.Utilities;
-      case "Healthcare":
-        return ProductType.Healthcare;
+      case "Health":
+        return ProductType.Health;
       case "Toys":
         return ProductType.Toys;
       default:
@@ -69,14 +79,14 @@ class ExpensesBrain {
     }
   }
 
-  String TypeToString(ProductType pt) {
+  static String TypeToString(ProductType pt) {
     switch (pt) {
       case ProductType.Food:
         return "Food";
       case ProductType.Utilities:
         return "Utilities";
-      case ProductType.Healthcare:
-        return "Healthcare";
+      case ProductType.Health:
+        return "Health";
       case ProductType.Toys:
         return "Toys";
       default:
@@ -85,11 +95,7 @@ class ExpensesBrain {
   }
 
   Expense getExpenseAt(int index) {
-    return _listOfExpenses[index];
-  }
-
-  List getListOfExpenses() {
-    return _listOfExpenses;
+    return User.expenses[index];
   }
 
   double getTotalToy() {
@@ -104,7 +110,7 @@ class ExpensesBrain {
     return _totalFoodExpense;
   }
 
-  double getTotalHealthCare() {
-    return _totalHealthCareExpense;
+  double getTotalHealth() {
+    return _totalHealthExpense;
   }
 }
