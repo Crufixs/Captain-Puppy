@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 const firstColor = Color(0xff7D79F2); //darker purple
 const secondColor = Color(0xff8D92F2); //lighter purple
@@ -53,4 +54,9 @@ const TextContentNormal = TextStyle(
   fontSize: 20,
   fontWeight: FontWeight.normal,
   color: Colors.black
+);
+
+const Loading = SpinKitPouringHourGlassRefined(
+  color: fourthColor,
+  size: 100.0,
 );

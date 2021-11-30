@@ -10,19 +10,13 @@ import 'Pet.dart';
 import 'expenses.dart';
 
 class User {
-  static String? userName;
+  static late String userName;
   static late Pet pet;
   static List<Note> notes = [];
   static List<Expense> expenses = [];
   static bool? isDarkMode;
 
-  // const User({
-  //   required this.userName,
-  //   required this.pet
-  // });
-
   static Map<String, dynamic> toJson() {
-    // String encodedNotes = "";
     List mapNotes = [];
     List mapDog = [];
 
@@ -33,7 +27,6 @@ class User {
       mapDog.add(expenses[i].toJson());
     }
     print("EXIT expense size: " + mapDog.length.toString());
-    // encodedNotes = jsonEncode(mapNotes);
 
     return {
       'userName': userName,

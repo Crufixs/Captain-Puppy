@@ -1,10 +1,16 @@
+import 'dart:convert';
+
+import 'package:date_format/date_format.dart';
+import 'package:fap/model/Note.dart';
+import 'package:fap/model/User.dart';
 import 'package:fap/utilities/constants.dart' as constants;
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class EditNotePage extends StatefulWidget {
-  EditNotePage({required this.isNew});
+  EditNotePage({required this.index});
 
-  final bool isNew;
+  final int index;
 
   @override
   _EditNotePageState createState() => _EditNotePageState();
@@ -13,18 +19,52 @@ class EditNotePage extends StatefulWidget {
 class _EditNotePageState extends State<EditNotePage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    if(widget.isNew)
+    index = widget.index;
+    if(index == -1)
       heading = "Add Note";
     else {
       heading = "Edit Note";
+      initialTitle = User.notes[index].title;
+      initialContent = User.notes[index].content;
     }
+
+    titleController = TextEditingController(text: initialTitle);
+    contentController = TextEditingController(text: initialContent);
   }
 
   String heading = "";
-  String content = "";
-  String title = "";
+  String initialContent = "";
+  String initialTitle = "";
+
+  int index = -1;
+
+  var titleController = TextEditingController();
+  var contentController = TextEditingController();
+
+  validateNote() async{
+    final now = new DateTime.now();
+    String formattedDate = formatDate(now, [MM, " ", d, ",", yyyy]);
+
+    String title = titleController.text;
+    String content = contentController.text;
+
+    if(title == "" && content == "")
+      return;
+
+    if(index == -1){ //New Note
+      Note note = Note(title, content, formattedDate);
+      User.notes.add(note);
+    } else { //Update Note
+      User.notes[index].title = title;
+      User.notes[index].content = content;
+      User.notes[index].date = formattedDate;
+    }
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String json = jsonEncode(User.toJson());
+    prefs.setString('userData', json);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,8 +94,9 @@ class _EditNotePageState extends State<EditNotePage> {
             Padding(
               padding: const EdgeInsets.only(right: 16.0),
               child: GestureDetector(
-                onTap: (){
-
+                onTap: () async{
+                  await validateNote();
+                  Navigator.pop(context);
                 },
                 child: Icon(
                   Icons.check,
@@ -72,7 +113,8 @@ class _EditNotePageState extends State<EditNotePage> {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                TextField(
+                TextFormField(
+                  controller: titleController,
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Enter Title',
@@ -82,7 +124,8 @@ class _EditNotePageState extends State<EditNotePage> {
                 ),
 
                 Expanded(
-                  child: TextField(
+                  child: TextFormField(
+                    controller: contentController,
                     keyboardType: TextInputType.multiline,
                     maxLines: null,
                     decoration: InputDecoration(

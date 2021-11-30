@@ -32,9 +32,7 @@ class _BreedsPageState extends State<BreedsPage> {
       future: getData(), // getting the breed data
       builder: (BuildContext context, AsyncSnapshot snap) {
         if (snap.data == null) {
-          return Center(
-            child: Text("LOADING", style: TextTitle),
-          );
+          return Loading;
         } else {
           return ListBreed(
             breeds: breeds,
