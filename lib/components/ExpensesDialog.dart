@@ -129,6 +129,11 @@ class _AddExpense extends State<AddExpense> {
                     Padding(
                       padding: EdgeInsets.all(8.0),
                       child: DropdownButtonFormField<String>(
+                        validator: (value) {
+                          if (value == null) {
+                            return 'Choose atleast one';
+                          }
+                        },
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -136,12 +141,8 @@ class _AddExpense extends State<AddExpense> {
                           labelText: 'Product Type',
                           icon: Icon(Icons.person, color: fourthColor),
                         ),
-                        items: <String>[
-                          'Food',
-                          'Utilities',
-                          'Toys',
-                          'Healthcare'
-                        ].map((String value) {
+                        items: <String>['Food', 'Utilities', 'Toys', 'Health']
+                            .map((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
                             child: new Text(value),
@@ -211,10 +212,11 @@ class EditExpensePopUp extends StatelessWidget {
             children: <Widget>[
               Padding(
                 padding: EdgeInsets.only(top: 8.0),
-                child: Text("PRODUCT NAME", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+                child: Text("PRODUCT NAME",
+                    style:
+                        TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
               ),
               Divider(
-
                 thickness: 2,
               ),
               Center(
@@ -374,7 +376,8 @@ class _EditExpenseState extends State<EditExpense> {
   @override
   void initState() {
     productName = eb.getExpenseAt(index).getProductName();
-    productType = eb.TypeToString(eb.getExpenseAt(index).getProductType());
+    productType =
+        ExpensesBrain.TypeToString(eb.getExpenseAt(index).getProductType());
     price = eb.getExpenseAt(index).getCost().toString();
 
     super.initState();
@@ -480,6 +483,11 @@ class _EditExpenseState extends State<EditExpense> {
                     Padding(
                       padding: EdgeInsets.all(8.0),
                       child: DropdownButtonFormField<String>(
+                        validator: (value) {
+                          if (value == null) {
+                            return 'Choose atleast one';
+                          }
+                        },
                         value: productType,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
@@ -488,12 +496,8 @@ class _EditExpenseState extends State<EditExpense> {
                           labelText: 'Product Type',
                           icon: Icon(Icons.person, color: fourthColor),
                         ),
-                        items: <String>[
-                          'Food',
-                          'Utilities',
-                          'Toys',
-                          'Healthcare'
-                        ].map((String value) {
+                        items: <String>['Food', 'Utilities', 'Toys', 'Health']
+                            .map((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
                             child: new Text(value),
@@ -519,7 +523,8 @@ class _EditExpenseState extends State<EditExpense> {
                           if (_formKey.currentState!.validate()) {
                             Expense e = eb.getExpenseAt(index);
                             e.setProductName(productName);
-                            e.setProductType(eb.StringToType(productType));
+                            e.setProductType(
+                                ExpensesBrain.StringToType(productType));
                             e.setCost(double.parse(price));
                             Navigator.pop(context);
                           }
