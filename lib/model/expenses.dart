@@ -64,4 +64,4 @@ class Expense {
   }
 }
 
-enum ProductType { Food, Healthcare, Utilities, Toys, ERROR }
+enum ProductType { Food, Health, Utilities, Toys, ERROR }

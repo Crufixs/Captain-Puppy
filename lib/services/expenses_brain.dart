@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class ExpensesBrain {
   double _totalFoodExpense = 0;
   double _totalUtilityExpense = 0;
-  double _totalHealthCareExpense = 0;
+  double _totalHealthExpense = 0;
   double _totalToyExpense = 0;
 
   ExpensesBrain() {
@@ -16,6 +16,10 @@ class ExpensesBrain {
   }
 
   void setTotal() {
+    _totalFoodExpense = 0;
+    _totalUtilityExpense = 0;
+    _totalHealthExpense = 0;
+    _totalToyExpense = 0;
     for (Expense e in User.expenses) {
       ProductType type = e.getProductType();
       switch (type) {
@@ -25,8 +29,8 @@ class ExpensesBrain {
         case ProductType.Utilities:
           _totalUtilityExpense += e.getCost();
           break;
-        case ProductType.Healthcare:
-          _totalHealthCareExpense += e.getCost();
+        case ProductType.Health:
+          _totalHealthExpense += e.getCost();
           break;
         case ProductType.Toys:
           _totalToyExpense += e.getCost();
@@ -66,8 +70,8 @@ class ExpensesBrain {
         return ProductType.Food;
       case "Utilities":
         return ProductType.Utilities;
-      case "Healthcare":
-        return ProductType.Healthcare;
+      case "Health":
+        return ProductType.Health;
       case "Toys":
         return ProductType.Toys;
       default:
@@ -81,8 +85,8 @@ class ExpensesBrain {
         return "Food";
       case ProductType.Utilities:
         return "Utilities";
-      case ProductType.Healthcare:
-        return "Healthcare";
+      case ProductType.Health:
+        return "Health";
       case ProductType.Toys:
         return "Toys";
       default:
@@ -106,7 +110,7 @@ class ExpensesBrain {
     return _totalFoodExpense;
   }
 
-  double getTotalHealthCare() {
-    return _totalHealthCareExpense;
+  double getTotalHealth() {
+    return _totalHealthExpense;
   }
 }

@@ -88,14 +88,6 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
-// class _MyAppState extends State<MyApp> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return HomePage();
-//     // return WelcomePage();
-//   }
-// }
-
 class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) => ChangeNotifierProvider(
         create: (context) => ThemeProvider(),
@@ -104,9 +96,10 @@ class _MyAppState extends State<MyApp> {
               Provider.of<ThemeProvider>(context, listen: true);
           return MaterialApp(
             themeMode: themeProvider.themeMode,
-            theme: MyThemes.lightTheme,
+            theme: ThemeData(
+              brightness: Brightness.light,
+            ),
             darkTheme: ThemeData(
-              accentColor: Colors.red,
               brightness: Brightness.dark,
             ),
             home: HomePage(),
