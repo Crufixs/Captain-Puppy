@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:fap/components/Button.dart';
+import 'package:fap/model/User.dart';
 import 'package:fap/model/breed.dart';
 import 'package:fap/services/breed_brain.dart';
 import 'package:fap/services/database_services.dart';
@@ -220,7 +221,7 @@ class BreedButton extends StatelessWidget {
                   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100.0),
-                    color: Colors.white,
+                    color: User.isDarkMode! ? Colors.white : Colors.black,
                   ),
                 ),
                 SizedBox(
@@ -235,7 +236,7 @@ class BreedButton extends StatelessWidget {
                         breed.name,
                         style: TextStyle(
                           fontSize: 23,
-                          color: Colors.white,
+                          color: User.isDarkMode! ? Colors.white : Colors.black,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -247,7 +248,7 @@ class BreedButton extends StatelessWidget {
                           softWrap: false,
                           style: TextStyle(
                             fontSize: 15,
-                            color: Colors.white,
+                            color: User.isDarkMode! ? Colors.white : Colors.black,
                             fontWeight: FontWeight.normal,
                           ),
                         ),

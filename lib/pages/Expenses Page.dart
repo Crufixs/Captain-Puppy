@@ -158,7 +158,7 @@ class ExpensesPageState extends State<ExpensesPage> {
                       textAlign: TextAlign.right,
                       style: TextStyle(
                         fontSize: 15,
-                        color: Colors.white,
+                        color: User.isDarkMode! ? Colors.white : Colors.black,
                         fontWeight: FontWeight.normal,
                       ),
                     ),
@@ -166,7 +166,7 @@ class ExpensesPageState extends State<ExpensesPage> {
                       cost,
                       style: TextStyle(
                         fontSize: 15,
-                        color: Colors.white,
+                        color: User.isDarkMode! ? Colors.white : Colors.black,
                         fontWeight: FontWeight.normal,
                       ),
                     ),
@@ -185,7 +185,7 @@ class ExpensesPageState extends State<ExpensesPage> {
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.normal,
-                      color: Colors.white,
+                      color: User.isDarkMode! ? Colors.white : Colors.black,
                     ),
                   ),
                 ),

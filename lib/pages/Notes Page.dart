@@ -30,7 +30,6 @@ class NotesPage extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-
                     ElevatedButton(
                       onPressed: () {
                         Navigator.push(
@@ -177,6 +176,8 @@ class NotesCard extends StatelessWidget {
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
+                            color:
+                                User.isDarkMode! ? Colors.white : Colors.black,
                           ),
                         ),
                       ),
@@ -189,7 +190,11 @@ class NotesCard extends StatelessWidget {
                         child: Text(
                           formattedDate,
                           style: TextStyle(
-                              fontWeight: FontWeight.w300, fontSize: 12),
+                            fontWeight: FontWeight.w300,
+                            fontSize: 12,
+                            color:
+                                User.isDarkMode! ? Colors.white : Colors.black,
+                          ),
                         ),
                       ),
                     ],

@@ -3,10 +3,12 @@ import 'package:fap/components/package/change_theme_button_widget.dart';
 import 'package:fap/main.dart';
 import 'package:fap/model/Pet.dart';
 import 'package:fap/model/User.dart';
+import 'package:fap/providers/theme_provide.dart';
 import 'package:fap/utilities/constants.dart' as constants;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'BabyPage.dart';
 
@@ -16,17 +18,35 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  //final GlobalKey<ChangeThemeButtonWidgetState> changeButtonKey = GlobalKey();
+
+  refresh() {
+    setState(() {
+      print('reload page');
+    });
+  }
+
   dynamic loadData() async {
     return User.userName;
   }
 
+  IconData icon = CupertinoIcons.moon_stars;
+
   @override
   Widget build(BuildContext context) {
-    final text = MediaQuery.of(context).platformBrightness == Brightness.dark
+    final text = MediaQuery
+        .of(context)
+        .platformBrightness == Brightness.dark
         ? 'DarkTheme'
         : 'LightTheme';
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery
+        .of(context)
+        .size
+        .width;
+    double screenHeight = MediaQuery
+        .of(context)
+        .size
+        .height;
 
     return FutureBuilder(
         future: loadData(), // getting the user data
@@ -79,7 +99,8 @@ class _HomePageState extends State<HomePage> {
                                   ClipOval(
                                     child: Image.asset(
                                       'images/FluffyPuppy.png',
-                                      height: 120,
+                                      // width:110,
+                                      height: 110,
                                     ),
                                   )
                                 ],
@@ -203,12 +224,12 @@ class _HomePageState extends State<HomePage> {
                                         RoundedRectangleBorder>(
                                       RoundedRectangleBorder(
                                         borderRadius:
-                                            BorderRadius.circular(25.0),
+                                        BorderRadius.circular(25.0),
                                       ),
                                     ),
                                     backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            constants.fourthColor),
+                                    MaterialStateProperty.all<Color>(
+                                        constants.fourthColor),
                                   ),
                                   onPressed: () {
                                     changePage(context, 2);
@@ -248,12 +269,12 @@ class _HomePageState extends State<HomePage> {
                                         RoundedRectangleBorder>(
                                       RoundedRectangleBorder(
                                         borderRadius:
-                                            BorderRadius.circular(25.0),
+                                        BorderRadius.circular(25.0),
                                       ),
                                     ),
                                     backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            constants.secondColor),
+                                    MaterialStateProperty.all<Color>(
+                                        constants.secondColor),
                                   ),
                                   onPressed: () {
                                     changePage(context, 4);
@@ -298,12 +319,12 @@ class _HomePageState extends State<HomePage> {
                                         RoundedRectangleBorder>(
                                       RoundedRectangleBorder(
                                         borderRadius:
-                                            BorderRadius.circular(25.0),
+                                        BorderRadius.circular(25.0),
                                       ),
                                     ),
                                     backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            constants.firstColor),
+                                    MaterialStateProperty.all<Color>(
+                                        constants.firstColor),
                                   ),
                                   onPressed: () {
                                     changePage(context, 3);
@@ -343,12 +364,12 @@ class _HomePageState extends State<HomePage> {
                                         RoundedRectangleBorder>(
                                       RoundedRectangleBorder(
                                         borderRadius:
-                                            BorderRadius.circular(25.0),
+                                        BorderRadius.circular(25.0),
                                       ),
                                     ),
                                     backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            constants.thirdColor),
+                                    MaterialStateProperty.all<Color>(
+                                        constants.thirdColor),
                                   ),
                                   onPressed: () {
                                     changePage(context, 1);
@@ -368,63 +389,84 @@ class _HomePageState extends State<HomePage> {
                           padding: const EdgeInsets.all(2.0),
                           child: Container(
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment
+                                    .spaceBetween,
+                                children: [
+                            Column(
+                            children: [
+                            Column(
+                            children: [
+                                // Icon(CupertinoIcons.moon_stars,
+                                //     size: 30,
+                                //    color: Color(0xff7D79F2),
+                                // ),
+                                //ChangeThemeButtonWidget(key: changeButtonKey, function: refresh),
+                                IconButton(
+                                icon: Icon(icon),
+                            iconSize: 30,
+                            color: Color(0xff7D79F2),
+                            onPressed: () {
+                              User.isDarkMode = !User.isDarkMode!;
+                              final provider = Provider.of<ThemeProvider>(
+                                  context, listen: false);
+                              provider.toggleTheme(User.isDarkMode!);
+
+                              setState(() {
+                                if (User.isDarkMode!) {
+                                  icon = CupertinoIcons.sun_max;
+                                  print('sun');
+                                } else {
+                                  icon = CupertinoIcons.moon_stars;
+                                  print('moon');
+                                }
+                                print(User.isDarkMode!);
+                              });
+                            },
+                          ),
+                          ],
+                        ),
+                        ],
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          ElevatedButton(
+                            onPressed: () {},
+                            child: Row(
                               children: [
                                 Column(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.end,
                                   children: [
-                                    Column(
-                                      children: [
-                                        // Icon(CupertinoIcons.moon_stars,
-                                        //     size: 30,
-                                        //    color: Color(0xff7D79F2),
-                                        // ),
-                                        ChangeThemeButtonWidget(),
-                                      ],
+                                    Image.asset(
+                                      "images/qmarkFinal.png",
+                                      height: 30.0,
+                                      width: 30.0,
                                     ),
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    ElevatedButton(
-                                      onPressed: () {},
-                                      child: Row(
-                                        children: [
-                                          Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            children: [
-                                              Image.asset(
-                                                "images/qmarkFinal.png",
-                                                height: 30.0,
-                                                width: 30.0,
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                      style: ButtonStyle(
-                                        backgroundColor:
-                                            MaterialStateProperty.all<Color>(
-                                                Colors.transparent),
-                                        shadowColor:
-                                            MaterialStateProperty.all<Color>(
-                                                Colors.transparent),
-                                      ),
-                                    ),
-                                    Text('Help'),
                                   ],
                                 ),
                               ],
                             ),
+                            style: ButtonStyle(
+                              backgroundColor:
+                              MaterialStateProperty.all<Color>(
+                                  Colors.transparent),
+                              shadowColor:
+                              MaterialStateProperty.all<Color>(
+                                  Colors.transparent),
+                            ),
                           ),
-                        ),
-                      )
+                        ],
+                      ),
                     ],
                   ),
                 ),
               ),
-            );
+            )],
+          ),
+          ),
+          ),
+          );
           }
         });
   }

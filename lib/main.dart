@@ -19,6 +19,7 @@ void main() async {
 }
 
 dynamic loadData() async {
+
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? json = prefs.getString('userData');
 
@@ -34,11 +35,12 @@ dynamic loadData() async {
   User.fromJson(decodedJson);
   print('ANG USERNAME KO AY: ' + User.userName.toString());
   print('EXAMPLE NOTE: ' + User.notes[4].title);
-
+  User.isDarkMode = false;
   return User.userName;
 }
 
 void saveData() async {
+
   final Pet pet = Pet(
     petImage: 'https://i.imgur.com/13wGXx5.jpg',
     petName: 'Koa',
