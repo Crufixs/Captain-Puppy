@@ -212,7 +212,7 @@ class EditExpensePopUp extends StatelessWidget {
             children: <Widget>[
               Padding(
                 padding: EdgeInsets.only(top: 8.0),
-                child: Text("PRODUCT NAME",
+                child: Text(productName,
                     style:
                         TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
               ),
@@ -225,7 +225,7 @@ class EditExpensePopUp extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("\$ Price", style: TextStyle(fontSize: 30)),
+                      Text("\$ $price", style: TextStyle(fontSize: 30)),
                     ],
                   ),
                 ),

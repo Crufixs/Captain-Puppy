@@ -50,11 +50,10 @@ const TextContentHeading2 = TextStyle(
 );
 
 const TextContentNormal = TextStyle(
-  //fontFamily:
-  fontSize: 20,
-  fontWeight: FontWeight.normal,
-  color: Colors.black
-);
+    //fontFamily:
+    fontSize: 20,
+    fontWeight: FontWeight.normal,
+    color: Colors.black);
 
 const Loading = SpinKitPouringHourGlassRefined(
   color: fourthColor,
