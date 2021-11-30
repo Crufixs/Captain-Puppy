@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 
 class ProfileModify extends StatelessWidget {
   final File petImage;
-  final Function func;
+ // final Function func;
   // final VoidCallback onClicked;
 
   const ProfileModify({
     Key? key,
     required this.petImage,
-    required this.func,
+    //required this.func,
     // required this.onClicked,
   }) : super(key: key);
 
@@ -36,7 +36,7 @@ class ProfileModify extends StatelessWidget {
 
   profileImage() {
     return ElevatedButton(
-      onPressed: () => func.call(),
+      onPressed: () {},
       style: ElevatedButton.styleFrom(
         shape: CircleBorder(),
       ),
