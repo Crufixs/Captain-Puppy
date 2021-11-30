@@ -51,7 +51,7 @@ class _WelcomePageState extends State<WelcomePage> {
             color: constants.firstColor,
           onClicked: () {
             Navigator.push(
-              context, MaterialPageRoute(builder: (context) => EditProfile()),
+              context, MaterialPageRoute(builder: (context) => EditProfile(isNew: true)),
             );
           },
           hPadding: 10,
@@ -69,7 +69,6 @@ class _WelcomePageState extends State<WelcomePage> {
       child: Scaffold(
         body: SingleChildScrollView(
           child: Column(
-            // mainAxisAlignment:MainAxisAlignment.center,
             children: [
               CarouselSlider(
                 options: CarouselOptions(
@@ -91,7 +90,7 @@ class _WelcomePageState extends State<WelcomePage> {
                           Container(
                             // width: MediaQuery.of(context).size.width,
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              // color: Colors.white,
                             ),
                             child: Container(
                               height: 500,
@@ -108,9 +107,7 @@ class _WelcomePageState extends State<WelcomePage> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: messages.map((text) {
-                                // print(urlOfItem);
                                 int index = messages.indexOf(text);
-                                // print("HERE NA " + index.toString());
                                 return Container(
                                   width: 10.0,
                                   height: 10.0,

@@ -121,9 +121,6 @@ class _EditNotePageState extends State<EditNotePage> {
                     hintStyle: constants.TextContentHeading2
                   ),
                   style: constants.TextContentHeading2,
-                  // onChanged: (value) {
-                  //   title = value;
-                  // },
                 ),
 
                 Expanded(
@@ -137,9 +134,6 @@ class _EditNotePageState extends State<EditNotePage> {
                         hintStyle: constants.TextContent
                     ),
                     style: constants.TextContent,
-                    // onChanged: (value){
-                    //   content = value;
-                    // },
                   ),
                 ),
               ],

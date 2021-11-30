@@ -15,13 +15,7 @@ class User {
   static List<Note> notes = [];
   static List<Expense> expenses = [];
 
-  // const User({
-  //   required this.userName,
-  //   required this.pet
-  // });
-
   static Map<String, dynamic> toJson() {
-    // String encodedNotes = "";
     List mapNotes = [];
     List mapDog = [];
 
@@ -32,7 +26,6 @@ class User {
       mapDog.add(expenses[i].toJson());
     }
     print("EXIT expense size: " + mapDog.length.toString());
-    // encodedNotes = jsonEncode(mapNotes);
 
     return {
       'userName': userName,

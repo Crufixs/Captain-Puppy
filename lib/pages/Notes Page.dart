@@ -208,11 +208,6 @@ class _NotesCardState extends State<NotesCard> {
   }
 }
 
-
-// class NotesCard extends StatelessWidget {
-//
-// }
-
 class NoteAlert extends StatefulWidget {
   NoteAlert({required this.index});
 

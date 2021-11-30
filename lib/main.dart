@@ -1,16 +1,21 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:fap/model/Note.dart';
 import 'package:fap/pages/Edit%20Note%20Page.dart';
 import 'package:fap/pages/Home%20Page.dart';
 import 'package:fap/pages/Notes%20Page.dart';
-import 'package:fap/pages/welcome%20pages/Welcome%20page%201.dart';
+import 'package:fap/pages/Welcome%20page%201.dart';
 import 'package:fap/providers/theme_provide.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'model/Pet.dart';
 import 'model/User.dart';
 import 'package:provider/provider.dart';
 import 'package:fap/providers/theme_provide.dart';
+
+bool isNew = true;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,60 +23,59 @@ void main() async {
   runApp(MyHome());
 }
 
-dynamic loadData() async {
+loadData() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
+  // prefs.clear();
   String? json = prefs.getString('userData');
 
   if (json == null) {
     print('NO JSON FOUND - WILL CREATE A NEW ONE');
+    isNew = true;
     saveData();
 
-    return User.userName;
+    return;
   }
 
+  isNew = false;
   print('YEHEY JSON FOUND');
   Map<String, dynamic> decodedJson = jsonDecode(json);
   User.fromJson(decodedJson);
-  print('ANG USERNAME KO AY: ' + User.userName.toString());
-  print('EXAMPLE NOTE: ' + User.notes[4].title);
+  // print('ANG USERNAME KO AY: ' + User.userName.toString());
+  // print('EXAMPLE NOTE: ' + User.notes[4].title);
 
-  return User.userName;
+  return;
 }
 
 void saveData() async {
+
+  //copying file to user's phone
+  final profilePicFileName = 'profilePic.png';
+  final byteData = await rootBundle.load('images/profilePic.png');
+  String dir = (await getApplicationDocumentsDirectory()).path;
+  final buffer = byteData.buffer;
+  await File('$dir/$profilePicFileName').writeAsBytes(buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
+
+
   final Pet pet = Pet(
-    petImage: 'https://i.imgur.com/13wGXx5.jpg',
-    petName: 'Koa',
-    breed: 'Pomeranian',
+    // petImage: '${(await getTemporaryDirectory()).path}/profilePic.png',
+    petImage: '$dir/$profilePicFileName',
+    petName: '',
+    breed: '',
     gender: 'Male',
     age: 1,
     weight: 3.8,
-    about:
-        '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor '
-        'incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud '
-        'exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."',
+    about: '',
   );
 
-  User.userName = 'someone';
+  User.userName = '';
   User.pet = pet;
-  User.notes = [
-    new Note("Title1", "Content1", "November 28, 2021"),
-    new Note("Title2", "Content2", "November 28, 2021"),
-    new Note("Title3", "Content3", "November 28, 2021"),
-    new Note("Title4", "Content4", "November 28, 2021"),
-    new Note("Title5", "Content5", "November 28, 2021"),
-    new Note("Title6", "Content6", "November 28, 2021"),
-    new Note("Title7", "Content7", "November 28, 2021"),
-    new Note("Title8", "Content8", "November 28, 2021"),
-    new Note("Title9", "Content9", "November 28, 2021"),
-    new Note("Title10", "Content10", "November 28, 2021"),
-  ];
+  // User.notes = [];
 
   print('ANG USERNAME KO AY: ' + User.userName.toString());
 
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  String json = jsonEncode(User.toJson());
-  prefs.setString('userData', json);
+  // SharedPreferences prefs = await SharedPreferences.getInstance();
+  // String json = jsonEncode(User.toJson());
+  // prefs.setString('userData', json);
 }
 
 class MyHome extends StatelessWidget {
@@ -102,7 +106,7 @@ class _MyAppState extends State<MyApp> {
             darkTheme: ThemeData(
               brightness: Brightness.dark,
             ),
-            home: HomePage(),
+            home: (!isNew) ? HomePage() : WelcomePage(),
           );
         },
       );
