@@ -6,9 +6,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 
 import 'Edit Profile.dart';
 
-
 class WelcomePage extends StatefulWidget {
-  const WelcomePage({Key? key}) : super(key: key);
+  WelcomePage({required this.fromHelp});
+  final bool fromHelp;
 
   @override
   _WelcomePageState createState() => _WelcomePageState();
@@ -33,26 +33,32 @@ class _WelcomePageState extends State<WelcomePage> {
 
   int _currentIndex = 0;
 
-  generateTextOrButton(int index){
-    if(index != 3){
+  generateTextOrButton(int index) {
+    if (index != 3) {
       return Flexible(
         child: Container(
           width: 300,
           child: Padding(
-            padding: const EdgeInsets.only(top:40),
+            padding: const EdgeInsets.only(top: 40),
             child: Text(messages[index]),
           ),
         ),
       );
     } else {
       return Padding(
-        padding: const EdgeInsets.only(top:40),
+        padding: const EdgeInsets.only(top: 40),
         child: Button(
-            color: constants.firstColor,
+          color: constants.firstColor,
           onClicked: () {
-            Navigator.push(
-              context, MaterialPageRoute(builder: (context) => EditProfile(isNew: true)),
-            );
+            if (fromHelp) {
+              Navigator.pop(context);
+            } else {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => EditProfile(isNew: true)),
+              );
+            }
           },
           hPadding: 10,
           vPadding: 10,
@@ -60,6 +66,15 @@ class _WelcomePageState extends State<WelcomePage> {
         ),
       );
     }
+  }
+
+  bool fromHelp = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    fromHelp = widget.fromHelp;
   }
 
   @override
@@ -90,16 +105,15 @@ class _WelcomePageState extends State<WelcomePage> {
                           Container(
                             // width: MediaQuery.of(context).size.width,
                             decoration: BoxDecoration(
-                              // color: Colors.white,
-                            ),
+                                // color: Colors.white,
+                                ),
                             child: Container(
-                              height: 500,
+                                height: 500,
                                 width: 500,
                                 child: Padding(
                                   padding: const EdgeInsets.only(top: 80),
                                   child: Image.asset("images/page$i.png"),
-                                )
-                            ),
+                                )),
                           ),
                           generateTextOrButton(i),
                           Expanded(
@@ -111,7 +125,8 @@ class _WelcomePageState extends State<WelcomePage> {
                                 return Container(
                                   width: 10.0,
                                   height: 10.0,
-                                  margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
+                                  margin: EdgeInsets.symmetric(
+                                      vertical: 10.0, horizontal: 2.0),
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     color: _currentIndex == index
@@ -135,4 +150,3 @@ class _WelcomePageState extends State<WelcomePage> {
     );
   }
 }
-

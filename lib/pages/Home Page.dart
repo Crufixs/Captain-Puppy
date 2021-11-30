@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'BabyPage.dart';
+import 'Welcome page 1.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -438,7 +439,14 @@ class _HomePageState extends State<HomePage> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => WelcomePage(fromHelp: true),
+                                ),
+                              );
+                            },
                             child: Row(
                               children: [
                                 Column(

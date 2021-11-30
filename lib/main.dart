@@ -106,7 +106,7 @@ class _MyAppState extends State<MyApp> {
             darkTheme: ThemeData(
               brightness: Brightness.dark,
             ),
-            home: (!isNew) ? HomePage() : WelcomePage(),
+            home: (!isNew) ? HomePage() : WelcomePage(fromHelp: false),
           );
         },
       );
