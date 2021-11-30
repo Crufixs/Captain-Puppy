@@ -12,19 +12,17 @@ import 'model/User.dart';
 import 'package:provider/provider.dart';
 import 'package:fap/providers/theme_provide.dart';
 
-
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await loadData();
   runApp(MyHome());
 }
 
-dynamic loadData () async{
+dynamic loadData() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  String? json =  prefs.getString('userData');
+  String? json = prefs.getString('userData');
 
-  if(json == null){
+  if (json == null) {
     print('NO JSON FOUND - WILL CREATE A NEW ONE');
     saveData();
 
@@ -40,7 +38,7 @@ dynamic loadData () async{
   return User.userName;
 }
 
-void saveData() async{
+void saveData() async {
   final Pet pet = Pet(
     petImage: 'https://i.imgur.com/13wGXx5.jpg',
     petName: 'Koa',
@@ -48,7 +46,8 @@ void saveData() async{
     gender: 'Male',
     age: 1,
     weight: 3.8,
-    about: '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor '
+    about:
+        '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor '
         'incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud '
         'exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."',
   );
@@ -97,19 +96,21 @@ class MyApp extends StatefulWidget {
 //   }
 // }
 
-class _MyAppState extends State<MyApp>{
+class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) => ChangeNotifierProvider(
-    create: (context) => ThemeProvider(),
-    builder: (context,_){
-      final themeProvider = Provider.of<ThemeProvider>(context, listen: true);
-      return MaterialApp(
-          themeMode: themeProvider.themeMode,
-          theme: MyThemes.lightTheme,
-          darkTheme: MyThemes.darkTheme,
-          home: HomePage(),
+        create: (context) => ThemeProvider(),
+        builder: (context, _) {
+          final themeProvider =
+              Provider.of<ThemeProvider>(context, listen: true);
+          return MaterialApp(
+            themeMode: themeProvider.themeMode,
+            theme: MyThemes.lightTheme,
+            darkTheme: ThemeData(
+              accentColor: Colors.red,
+              brightness: Brightness.dark,
+            ),
+            home: HomePage(),
+          );
+        },
       );
-    },
-  );
 }
-
-

@@ -5,11 +5,13 @@ class Expense {
   DateTime _date = DateTime.now();
   double _cost = 0;
 
-  Expense(int index, String productName, ProductType productType, double cost) {
+  Expense(int index, String productName, ProductType productType, double cost,
+      DateTime date) {
     this._index = index;
     this._productName = productName;
     this._productType = productType;
     this._cost = cost;
+    this._date = date;
   }
 
   int getIndex() {

@@ -2,6 +2,7 @@ import 'package:fap/components/Button.dart';
 import 'package:fap/components/ExpensesDialog.dart';
 import 'package:fap/components/Indicator.dart';
 import 'package:fap/components/ReusableComponent.dart';
+import 'package:fap/model/User.dart';
 import 'package:fap/model/expenses.dart';
 import 'package:fap/services/expenses_brain.dart';
 import 'package:fap/utilities/constants.dart';
@@ -290,7 +291,7 @@ class ExpensesPageState extends State<ExpensesPage> {
 
   Widget getListSection() {
     final ListChildren = <Widget>[];
-    for (Expense e in eb.getListOfExpenses()) {
+    for (Expense e in User.expenses) {
       int index = e.getIndex();
       String productName = e.getProductName();
       String type = eb.TypeToString(e.getProductType());
