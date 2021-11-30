@@ -1,4 +1,6 @@
 // import 'package:fap/components/CustomNavBar.dart';
+import 'dart:io';
+
 import 'package:fap/model/Pet.dart';
 import 'package:fap/pages/Edit%20Profile.dart';
 import 'package:fap/utilities/constants.dart';
@@ -15,10 +17,8 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-
   @override
   Widget build(BuildContext context) {
-
     // access the User_Details
     return SafeArea(
       child: SingleChildScrollView(
@@ -43,10 +43,15 @@ class _ProfilePageState extends State<ProfilePage> {
                           primary: Colors.transparent,
                           shadowColor: Colors.transparent,
                         ),
-                        onPressed: () => Navigator.of(context).push(
-                          MaterialPageRoute(
-                              builder: (context) => EditProfile()),
-                        ).then((value) => setState(() {})),
+                        onPressed: () => Navigator.of(context)
+                            .push(
+                              MaterialPageRoute(
+                                builder: (context) => EditProfile(),
+                              ),
+                            )
+                            .then(
+                              (value) => setState(() {}),
+                            ),
                       ),
                     ),
                   ],
@@ -78,43 +83,38 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   profileImage() {
-    final image = NetworkImage(User.pet.petImage);
+    final image = Image.file(new File(User.pet.petImage));
     return ClipOval(
       child: Material(
         // must be implemented for ClipOval
         color: Colors.transparent,
         child: Ink.image(
           // widget that shows an image obtained from an ImageProvider
-          image: image,
+          image: image.image,
           fit: BoxFit.cover,
           width: 170,
           height: 170,
-          child: InkWell(
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(
-                    builder: (context) => EditProfile()),
-              ).then((value) => setState(() {}))),       // splash effect when clicking
         ),
       ),
     );
   }
 
   editIcon(Color color) => circleContainer(
-    color: Colors.white,
-    all: 3,
-    child: circleContainer(
-      color: firstColor,
-      all: 8, // padding
-      child: Icon(
-        Icons.edit,
         color: Colors.white,
-        size: 20,
-      ),
-    ),
-  );
+        all: 3,
+        child: circleContainer(
+          color: firstColor,
+          all: 8, // padding
+          child: Icon(
+            Icons.edit,
+            color: Colors.white,
+            size: 20,
+          ),
+        ),
+      );
 
   circleContainer(
-      {required Widget child, required double all, required Color color}) =>
+          {required Widget child, required double all, required Color color}) =>
       ClipOval(
         child: Container(
           child: child,
@@ -158,118 +158,115 @@ class _ProfilePageState extends State<ProfilePage> {
   //     );
 
   genderEnter() {
-    return Row(
-        children: [
-          Container(
-            margin: EdgeInsets.all(5),
-            padding: EdgeInsets.all(15),
-            decoration: BoxDecoration(
-              color: thirdColor,
-              borderRadius: BorderRadius.all(Radius.circular(10)),
+    return Row(children: [
+      Container(
+        margin: EdgeInsets.all(5),
+        padding: EdgeInsets.all(15),
+        decoration: BoxDecoration(
+          color: thirdColor,
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              User.pet.gender,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 25,
+                color: Colors.white,
+              ),
             ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  User.pet.gender,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25,
-                    color: Colors.white,
-                  ),
-                ),
-
-                SizedBox(height: 2),
-                Text(
-                  'Gender',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
+            SizedBox(height: 2),
+            Text(
+              'Gender',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+                color: Colors.white,
+              ),
             ),
-          ),
-        ]);
-
+          ],
+        ),
+      ),
+    ]);
   }
 
   ageEnter() {
     return Row(//MaterialButton
-      // onPressed: () {},
+        // onPressed: () {},
         children: [
-          Container(
-            margin: EdgeInsets.all(5),
-            padding: EdgeInsets.all(15),
-            decoration: BoxDecoration(
-              color: thirdColor,
-              borderRadius: BorderRadius.all(Radius.circular(10)),
+      Container(
+        margin: EdgeInsets.all(5),
+        padding: EdgeInsets.all(15),
+        decoration: BoxDecoration(
+          color: thirdColor,
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              User.pet.age.toString() + ' ' + 'y/o',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 25,
+                color: Colors.white,
+              ),
             ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  User.pet.age.toString() + ' ' + 'y/o',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25,
-                    color: Colors.white,
-                  ),
-                ),
-                SizedBox(height: 2),
-                Text(
-                  'Age',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
+            SizedBox(height: 2),
+            Text(
+              'Age',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+                color: Colors.white,
+              ),
             ),
-          ),
-        ]);
+          ],
+        ),
+      ),
+    ]);
   }
 
   weightEnter() {
     return Row(//MaterialButton
-      // onPressed: () {},
+        // onPressed: () {},
         children: [
-          Container(
-            margin: EdgeInsets.all(5),
-            padding: EdgeInsets.all(15),
-            decoration: BoxDecoration(
-              color: thirdColor,
-              borderRadius: BorderRadius.all(Radius.circular(10)),
+      Container(
+        margin: EdgeInsets.all(5),
+        padding: EdgeInsets.all(15),
+        decoration: BoxDecoration(
+          color: thirdColor,
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              User.pet.weight.toString() + ' ' + 'kg',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 25,
+                color: Colors.white,
+              ),
             ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  User.pet.weight.toString() + ' ' + 'kg',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25,
-                    color: Colors.white,
-                  ),
-                ),
-                SizedBox(height: 2),
-                Text(
-                  'Weight',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
+            SizedBox(height: 2),
+            Text(
+              'Weight',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+                color: Colors.white,
+              ),
             ),
-          ),
-        ]);
+          ],
+        ),
+      ),
+    ]);
   }
 
   petAbout() {
@@ -310,7 +307,6 @@ class _ProfilePageState extends State<ProfilePage> {
 // }
 
 }
-
 
 // // import 'package:fap/components/CustomNavBar.dart';
 // import 'package:fap/model/Pet.dart';

@@ -361,7 +361,8 @@ class _EditExpenseState extends State<EditExpense> {
   @override
   void initState() {
     productName = eb.getExpenseAt(index).getProductName();
-    productType = eb.TypeToString(eb.getExpenseAt(index).getProductType());
+    productType =
+        ExpensesBrain.TypeToString(eb.getExpenseAt(index).getProductType());
     price = eb.getExpenseAt(index).getCost().toString();
 
     super.initState();
@@ -506,7 +507,8 @@ class _EditExpenseState extends State<EditExpense> {
                           if (_formKey.currentState!.validate()) {
                             Expense e = eb.getExpenseAt(index);
                             e.setProductName(productName);
-                            e.setProductType(eb.StringToType(productType));
+                            e.setProductType(
+                                ExpensesBrain.StringToType(productType));
                             e.setCost(double.parse(price));
                             Navigator.pop(context);
                           }

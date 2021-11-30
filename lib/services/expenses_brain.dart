@@ -1,8 +1,9 @@
+import 'dart:convert';
+
 import 'package:fap/model/User.dart';
 import 'package:fap/model/expenses.dart';
-import 'package:fap/pages/Expenses%20Page.dart';
-import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ExpensesBrain {
   double _totalFoodExpense = 0;
@@ -34,22 +35,32 @@ class ExpensesBrain {
     }
   }
 
-  void addExpense(String productName, String productType, double cost) {
-    Expense e = new Expense(User.expenses.length, productName,
-        StringToType(productType), cost, DateTime.now());
+  void addExpense(String productName, String productType, double cost) async {
+    Expense e = new Expense(
+        User.expenses.length,
+        productName,
+        StringToType(productType),
+        cost,
+        DateFormat.yMMMd().format(DateTime.now()));
+    SharedPreferences roar = await SharedPreferences.getInstance();
     User.expenses.add(e);
+    String json = jsonEncode(User.toJson());
+    roar.setString("userData", json);
     setTotal();
   }
 
-  void deleteExpense(int index) {
+  void deleteExpense(int index) async {
     User.expenses.removeAt(index);
     for (int i = index; i < User.expenses.length; i++) {
       User.expenses[i].decrementId();
     }
+    SharedPreferences roar = await SharedPreferences.getInstance();
+    String json = jsonEncode(User.toJson());
+    roar.setString("userData", json);
     setTotal();
   }
 
-  ProductType StringToType(String pt) {
+  static ProductType StringToType(String pt) {
     switch (pt) {
       case "Food":
         return ProductType.Food;
@@ -64,7 +75,7 @@ class ExpensesBrain {
     }
   }
 
-  String TypeToString(ProductType pt) {
+  static String TypeToString(ProductType pt) {
     switch (pt) {
       case ProductType.Food:
         return "Food";

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:fap/model/expenses.dart';
+import 'package:fap/services/expenses_brain.dart';
 
 import 'Note.dart';
 import 'Pet.dart';
@@ -30,7 +31,7 @@ class User {
     for (int i = 0; i < expenses.length; i++) {
       mapDog.add(expenses[i].toJson());
     }
-    print("expense size: " + mapDog.length.toString());
+    print("EXIT expense size: " + mapDog.length.toString());
     // encodedNotes = jsonEncode(mapNotes);
 
     return {
@@ -74,7 +75,7 @@ class User {
       expenses.add(new Expense(
           decodedExpenses[i]['index'],
           decodedExpenses[i]['productName'],
-          decodedExpenses[i]['productType'],
+          ExpensesBrain.StringToType(decodedExpenses[i]['productType']),
           decodedExpenses[i]['cost'],
           decodedExpenses[i]['date']));
     }
