@@ -42,7 +42,7 @@ loadData() async {
   User.fromJson(decodedJson);
   // print('ANG USERNAME KO AY: ' + User.userName.toString());
   // print('EXAMPLE NOTE: ' + User.notes[4].title);
-
+  User.isDarkMode = false;
   return;
 }
 

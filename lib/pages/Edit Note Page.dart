@@ -72,12 +72,12 @@ class _EditNotePageState extends State<EditNotePage> {
       onWillPop: () async => false,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: constants.fifthColor,
+          //backgroundColor: constants.fifthColor,
           elevation: 0,
           title: Center(
             child: Text(
               heading,
-              style: constants.TextContentHeading1,
+              //style: constants.TextContentHeading1,
             ),
           ),
           leading: GestureDetector(
@@ -108,7 +108,7 @@ class _EditNotePageState extends State<EditNotePage> {
           ],
         ),
         body: Container(
-          color: constants.fifthColor,
+          //color: constants.fifthColor,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -118,9 +118,9 @@ class _EditNotePageState extends State<EditNotePage> {
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Enter Title',
-                    hintStyle: constants.TextContentHeading2
+                   // hintStyle: constants.TextContentHeading2
                   ),
-                  style: constants.TextContentHeading2,
+                  //style: constants.TextContentHeading2,
                 ),
 
                 Expanded(
@@ -131,9 +131,9 @@ class _EditNotePageState extends State<EditNotePage> {
                     decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: 'Add Notes',
-                        hintStyle: constants.TextContent
+                        //hintStyle: constants.TextContent
                     ),
-                    style: constants.TextContent,
+                    //style: constants.TextContent,
                   ),
                 ),
               ],

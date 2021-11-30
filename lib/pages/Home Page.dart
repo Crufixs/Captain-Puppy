@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:fap/components/package/change_theme_button_widget.dart';
 import 'package:fap/main.dart';
 import 'package:fap/model/Pet.dart';
@@ -97,10 +98,16 @@ class _HomePageState extends State<HomePage> {
                               child: Column(
                                 children: [
                                   ClipOval(
-                                    child: Image.asset(
-                                      'images/FluffyPuppy.png',
-                                      // width:110,
-                                      height: 110,
+                                    child: Material(
+                                      // must be implemented for ClipOval
+                                      color: Colors.transparent,
+                                      child: Ink.image(
+                                        // widget that shows an image obtained from an ImageProvider
+                                        image: Image.file(new File(User.pet.petImage)).image,
+                                        fit: BoxFit.cover,
+                                        width: 110,
+                                        height: 110,
+                                      ),
                                     ),
                                   )
                                 ],
