@@ -16,7 +16,7 @@ import 'package:provider/provider.dart';
 import 'package:fap/providers/theme_provide.dart';
 
 bool isNew = true;
-
+//ROAR
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await loadData();
@@ -47,14 +47,13 @@ loadData() async {
 }
 
 void saveData() async {
-
   //copying file to user's phone
   final profilePicFileName = 'profilePic.png';
   final byteData = await rootBundle.load('images/profilePic.png');
   String dir = (await getApplicationDocumentsDirectory()).path;
   final buffer = byteData.buffer;
-  await File('$dir/$profilePicFileName').writeAsBytes(buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
-
+  await File('$dir/$profilePicFileName').writeAsBytes(
+      buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
 
   final Pet pet = Pet(
     // petImage: '${(await getTemporaryDirectory()).path}/profilePic.png',
