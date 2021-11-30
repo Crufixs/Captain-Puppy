@@ -46,26 +46,30 @@ class _HomePageState extends State<HomePage> {
                         width: screenWidth * 0.9,
                         // height: 120,
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Expanded(
                               flex: 2,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Hi, ' + User.userName.toString() + "!",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 30,
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 20.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Hi, ' + User.userName.toString() + "!",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 30,
+                                      ),
                                     ),
-                                  ),
-                                  Text(
-                                    'Your dog misses you today',
-                                    style: TextStyle(
-                                      fontSize: 20,
+                                    Text(
+                                      'Your dog misses you today!',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                             Expanded(
@@ -103,7 +107,7 @@ class _HomePageState extends State<HomePage> {
                                   size: 40,
                                 ),
                                 Text(
-                                  'Pomeranian',
+                                  User.pet.breed.toString(),
                                   style: TextStyle(
                                     color: Color(0xff7d79f2),
                                   ),
@@ -118,7 +122,7 @@ class _HomePageState extends State<HomePage> {
                                   height: 40,
                                 ),
                                 Text(
-                                  'Male',
+                                  User.pet.gender.toString(),
                                   style: TextStyle(
                                     color: Color(0xff7D79F2),
                                   ),
@@ -133,7 +137,7 @@ class _HomePageState extends State<HomePage> {
                                   size: 40,
                                 ),
                                 Text(
-                                  '1 y/o',
+                                  User.pet.age.toString() + 'y/o',
                                   style: TextStyle(
                                     color: Color(0xff7d79f2),
                                   ),
@@ -148,7 +152,7 @@ class _HomePageState extends State<HomePage> {
                                   height: 40,
                                 ),
                                 Text(
-                                  '3.5 kg',
+                                  User.pet.weight.toString() + ' kg',
                                   style: TextStyle(
                                     color: Color(0xff7d79f2),
                                   ),
@@ -188,6 +192,8 @@ class _HomePageState extends State<HomePage> {
                                         'Profile',
                                         style: TextStyle(
                                           color: Color(0xffF2F2F2),
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
                                         ),
                                       ),
                                     ],
@@ -231,6 +237,8 @@ class _HomePageState extends State<HomePage> {
                                         'Notes',
                                         style: TextStyle(
                                           color: Color(0xffF2F2F2),
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
                                         ),
                                       ),
                                     ],
@@ -279,6 +287,8 @@ class _HomePageState extends State<HomePage> {
                                         'Breeds',
                                         style: TextStyle(
                                           color: Color(0xffF2F2F2),
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
                                         ),
                                       ),
                                     ],
@@ -322,6 +332,8 @@ class _HomePageState extends State<HomePage> {
                                         'Expenses',
                                         style: TextStyle(
                                           color: Color(0xffF2F2F2),
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
                                         ),
                                       ),
                                     ],
