@@ -12,6 +12,7 @@ import 'package:fap/pages/Profile%20Page.dart';
 import 'package:fap/services/import_image.dart';
 import 'package:fap/utilities/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -30,6 +31,8 @@ class _EditProfileState extends State<EditProfile> {
   double weightValue = User.pet.weight;
   String? value;
   String selectedGender = User.pet.gender;
+  final _formKey = GlobalKey<FormState>();
+
 
   TextEditingController userNameController =
       new TextEditingController(text: User.userName);
@@ -97,99 +100,106 @@ class _EditProfileState extends State<EditProfile> {
         body: SafeArea(
           child: SingleChildScrollView(
             padding: EdgeInsets.symmetric(horizontal: 15),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    BackButton(
-                      onPressed: () => {
-                        Navigator.of(context).pop(),
-                      },
-                    ),
-                    Text(
-                      headerMessage,
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      BackButton(
+                        onPressed: () => {
+                          Navigator.of(context).pop(),
+                        },
                       ),
-                    )
-                  ],
-                ),
-                const SizedBox(height: 5),
-                EditProfileModify(
-                  petImage: User.pet.petImage,
-                  isEdit: true,
-                  onClicked: () async {
-                    setState(() {
-                      getImage();
-                    });
-                  },
-                ),
-                const SizedBox(height: 15),
-                userNameInput(),
-                const SizedBox(height: 20),
-                petNameInput(),
-                const SizedBox(height: 20),
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 2,
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 8),
-                        child: petAgeInput(),
+                      Text(
+                        headerMessage,
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    ],
+                  ),
+                  const SizedBox(height: 5),
+                  EditProfileModify(
+                    petImage: User.pet.petImage,
+                    isEdit: true,
+                    onClicked: () async {
+                      setState(() {
+                        getImage();
+                      });
+                    },
+                  ),
+                  const SizedBox(height: 15),
+                  userNameInput(),
+                  const SizedBox(height: 20),
+                  petNameInput(),
+                  const SizedBox(height: 20),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 8),
+                          child: petAgeInput(),
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 20),
-                    Expanded(
-                      flex: 3,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 8),
-                        child: petBreedInput(),
+                      const SizedBox(height: 20),
+                      Expanded(
+                        flex: 3,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 8),
+                          child: petBreedInput(),
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20),
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 2,
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 8),
-                        child: petWeightInput(),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 8),
+                          child: petWeightInput(),
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 20),
-                    Expanded(
-                      flex: 3,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 8),
-                        child: Container(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Pet\'s Gender',
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
+                      const SizedBox(height: 20),
+                      Expanded(
+                        flex: 3,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 8),
+                          child: Container(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Pet\'s Gender',
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(height: 5),
-                              Container(
-                                width: 225,
-                                height: 59,
-                                child: InputDecorator(
-                                  decoration: InputDecoration(
-                                      hintText: value,
-                                      border: OutlineInputBorder(
-                                          // borderRadius: BorderRadius.circular(10),
-                                          )),
-                                  // children: [
-                                  child: ButtonTheme(
-                                    // alignedDropdown: true,
+                                const SizedBox(height: 5),
+                                Container(
+                                  width: 225,
+                                  height: 59,
+                                  child: InputDecorator(
+                                    decoration: InputDecoration(
+                                        hintText: value,
+                                        border: OutlineInputBorder(
+                                            // borderRadius: BorderRadius.circular(10),
+                                            )),
+                                    // children: [
                                     child: DropdownButtonHideUnderline(
                                       child: DropdownButton<String>(
+                                        // validator: (value) {
+                                        //   if (value == null) {
+                                        //     return 'Choose at least one.';
+                                        //   }
+                                        // },
                                         value: selectedGender,
                                         iconSize: 25,
                                         icon: Icon(Icons.arrow_drop_down,
@@ -202,44 +212,44 @@ class _EditProfileState extends State<EditProfile> {
                                         }),
                                       ),
                                     ),
+                                    // ],
                                   ),
-                                  // ],
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: 150,
-                      child: Slider(
-                        value: weightValue.toDouble(),
-                        min: 1.0,
-                        max: 150.0,
-                        activeColor: thirdColor,
-                        inactiveColor: thirdTransparentColor,
-                        onChanged: (double newValue) {
-                          setState(() {
-                            weightValue = newValue.round().toDouble();
-                            petWeightController.text = weightValue.toString();
-                          });
-                        },
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: 150,
+                        child: Slider(
+                          value: weightValue.toDouble(),
+                          min: 1.0,
+                          max: 150.0,
+                          activeColor: thirdColor,
+                          inactiveColor: thirdTransparentColor,
+                          onChanged: (double newValue) {
+                            setState(() {
+                              weightValue = newValue.round().toDouble();
+                              petWeightController.text = weightValue.toString();
+                            });
+                          },
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20),
-                petAboutInput(),
-                const SizedBox(height: 40),
-                saveButton(),
-                const SizedBox(height: 15),
-              ],
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  petAboutInput(),
+                  const SizedBox(height: 40),
+                  saveButton(),
+                  const SizedBox(height: 15),
+                ],
+              ),
             ),
           ),
         ),
@@ -264,23 +274,25 @@ class _EditProfileState extends State<EditProfile> {
         vPadding: 10,
         hPadding: 15,
         onClicked: () {
-          saveChanges();
-          print(userNameController.text +
-              petNameController.text +
-              petAgeController.text +
-              petBreedController.text +
-              petWeightController.text +
-              // petGenderController.text +
-              petAboutController.text);
+          if (_formKey.currentState!.validate()) {
+            saveChanges();
+            print(userNameController.text +
+                petNameController.text +
+                petAgeController.text +
+                petBreedController.text +
+                petWeightController.text +
+                // petGenderController.text +
+                petAboutController.text);
 
-          if (isNew) {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => HomePage(),
-              ),
-            );
-          } else {
-            Navigator.pop(context);
+            if (isNew) {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => HomePage(),
+                ),
+              );
+            } else {
+              Navigator.pop(context);
+            }
           }
         },
         color: secondColor,
@@ -298,6 +310,12 @@ class _EditProfileState extends State<EditProfile> {
           ),
           const SizedBox(height: 5),
           TextFormField(
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter some text.';
+              }
+              return null;
+            },
             controller: userNameController,
             decoration: InputDecoration(
               hintStyle: TextStyle(
@@ -332,6 +350,12 @@ class _EditProfileState extends State<EditProfile> {
           ),
           const SizedBox(height: 5),
           TextFormField(
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter some text.';
+              }
+              return null;
+            },
             controller: petNameController,
             decoration: InputDecoration(
               hintStyle: TextStyle(
@@ -366,7 +390,15 @@ class _EditProfileState extends State<EditProfile> {
             ),
           ),
           const SizedBox(height: 5),
-          TextField(
+          TextFormField(
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Enter a number.';
+              } else if (double.tryParse(value) == null) {
+                return 'Wrong input.';
+              }
+              return null;
+            },
             controller: petAgeController,
             decoration: InputDecoration(
               hintStyle: TextStyle(
@@ -392,6 +424,12 @@ class _EditProfileState extends State<EditProfile> {
           ),
           const SizedBox(height: 5),
           TextFormField(
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter some text.';
+              }
+              return null;
+            },
             controller: petBreedController,
             decoration: InputDecoration(
               hintStyle: TextStyle(
@@ -426,7 +464,15 @@ class _EditProfileState extends State<EditProfile> {
             ),
           ),
           const SizedBox(height: 5),
-          TextField(
+          TextFormField(
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Enter a number.';
+              } else if (double.tryParse(value) == null) {
+                return 'Wrong input.';
+              }
+              return null;
+            },
             controller: petWeightController,
             decoration: InputDecoration(
               hintStyle: TextStyle(
@@ -453,6 +499,12 @@ class _EditProfileState extends State<EditProfile> {
           ),
           const SizedBox(height: 5),
           TextFormField(
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter some text.';
+              }
+              return null;
+            },
             controller: petAboutController,
             decoration: InputDecoration(
               hintStyle: TextStyle(
