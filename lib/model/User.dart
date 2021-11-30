@@ -14,6 +14,7 @@ class User {
   static late Pet pet;
   static List<Note> notes = [];
   static List<Expense> expenses = [];
+  static bool? isDarkMode;
 
   static Map<String, dynamic> toJson() {
     List mapNotes = [];
@@ -38,6 +39,7 @@ class User {
       'petImage': pet.petImage,
       'notes': mapNotes,
       'expenses': mapDog,
+      'isDarkMode': isDarkMode,
     };
   }
 
@@ -73,5 +75,7 @@ class User {
           decodedExpenses[i]['date']));
     }
     print("expense size: " + expenses.length.toString());
+
+    isDarkMode = json['isDarkMode'];
   }
 }
