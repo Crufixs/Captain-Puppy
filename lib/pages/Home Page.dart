@@ -383,7 +383,6 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                   ],
                                 ),
-
                                 Column(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
@@ -400,7 +399,6 @@ class _HomePageState extends State<HomePage> {
                                                 height: 30.0,
                                                 width: 30.0,
                                               ),
-
                                             ],
                                           ),
                                         ],
@@ -414,9 +412,7 @@ class _HomePageState extends State<HomePage> {
                                                 Colors.transparent),
                                       ),
                                     ),
-                                    Text(
-                                        'Help'
-                                    ),
+                                    Text('Help'),
                                   ],
                                 ),
                               ],

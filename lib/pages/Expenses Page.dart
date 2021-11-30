@@ -132,9 +132,6 @@ class ExpensesPageState extends State<ExpensesPage> {
         break;
     }
 
-    var brightness = MediaQuery.of(context).platformBrightness;
-    print(brightness);
-
     return ReusableComponent(
         insideComponents: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -152,9 +149,7 @@ class ExpensesPageState extends State<ExpensesPage> {
                       productName,
                       style: TextStyle(
                         fontSize: 18,
-                        color: brightness == Brightness.light
-                            ? Colors.white
-                            : Colors.black,
+                        color: User.isDarkMode! ? Colors.white : Colors.black,
                         fontWeight: FontWeight.w800,
                       ),
                     ),

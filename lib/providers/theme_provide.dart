@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-
-class ThemeProvider extends ChangeNotifier{
+class ThemeProvider extends ChangeNotifier {
   ThemeMode themeMode = ThemeMode.light;
   bool get isDarkMode => themeMode == ThemeMode.dark;
 
-  void toggleTheme(bool isOn){
+  void toggleTheme(bool isOn) {
     themeMode = isOn ? ThemeMode.dark : ThemeMode.light;
     notifyListeners();
   }
 }
 
-class MyThemes{
+class MyThemes {
   static final darkTheme = ThemeData(
+    brightness: Brightness.dark,
     scaffoldBackgroundColor: Colors.grey.shade900,
     colorScheme: ColorScheme.dark(),
     elevatedButtonTheme: ElevatedButtonThemeData(
@@ -22,6 +22,7 @@ class MyThemes{
     ),
   );
   static final lightTheme = ThemeData(
+    brightness: Brightness.light,
     scaffoldBackgroundColor: Colors.white,
     colorScheme: ColorScheme.light(),
   );
