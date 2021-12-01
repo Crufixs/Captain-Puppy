@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:fap/model/User.dart';
 import 'package:fap/pages/Edit%20Note%20Page.dart';
 import 'package:fap/utilities/constants.dart' as constants;
+import 'package:fap/utilities/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:date_format/date_format.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -15,6 +16,7 @@ class NotesPage extends StatefulWidget {
 }
 
 class _NotesPageState extends State<NotesPage> {
+  void showNoteAlert() {}
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -29,45 +31,41 @@ class _NotesPageState extends State<NotesPage> {
               //Notes and Trash Can
               Container(
                 width: 350,
-                padding: EdgeInsets.symmetric(vertical: 10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Notes',
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => EditNotePage(
-                              index: -1,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 16, bottom: 8),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('Notes', style: TextTitle),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => EditNotePage(
+                                index: -1,
+                              ),
+                            ),
+                          ).then((value) => setState(() {}));
+                        },
+                        child: Icon(
+                          Icons.add,
+                          color: Color(0xffF2F2F2),
+                          size: 30,
+                        ),
+                        style: ButtonStyle(
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50.0),
                             ),
                           ),
-                        ).then((value) => setState(() {}));
-                      },
-                      child: Icon(
-                        Icons.add,
-                        color: Color(0xffF2F2F2),
-                        size: 30,
-                      ),
-                      style: ButtonStyle(
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50.0),
-                          ),
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              constants.secondColor),
                         ),
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            constants.secondColor),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
 
@@ -80,7 +78,7 @@ class _NotesPageState extends State<NotesPage> {
                   child: NotesColumn(),
                 ),
                 decoration: BoxDecoration(
-                  border: Border.all(color: Color(0xff7D79F2), width: 8),
+                  border: Border.all(color: fourthColor, width: 5),
                   borderRadius: BorderRadius.circular(12),
                 ),
               ),
@@ -126,43 +124,47 @@ class _NotesColumnState extends State<NotesColumn> {
                     context: context,
                     builder: (BuildContext context) => NoteAlert(index: i),
                   ).then((value) => setState(() {})),
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 4),
-                            child: Text(
-                              displayTitle,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                                color: User.isDarkMode!
-                                    ? Colors.white
-                                    : Colors.black,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 4),
+                              child: Text(
+                                displayTitle,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                  color: User.isDarkMode!
+                                      ? Colors.white
+                                      : Colors.black,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 4.0),
-                            child: Text(
-                              User.notes[i].date,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w300,
-                                fontSize: 12,
-                                color: User.isDarkMode!
-                                    ? Colors.white
-                                    : Colors.black,
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 4.0),
+                              child: Text(
+                                User.notes[i].date,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w300,
+                                  fontSize: 12,
+                                  color: User.isDarkMode!
+                                      ? Colors.white
+                                      : Colors.black,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -171,7 +173,7 @@ class _NotesColumnState extends State<NotesColumn> {
                       ),
                     ),
                     backgroundColor:
-                        MaterialStateProperty.all<Color>(constants.secondColor),
+                        MaterialStateProperty.all<Color>(constants.thirdColor),
                   ),
                 ),
               ),
@@ -240,13 +242,13 @@ class _NoteAlertState extends State<NoteAlert> {
                     GestureDetector(
                       child: Text('Edit'),
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => EditNotePage(
-                              index: index,
-                            ),
-                          ),
+                        //pop
+                        //then push from notes page
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return EditNotePage(index: index);
+                          },
                         ).then((value) => setState(() {}));
                       },
                     ),

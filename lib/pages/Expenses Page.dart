@@ -38,10 +38,16 @@ class ExpensesPageState extends State<ExpensesPage> {
         child: Column(
           children: <Widget>[
             Center(
-              child: Text(
-                "EXPENSES",
-                style: TextTitle,
-                textAlign: TextAlign.center,
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  top: 16.0,
+                  bottom: 8,
+                ),
+                child: Text(
+                  "Expenses",
+                  style: TextTitle,
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
             Center(

@@ -130,6 +130,7 @@ class _ProfilePageState extends State<ProfilePage> {
         Text(
           User.pet.petName,
           style: TextTitle,
+          textAlign: TextAlign.center,
         ),
         //const SizedBox(height: 1),
         Text(
@@ -268,14 +269,22 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
           SizedBox(height: 10),
-          Text(
-            User.pet.about,
-            textAlign: TextAlign.justify,
-            style: TextStyle(
-              fontSize: 15,
-              height: 1.3,
+          Row(children: [
+            Padding(
+              padding: EdgeInsets.only(
+                left: MediaQuery.of(context).size.width * 0.05,
+                bottom: 16,
+              ),
+              child: Text(
+                User.pet.about,
+                textAlign: TextAlign.justify,
+                style: TextStyle(
+                  fontSize: 15,
+                  height: 1.3,
+                ),
+              ),
             ),
-          ),
+          ]),
         ],
       ),
     );
