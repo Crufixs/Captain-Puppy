@@ -28,6 +28,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    print(User.isDarkMode!.toString() + " DARKMODE");
     double screenWidth = MediaQuery.of(context).size.width;
 
     return FutureBuilder(
@@ -402,15 +403,13 @@ class _HomePageState extends State<HomePage> {
                                                     listen: false);
                                             provider
                                                 .toggleTheme(User.isDarkMode!);
-
-                                            setState(() {
-                                              if (User.isDarkMode!) {
-                                                icon = CupertinoIcons.sun_max;
-                                              } else {
-                                                icon =
-                                                    CupertinoIcons.moon_stars;
-                                              }
-                                            });
+                                            provider
+                                                .toggleTheme(User.isDarkMode!);
+                                            if (User.isDarkMode!) {
+                                              icon = CupertinoIcons.sun_max;
+                                            } else {
+                                              icon = CupertinoIcons.moon_stars;
+                                            }
                                           },
                                         ),
                                       ],

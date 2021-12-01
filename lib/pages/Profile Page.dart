@@ -250,7 +250,9 @@ class _ProfilePageState extends State<ProfilePage> {
 
   petAbout() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20),
+      padding: EdgeInsets.symmetric(
+        horizontal: MediaQuery.of(context).size.width * 0.05,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -263,17 +265,20 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           SizedBox(height: 10),
           Row(children: [
-            Padding(
-              padding: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width * 0.05,
-                bottom: 16,
-              ),
-              child: Text(
-                User.pet.about,
-                textAlign: TextAlign.justify,
-                style: TextStyle(
-                  fontSize: 15,
-                  height: 1.3,
+            Flexible(
+              child: Padding(
+                padding: EdgeInsets.only(
+                  left: MediaQuery.of(context).size.width * 0.05,
+                  right: MediaQuery.of(context).size.width * 0.05,
+                  bottom: 16,
+                ),
+                child: Text(
+                  User.pet.about,
+                  textAlign: TextAlign.justify,
+                  style: TextStyle(
+                    fontSize: 18,
+                    height: 1.3,
+                  ),
                 ),
               ),
             ),
