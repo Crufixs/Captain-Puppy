@@ -122,7 +122,6 @@ class _NotesColumnState extends State<NotesColumn> {
   }
 }
 
-
 class NotesCard extends StatefulWidget {
   NotesCard({
     required this.index,
@@ -204,7 +203,7 @@ class _NotesCardState extends State<NotesCard> {
                   ),
                 ),
                 backgroundColor:
-                MaterialStateProperty.all<Color>(constants.secondColor),
+                    MaterialStateProperty.all<Color>(constants.secondColor),
               ),
             ),
           ),
@@ -253,7 +252,11 @@ class _NoteAlertState extends State<NoteAlert> {
               ),
               Text(
                 User.notes[index].date,
-                style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
+                style: TextStyle(
+                  fontSize: 18,
+                  fontStyle: FontStyle.italic,
+                  color: User.isDarkMode! ? Colors.white : Colors.black,
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 24.0),
@@ -275,12 +278,13 @@ class _NoteAlertState extends State<NoteAlert> {
                     ),
                     GestureDetector(
                       child: Text('Delete'),
-                      onTap: () async{
+                      onTap: () async {
                         print(User.notes.length);
                         User.notes.removeAt(index);
                         print(User.notes.length);
 
-                        SharedPreferences prefs = await SharedPreferences.getInstance();
+                        SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
                         String json = jsonEncode(User.toJson());
                         prefs.setString('userData', json);
                         Navigator.pop(context);
