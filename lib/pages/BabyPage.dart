@@ -1,12 +1,10 @@
-import 'package:fap/components/ExpensesDialog.dart';
 import 'package:fap/services/expenses_brain.dart';
 import 'package:fap/utilities/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 import 'Breeds Page.dart';
-import 'Expenses Page.dart';
-import 'Home Page.dart';
+import 'Expenses Page/Expense Create.dart';
+import 'Expenses Page/Expenses Page.dart';
 import 'Notes Page.dart';
 import 'Profile Page.dart';
 

@@ -1,5 +1,4 @@
 import 'package:fap/model/User.dart';
-import 'package:fap/utilities/constants.dart';
 import 'package:flutter/material.dart';
 
 class Button extends StatelessWidget {

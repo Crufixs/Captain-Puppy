@@ -2,13 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:fap/components/EditProfile_Modify.dart';
-import 'package:fap/components/TextField_Modify.dart';
 import 'package:fap/components/Button.dart';
-import 'package:fap/components/Slider.dart';
-import 'package:fap/components/OptionSelect.dart';
-import 'package:fap/model/Pet.dart';
 import 'package:fap/model/User.dart';
-import 'package:fap/pages/Profile%20Page.dart';
 import 'package:fap/services/import_image.dart';
 import 'package:fap/utilities/constants.dart';
 import 'package:flutter/material.dart';
@@ -85,14 +80,11 @@ class _EditProfileState extends State<EditProfile> {
     ImageImportBrain imb = ImageImportBrain();
     ImageSource? source = await imb.showImageSource(context);
     File? img = await imb.pickImage(source!);
-    print(User.pet.petImage);
     User.pet.petImage = img!.path;
-    print(User.pet.petImage);
   }
 
   @override
   Widget build(BuildContext context) {
-    final color = Theme.of(context).colorScheme.primary;
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -272,14 +264,6 @@ class _EditProfileState extends State<EditProfile> {
         onClicked: () {
           if (_formKey.currentState!.validate()) {
             saveChanges();
-            print(userNameController.text +
-                petNameController.text +
-                petAgeController.text +
-                petBreedController.text +
-                petWeightController.text +
-                // petGenderController.text +
-                petAboutController.text);
-
             if (isNew) {
               Navigator.of(context).push(
                 MaterialPageRoute(

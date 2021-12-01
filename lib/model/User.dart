@@ -1,10 +1,5 @@
-//define all the fields
-import 'dart:convert';
-import 'dart:math';
-
 import 'package:fap/model/expenses.dart';
 import 'package:fap/services/expenses_brain.dart';
-
 import 'Note.dart';
 import 'Pet.dart';
 import 'expenses.dart';
@@ -26,7 +21,6 @@ class User {
     for (int i = 0; i < expenses.length; i++) {
       mapDog.add(expenses[i].toJson());
     }
-    print("EXIT expense size: " + mapDog.length.toString());
 
     return {
       'userName': userName,
@@ -70,11 +64,10 @@ class User {
       expenses.add(new Expense(
           decodedExpenses[i]['index'],
           decodedExpenses[i]['productName'],
-          ExpensesBrain.StringToType(decodedExpenses[i]['productType']),
+          ExpensesBrain.stringToType(decodedExpenses[i]['productType']),
           decodedExpenses[i]['cost'],
           decodedExpenses[i]['date']));
     }
-    print("expense size: " + expenses.length.toString());
 
     isDarkMode = json['isDarkMode'];
   }

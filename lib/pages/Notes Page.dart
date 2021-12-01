@@ -1,11 +1,9 @@
 import 'dart:convert';
-
 import 'package:fap/model/User.dart';
 import 'package:fap/pages/Edit%20Note%20Page.dart';
 import 'package:fap/utilities/constants.dart' as constants;
 import 'package:fap/utilities/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:date_format/date_format.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class NotesPage extends StatefulWidget {
@@ -19,7 +17,6 @@ class _NotesPageState extends State<NotesPage> {
   void showNoteAlert() {}
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
     return SafeArea(
@@ -106,9 +103,7 @@ class _NotesColumnState extends State<NotesColumn> {
   Widget build(BuildContext context) {
     final children = <Widget>[];
 
-    print('Length: ' + User.notes.length.toString());
     for (int i = 0; i < User.notes.length; i++) {
-      print("IN NOTES CARD: " + i.toString());
       String displayTitle = User.notes[i].title;
       if (displayTitle == "") displayTitle = "Untitled";
       children.add(
@@ -255,10 +250,7 @@ class _NoteAlertState extends State<NoteAlert> {
                     GestureDetector(
                       child: Text('Delete'),
                       onTap: () async {
-                        print(User.notes.length);
                         User.notes.removeAt(index);
-                        print(User.notes.length);
-
                         SharedPreferences prefs =
                             await SharedPreferences.getInstance();
                         String json = jsonEncode(User.toJson());

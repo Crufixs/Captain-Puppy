@@ -1,9 +1,7 @@
-import 'dart:math';
 import 'package:fap/components/Button.dart';
 import 'package:fap/model/User.dart';
 import 'package:fap/model/breed.dart';
 import 'package:fap/services/breed_brain.dart';
-import 'package:fap/services/database_services.dart';
 import 'package:fap/utilities/constants.dart' as constants;
 import 'package:fap/utilities/constants.dart';
 import 'package:flutter/material.dart';
@@ -130,7 +128,6 @@ class _ListBreedState extends State<ListBreed> {
     );
 
     int colorIndex = 0;
-    print(breedDuplicate.length.toString() + "WAKKKKKAHKKK");
 
     for (var i = 0; i < breedDuplicate.length; i++) {
       children.add(
@@ -220,7 +217,7 @@ class BreedButton extends StatelessWidget {
                   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100.0),
-                    color: User.isDarkMode! ?  Colors.black : Colors.white,
+                    color: User.isDarkMode! ? Colors.black : Colors.white,
                   ),
                 ),
                 SizedBox(
@@ -299,8 +296,10 @@ class BreedInfoAlert extends StatelessWidget {
                 children: [
                   Text(
                     breed.name,
-                    style: TextStyle( color: User.isDarkMode! ? Colors.white :  Colors.black, fontSize: 30,
-                      fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        color: User.isDarkMode! ? Colors.white : Colors.black,
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(
@@ -383,7 +382,7 @@ class BreedInfoAlert extends StatelessWidget {
                 ],
               ),
               decoration: BoxDecoration(
-                color: User.isDarkMode! ? Colors.grey[850] :  Colors.white,
+                color: User.isDarkMode! ? Colors.grey[850] : Colors.white,
                 borderRadius: BorderRadius.circular(25.0),
                 border: Border.all(
                   width: 0,
@@ -416,11 +415,15 @@ class BreedPopupDetail extends StatelessWidget {
             text: TextSpan(children: [
               TextSpan(
                 text: detailTitle,
-                style: TextStyle( color: User.isDarkMode! ? Colors.white :  Colors.black, fontSize: 20),
+                style: TextStyle(
+                    color: User.isDarkMode! ? Colors.white : Colors.black,
+                    fontSize: 20),
               ),
               TextSpan(
                 text: detailContent,
-                style: TextStyle( color: User.isDarkMode! ? Colors.white :  Colors.black, fontSize: 20),
+                style: TextStyle(
+                    color: User.isDarkMode! ? Colors.white : Colors.black,
+                    fontSize: 20),
               ),
             ]),
             textAlign: TextAlign.left,

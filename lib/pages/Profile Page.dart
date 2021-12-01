@@ -1,14 +1,7 @@
-// import 'package:fap/components/CustomNavBar.dart';
 import 'dart:io';
-
-import 'package:fap/model/Pet.dart';
 import 'package:fap/pages/Edit%20Profile.dart';
 import 'package:fap/utilities/constants.dart';
 import 'package:fap/model/User.dart';
-import 'package:fap/model/User_Details.dart';
-import 'package:fap/components/Profile_Modify.dart';
-import 'package:fap/components/Button.dart';
-import 'package:fap/components/Information.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {

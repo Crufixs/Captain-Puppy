@@ -43,7 +43,7 @@ class ExpensesBrain {
     Expense e = new Expense(
         User.expenses.length,
         productName,
-        StringToType(productType),
+        stringToType(productType),
         cost,
         DateFormat.yMMMd().format(DateTime.now()));
     SharedPreferences roar = await SharedPreferences.getInstance();
@@ -64,7 +64,7 @@ class ExpensesBrain {
     setTotal();
   }
 
-  static ProductType StringToType(String pt) {
+  static ProductType stringToType(String pt) {
     switch (pt) {
       case "Food":
         return ProductType.Food;
@@ -79,7 +79,7 @@ class ExpensesBrain {
     }
   }
 
-  static String TypeToString(ProductType pt) {
+  static String typeToString(ProductType pt) {
     switch (pt) {
       case ProductType.Food:
         return "Food";

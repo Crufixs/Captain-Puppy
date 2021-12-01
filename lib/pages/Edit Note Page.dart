@@ -1,9 +1,7 @@
 import 'dart:convert';
-
 import 'package:date_format/date_format.dart';
 import 'package:fap/model/Note.dart';
 import 'package:fap/model/User.dart';
-import 'package:fap/utilities/constants.dart' as constants;
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -127,7 +125,7 @@ class _EditNotePageState extends State<EditNotePage> {
                       // hintStyle: constants.TextContentHeading2
                     ),
                     validator: (String? value) {
-                      if (value != null && value!.length > 30) {
+                      if (value != null && value.length > 30) {
                         return 'Title is too long.';
                       }
                       return null;
