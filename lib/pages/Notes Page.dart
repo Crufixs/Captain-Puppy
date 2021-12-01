@@ -108,107 +108,81 @@ class _NotesColumnState extends State<NotesColumn> {
   Widget build(BuildContext context) {
     final children = <Widget>[];
 
+    print('Length: ' + User.notes.length.toString());
     for (int i = 0; i < User.notes.length; i++) {
+      print("IN NOTES CARD: " + i.toString());
+      String displayTitle = User.notes[i].title;
+      if (displayTitle == "") displayTitle = "Untitled";
       children.add(
-        NotesCard(
-          index: i,
+        Container(
+          // height: 30,
+          margin: EdgeInsets.symmetric(vertical: 4),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () => showDialog(
+                    context: context,
+                    builder: (BuildContext context) => NoteAlert(index: i),
+                  ).then((value) => setState(() {})),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 4),
+                            child: Text(
+                              displayTitle,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: User.isDarkMode!
+                                    ? Colors.white
+                                    : Colors.black,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 4.0),
+                            child: Text(
+                              User.notes[i].date,
+                              style: TextStyle(
+                                fontWeight: FontWeight.w300,
+                                fontSize: 12,
+                                color: User.isDarkMode!
+                                    ? Colors.white
+                                    : Colors.black,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(constants.secondColor),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       );
     }
 
     return Column(
       children: children,
-    );
-  }
-}
-
-class NotesCard extends StatefulWidget {
-  NotesCard({
-    required this.index,
-  });
-
-  final int index;
-
-  @override
-  _NotesCardState createState() => _NotesCardState();
-}
-
-class _NotesCardState extends State<NotesCard> {
-  int index = -1;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    index = widget.index;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    String displayTitle = User.notes[index].title;
-    if (displayTitle == "") displayTitle = "Untitled";
-
-    return Container(
-      // height: 30,
-      margin: EdgeInsets.symmetric(vertical: 4),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Expanded(
-            child: ElevatedButton(
-              onPressed: () => showDialog(
-                context: context,
-                builder: (BuildContext context) => NoteAlert(index: index),
-              ).then((value) => setState(() {})),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 4),
-                        child: Text(
-                          displayTitle,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            color:
-                                User.isDarkMode! ? Colors.white : Colors.black,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 4.0),
-                        child: Text(
-                          User.notes[index].date,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w300,
-                            fontSize: 12,
-                            color:
-                                User.isDarkMode! ? Colors.white : Colors.black,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              style: ButtonStyle(
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                ),
-                backgroundColor:
-                    MaterialStateProperty.all<Color>(constants.secondColor),
-              ),
-            ),
-          ),
-        ],
-      ),
     );
   }
 }
@@ -310,7 +284,3 @@ class _NoteAlertState extends State<NoteAlert> {
     );
   }
 }
-
-// class NoteAlert extends StatelessWidget {
-//
-// }
