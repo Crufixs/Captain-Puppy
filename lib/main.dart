@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:fap/pages/Home%20Page.dart';
-import 'package:fap/pages/Welcome%20page%201.dart';
 import 'package:fap/providers/theme_provide.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,6 +9,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'model/Pet.dart';
 import 'model/User.dart';
 import 'package:provider/provider.dart';
+
+import 'pages/Welcome Page.dart';
 
 bool isNew = true;
 

@@ -81,6 +81,7 @@ class _EditProfileState extends State<EditProfile> {
     ImageSource? source = await imb.showImageSource(context);
     File? img = await imb.pickImage(source!);
     User.pet.petImage = img!.path;
+    setState(() {});
   }
 
   @override

@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'BabyPage.dart';
-import 'Welcome page 1.dart';
+import 'Welcome Page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -476,6 +476,6 @@ class _HomePageState extends State<HomePage> {
       MaterialPageRoute(
         builder: (context) => BabyPage(selectedPage: pageNo),
       ),
-    );
+    ).then((value) => {refresh()});
   }
 }
