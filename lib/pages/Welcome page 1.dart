@@ -18,25 +18,17 @@ class WelcomePage extends StatefulWidget {
 //ROAR
 class _WelcomePageState extends State<WelcomePage> {
   List messages = [
-    "I miss screaming and fighting and kissing in the rain "
-        "It's 2:00 a.m. and I'm cursing your name "
-        "So in love that I acted insane "
-        "And that's the way I loved you "
-        "Breaking down and coming undone "
-        "It's a roller coaster kinda rush ",
-    "I diss screaming and fighting and kissing in the rain "
-        "It's 2:00 a.m. and I'm cursing your name "
-        "So in love that I acted insane "
-        "And that's the way I loved you "
-        "Breaking down and coming undone "
-        "It's a roller coaster kinda rush ",
-    "I riss screaming and fighting and kissing in the rain "
-        "It's 2:00 a.m. and I'm cursing your name "
-        "So in love that I acted insane "
-        "And that's the way I loved you "
-        "Breaking down and coming undone "
-        "It's a roller coaster kinda rush ",
+    "Manage expenses for your dog's needs such as food, utilities, and health care.",
+    "Get to know more about various dog breeds and their characteristics.",
+    "Keep track of your activities with your personal journal dedicated for your pet.",
     "dummy"
+  ];
+
+  List titles = [
+    "Track Your Expenses",
+    "Learn About Breeds",
+    "Take Down Notes",
+    "Ready to get started with your " + "\npet management app?",
   ];
 
   int _currentIndex = 0;
@@ -44,33 +36,67 @@ class _WelcomePageState extends State<WelcomePage> {
   generateTextOrButton(int index) {
     if (index != 3) {
       return Flexible(
-        child: Container(
-          width: 300,
-          child: Padding(
-            padding: const EdgeInsets.only(top: 40),
-            child: Text(messages[index]),
-          ),
+        child: Column(
+          children: [
+            const SizedBox (height: 5),
+            Text(
+              titles[index],
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 25,
+              )
+            ),
+            Container(
+              width: 300,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 40),
+                child: Text(
+                    messages[index],
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 18,
+                ),
+                ),
+              ),
+            ),
+          ],
         ),
       );
     } else {
       return Padding(
         padding: const EdgeInsets.only(top: 40),
-        child: Button(
-          color: constants.firstColor,
-          onClicked: () {
-            if (fromHelp) {
-              Navigator.pop(context);
-            } else {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => EditProfile(isNew: true)),
-              );
-            }
-          },
-          hPadding: 30,
-          vPadding: 30,
-          text: 'Let\'s Get Started!',
+        child: Column(
+          children: [
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 20),
+                child: Text(
+                  titles[index],
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 18,
+                  ),
+                ),
+              ),
+            ),
+            Button(
+              color: constants.firstColor,
+              onClicked: () {
+                if (fromHelp) {
+                  Navigator.pop(context);
+                } else {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => EditProfile(isNew: true)),
+                  );
+                }
+              },
+              hPadding: 20,
+              vPadding: 20,
+              text: 'Let\'s Get Started!',
+            ),
+          ],
         ),
       );
     }
@@ -119,8 +145,8 @@ class _WelcomePageState extends State<WelcomePage> {
                                 height: 400,
                                 width: 400,
                                 child: Padding(
-                                  padding: const EdgeInsets.only(top: 80),
-                                  child: Image.asset("images/page$i.png"),
+                                  padding: const EdgeInsets.only(top: 80, bottom: 20),
+                                  child: Image.asset("images/wpage$i.png"),
                                 )),
                           ),
                           generateTextOrButton(i),
