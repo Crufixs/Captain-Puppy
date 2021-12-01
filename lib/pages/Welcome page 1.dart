@@ -31,17 +31,35 @@ class _WelcomePageState extends State<WelcomePage> {
     "dummy"
   ];
 
+  List titles = [
+    "BLAAAAA",
+    "AAAAKS",
+    "SHSHJSHSJ",
+    "DUMMY"
+  ];
+
   int _currentIndex = 0;
 
   generateTextOrButton(int index) {
     if (index != 3) {
       return Flexible(
-        child: Container(
-          width: 300,
-          child: Padding(
-            padding: const EdgeInsets.only(top: 40),
-            child: Text(messages[index]),
-          ),
+        child: Column(
+          children: [
+            Container(
+              width: 300,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 40),
+                child: Text(titles[index]),
+              ),
+            ),
+            Container(
+              width: 300,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 40),
+                child: Text(messages[index]),
+              ),
+            ),
+          ],
         ),
       );
     } else {
