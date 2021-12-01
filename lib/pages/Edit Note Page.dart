@@ -1,9 +1,7 @@
 import 'dart:convert';
-
 import 'package:date_format/date_format.dart';
 import 'package:fap/model/Note.dart';
 import 'package:fap/model/User.dart';
-import 'package:fap/utilities/constants.dart' as constants;
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

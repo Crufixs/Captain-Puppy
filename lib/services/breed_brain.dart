@@ -12,12 +12,9 @@ class BreedBrain {
   Future<void> generateBreedData() async {
     DatabaseServices databaseServices = DatabaseServices();
     bool isDatabaseExisting = await databaseServices.isDatabaseExisting();
-    print(isDatabaseExisting.toString() + "WAKWAK");
 
-    if(isDatabaseExisting){
-      // print('GENERATING...');
+    if (isDatabaseExisting) {
       breeds = await databaseServices.generateBreedList();
-      // print('DONE GENERATING!!!');
       return;
     }
 
@@ -34,7 +31,7 @@ class BreedBrain {
       String lifeSpan = breedData[i]['life_span'];
 
       String temperament = "";
-      if(breedData[i]['temperament'] == null)
+      if (breedData[i]['temperament'] == null)
         temperament = "Data Unavailable";
       else
         temperament = breedData[i]['temperament'];
@@ -57,7 +54,7 @@ class BreedBrain {
     breeds = await databaseServices.generateBreedList();
   }
 
-  List<Breed> getBreedList(){
+  List<Breed> getBreedList() {
     return breeds;
   }
 }

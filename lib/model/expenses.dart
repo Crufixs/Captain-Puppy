@@ -1,21 +1,14 @@
 import 'package:fap/services/expenses_brain.dart';
-import 'package:intl/intl.dart';
 
 class Expense {
-  int _index = 0;
-  String _productName = "";
-  ProductType _productType = ProductType.ERROR;
-  String _date = DateFormat.yMMMd().format(DateTime.now());
-  double _cost = 0;
+  int _index;
+  String _productName;
+  ProductType _productType;
+  String _date;
+  double _cost;
 
-  Expense(int index, String productName, ProductType productType, double cost,
-      String date) {
-    this._index = index;
-    this._productName = productName;
-    this._productType = productType;
-    this._cost = cost;
-    this._date = date;
-  }
+  Expense(this._index, this._productName, this._productType, this._cost,
+      this._date);
 
   int getIndex() {
     return _index;
@@ -57,7 +50,7 @@ class Expense {
     return {
       'index': _index,
       'productName': _productName,
-      'productType': ExpensesBrain.TypeToString(_productType),
+      'productType': ExpensesBrain.typeToString(_productType),
       'date': _date,
       'cost': _cost,
     };

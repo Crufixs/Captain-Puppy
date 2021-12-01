@@ -1,5 +1,5 @@
 import 'package:fap/components/Button.dart';
-import 'package:fap/components/ExpensesDialog.dart';
+import 'package:fap/pages/Expenses%20Page/Expenses Dialogs.dart';
 import 'package:fap/components/Indicator.dart';
 import 'package:fap/components/ReusableComponent.dart';
 import 'package:fap/model/User.dart';
@@ -123,7 +123,7 @@ class ExpensesPageState extends State<ExpensesPage> {
   Widget getListComponents(
       int index, String productName, String type, String cost, String date) {
     Color color = Colors.red;
-    switch (ExpensesBrain.StringToType(type)) {
+    switch (ExpensesBrain.stringToType(type)) {
       case ProductType.Toys:
         color = secondColor;
         break;
@@ -214,7 +214,6 @@ class ExpensesPageState extends State<ExpensesPage> {
       },
     ).then((value) => setState(() {
           eb.setTotal();
-          print("Rawr");
         }));
     ;
   }
@@ -307,7 +306,7 @@ class ExpensesPageState extends State<ExpensesPage> {
     for (Expense e in User.expenses) {
       int index = e.getIndex();
       String productName = e.getProductName();
-      String type = ExpensesBrain.TypeToString(e.getProductType());
+      String type = ExpensesBrain.typeToString(e.getProductType());
       String cost = "\$" + e.getCost().toStringAsFixed(2);
       String date = e.getDate();
       ListChildren.add(getListComponents(index, productName, type, cost, date));
@@ -325,15 +324,6 @@ class ExpensesPageState extends State<ExpensesPage> {
     double totalToys = eb.getTotalToy();
     double totalHealth = eb.getTotalHealth();
     double totaltotal = totalFood + totalUtilities + totalToys + totalHealth;
-    print(totaltotal.toString() +
-        " = h" +
-        totalFood.toString() +
-        " + u" +
-        totalUtilities.toString() +
-        " + t" +
-        totalToys.toString() +
-        " + h" +
-        totalHealth.toString());
     if (User.expenses.isEmpty) {
       return <PieChartSectionData>[
         PieChartSectionData(
