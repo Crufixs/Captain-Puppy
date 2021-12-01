@@ -23,7 +23,7 @@ class _WelcomePageState extends State<WelcomePage> {
     "I riss screaming and fighting and kissing in the rain ",
     "dummy"
   ];
-
+//
   int _currentIndex = 0;
 
   generateTextOrButton(int index) {
