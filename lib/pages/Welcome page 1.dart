@@ -18,24 +18,9 @@ class WelcomePage extends StatefulWidget {
 //ROAR
 class _WelcomePageState extends State<WelcomePage> {
   List messages = [
-    "I miss screaming and fighting and kissing in the rain "
-        "It's 2:00 a.m. and I'm cursing your name "
-        "So in love that I acted insane "
-        "And that's the way I loved you "
-        "Breaking down and coming undone "
-        "It's a roller coaster kinda rush ",
-    "I diss screaming and fighting and kissing in the rain "
-        "It's 2:00 a.m. and I'm cursing your name "
-        "So in love that I acted insane "
-        "And that's the way I loved you "
-        "Breaking down and coming undone "
-        "It's a roller coaster kinda rush ",
-    "I riss screaming and fighting and kissing in the rain "
-        "It's 2:00 a.m. and I'm cursing your name "
-        "So in love that I acted insane "
-        "And that's the way I loved you "
-        "Breaking down and coming undone "
-        "It's a roller coaster kinda rush ",
+    "I miss screaming and fighting and kissing in the rain ",
+    "I diss screaming and fighting and kissing in the rain ",
+    "I riss screaming and fighting and kissing in the rain ",
     "dummy"
   ];
 
