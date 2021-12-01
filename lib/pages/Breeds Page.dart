@@ -189,6 +189,7 @@ class BreedButton extends StatelessWidget {
   final Breed breed;
   final Color color;
   final Color iconColor;
+
   // final String picture;
 
   @override
@@ -219,7 +220,7 @@ class BreedButton extends StatelessWidget {
                   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100.0),
-                    color: User.isDarkMode! ? Colors.white : Colors.black,
+                    color: User.isDarkMode! ?  Colors.black : Colors.white,
                   ),
                 ),
                 SizedBox(
@@ -293,12 +294,13 @@ class BreedInfoAlert extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(20.0),
               width: MediaQuery.of(context).size.width * 0.8,
-              // color: constants.firstColor,
+              //color: constants.firstColor,
               child: Column(
                 children: [
                   Text(
                     breed.name,
-                    style: constants.TextContentHeading1,
+                    style: TextStyle( color: User.isDarkMode! ? Colors.white :  Colors.black, fontSize: 30,
+                      fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(
@@ -312,7 +314,7 @@ class BreedInfoAlert extends StatelessWidget {
                           decoration: BoxDecoration(
                             gradient: LinearGradient(colors: [
                               constants.fifthColor,
-                              Colors.black,
+                              User.isDarkMode! ? Colors.black : Colors.white,
                               constants.fifthColor,
                             ]),
                           ),
@@ -361,24 +363,27 @@ class BreedInfoAlert extends StatelessWidget {
                     detailTitle: 'Temperament: ',
                     detailContent: breed.temperament,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Button(
-                        color: firstColor,
-                        vPadding: 5,
-                        hPadding: 5,
-                        text: 'BACK',
-                        onClicked: () {
-                          Navigator.pop(context);
-                        },
-                      ),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Button(
+                          color: constants.thirdColor,
+                          vPadding: 5,
+                          hPadding: 5,
+                          text: 'BACK',
+                          onClicked: () {
+                            Navigator.pop(context);
+                          },
+                        ),
+                      ],
+                    ),
                   )
                 ],
               ),
               decoration: BoxDecoration(
-                color: constants.fifthColor,
+                color: User.isDarkMode! ? Colors.grey[850] :  Colors.white,
                 borderRadius: BorderRadius.circular(25.0),
                 border: Border.all(
                   width: 0,
@@ -411,11 +416,11 @@ class BreedPopupDetail extends StatelessWidget {
             text: TextSpan(children: [
               TextSpan(
                 text: detailTitle,
-                style: constants.TextContentHeading2,
+                style: TextStyle( color: User.isDarkMode! ? Colors.white :  Colors.black, fontSize: 20),
               ),
               TextSpan(
                 text: detailContent,
-                style: constants.TextContentNormal,
+                style: TextStyle( color: User.isDarkMode! ? Colors.white :  Colors.black, fontSize: 20),
               ),
             ]),
             textAlign: TextAlign.left,
