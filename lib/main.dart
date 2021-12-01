@@ -42,12 +42,12 @@ loadData() async {
   User.fromJson(decodedJson);
   // print('ANG USERNAME KO AY: ' + User.userName.toString());
   // print('EXAMPLE NOTE: ' + User.notes[4].title);
-  User.isDarkMode = false;
   return;
 }
 
 void saveData() async {
   //copying file to user's phone
+  User.isDarkMode = false;
   final profilePicFileName = 'profilePic.png';
   final byteData = await rootBundle.load('images/profilePic.png');
   String dir = (await getApplicationDocumentsDirectory()).path;
