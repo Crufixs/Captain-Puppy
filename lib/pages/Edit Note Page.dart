@@ -127,7 +127,7 @@ class _EditNotePageState extends State<EditNotePage> {
                       // hintStyle: constants.TextContentHeading2
                     ),
                     validator: (String? value) {
-                      if (value != null && value!.length > 30) {
+                      if (value != null && value.length > 30) {
                         return 'Title is too long.';
                       }
                       return null;
