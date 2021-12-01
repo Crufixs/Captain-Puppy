@@ -84,7 +84,7 @@ class _WelcomePageState extends State<WelcomePage> {
               color: constants.firstColor,
               onClicked: () {
                 final player = AudioCache();
-                player.play('assets/audio/dogBark.mp3');
+                player.play('audio/dogBark.mp3');
                 if (fromHelp) {
                   Navigator.pop(context);
                 } else {

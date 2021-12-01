@@ -128,7 +128,7 @@ class _HomePageState extends State<HomePage> {
                             Column(
                               children: [
                                 Image.asset(
-                                  'images/gender.png',
+                                  'assets/images/gender.png',
                                   width: 40,
                                   height: 40,
                                 ),
@@ -158,7 +158,7 @@ class _HomePageState extends State<HomePage> {
                             Column(
                               children: [
                                 Image.asset(
-                                  "images/weight.png",
+                                  "assets/images/weight.png",
                                   width: 40,
                                   height: 40,
                                 ),
@@ -192,7 +192,7 @@ class _HomePageState extends State<HomePage> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Image.asset(
-                                        "images/profileIcon.png",
+                                        "assets/images/profileIcon.png",
                                         height: 80,
                                         width: 80,
                                       ),
@@ -237,7 +237,7 @@ class _HomePageState extends State<HomePage> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Image.asset(
-                                        "images/noteIcon.png",
+                                        "assets/images/noteIcon.png",
                                         height: 80,
                                         width: 80,
                                       ),
@@ -332,7 +332,7 @@ class _HomePageState extends State<HomePage> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Image.asset(
-                                        "images/expensesIcon.png",
+                                        "assets/images/expensesIcon.png",
                                         height: 80,
                                         width: 80,
                                       ),
@@ -437,7 +437,7 @@ class _HomePageState extends State<HomePage> {
                                                 MainAxisAlignment.end,
                                             children: [
                                               Image.asset(
-                                                "images/qmarkFinal.png",
+                                                "assets/images/qmarkFinal.png",
                                                 height: 30.0,
                                                 width: 30.0,
                                               ),

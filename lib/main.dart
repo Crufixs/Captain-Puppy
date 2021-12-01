@@ -40,7 +40,7 @@ void saveData() async {
   //copying file to user's phone
   User.isDarkMode = false;
   final profilePicFileName = 'profilePic.png';
-  final byteData = await rootBundle.load('images/profilePic.png');
+  final byteData = await rootBundle.load('assets/images/profilePic.png');
   String dir = (await getApplicationDocumentsDirectory()).path;
   final buffer = byteData.buffer;
   await File('$dir/$profilePicFileName').writeAsBytes(
