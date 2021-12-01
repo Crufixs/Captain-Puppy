@@ -1,3 +1,4 @@
+import 'package:fap/model/User.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -29,23 +30,15 @@ const TextContent = TextStyle(
   fontSize: 20,
 );
 
-const TextForButton = TextStyle(
-  //fontFamily:
-  fontSize: 20,
-  color: Colors.white,
-);
-
 const TextContentHeading1 = TextStyle(
   //fontFamily:
-  fontSize: 25,
-  color: Colors.black,
+  fontSize: 30,
   fontWeight: FontWeight.bold,
 );
 
 const TextContentHeading2 = TextStyle(
   //fontFamily:
   fontSize: 20,
-  color: Colors.black,
   fontWeight: FontWeight.w500,
 );
 
@@ -53,7 +46,6 @@ const TextContentNormal = TextStyle(
   //fontFamily:
   fontSize: 20,
   fontWeight: FontWeight.normal,
-  color: Colors.black
 );
 
 const Loading = SpinKitPouringHourGlassRefined(

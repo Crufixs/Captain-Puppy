@@ -122,13 +122,13 @@ class ExpensesPageState extends State<ExpensesPage> {
         color = secondColor;
         break;
       case ProductType.Health:
-        color = fourthColor;
+        color = pieChartColor4;
         break;
       case ProductType.Utilities:
-        color = thirdColor;
+        color = fourthColor;
         break;
       case ProductType.Food:
-        color = pieChartColor4;
+        color = thirdColor;
         break;
     }
 
@@ -149,7 +149,7 @@ class ExpensesPageState extends State<ExpensesPage> {
                       productName,
                       style: TextStyle(
                         fontSize: 18,
-                        color: User.isDarkMode! ? Colors.white : Colors.black,
+                        color: User.isDarkMode! ? Colors.black : Colors.white,
                         fontWeight: FontWeight.w800,
                       ),
                     ),
@@ -158,7 +158,7 @@ class ExpensesPageState extends State<ExpensesPage> {
                       textAlign: TextAlign.right,
                       style: TextStyle(
                         fontSize: 15,
-                        color: User.isDarkMode! ? Colors.white : Colors.black,
+                        color: User.isDarkMode! ? Colors.black : Colors.white,
                         fontWeight: FontWeight.normal,
                       ),
                     ),
@@ -166,7 +166,7 @@ class ExpensesPageState extends State<ExpensesPage> {
                       cost,
                       style: TextStyle(
                         fontSize: 15,
-                        color: User.isDarkMode! ? Colors.white : Colors.black,
+                        color: User.isDarkMode! ? Colors.black : Colors.white,
                         fontWeight: FontWeight.normal,
                       ),
                     ),
@@ -185,7 +185,7 @@ class ExpensesPageState extends State<ExpensesPage> {
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.normal,
-                      color: User.isDarkMode! ? Colors.white : Colors.black,
+                      color: User.isDarkMode! ? Colors.black : Colors.white,
                     ),
                   ),
                 ),

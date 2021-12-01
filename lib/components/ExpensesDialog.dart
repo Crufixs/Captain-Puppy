@@ -184,20 +184,28 @@ class _AddExpense extends State<AddExpense> {
   }
 }
 
-class EditExpensePopUp extends StatelessWidget {
+class EditExpensePopUp extends StatefulWidget {
+  EditExpensePopUp(this.eb, this.index);
   final ExpensesBrain eb;
   final int index;
 
-  EditExpensePopUp(this.eb, this.index) {
-    price = eb.getExpenseAt(index).getCost().toString();
-    productName = eb.getExpenseAt(index).getProductName();
-  }
-  late Function updateState;
+  @override
+  State<EditExpensePopUp> createState() => _EditExpensePopUpState(eb, index);
+}
+
+class _EditExpensePopUpState extends State<EditExpensePopUp> {
   late String price;
   late String productName;
 
+  ExpensesBrain eb;
+  int index;
+
+  _EditExpensePopUpState(this.eb, this.index) {}
+
   @override
   Widget build(BuildContext context) {
+    price = eb.getExpenseAt(index).getCost().toString();
+    productName = eb.getExpenseAt(index).getProductName();
     return AlertDialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(30),
@@ -212,9 +220,10 @@ class EditExpensePopUp extends StatelessWidget {
             children: <Widget>[
               Padding(
                 padding: EdgeInsets.only(top: 8.0),
-                child: Text("PRODUCT NAME",
-                    style:
-                        TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+                child: Text(
+                  productName,
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                ),
               ),
               Divider(
                 thickness: 2,
@@ -225,7 +234,7 @@ class EditExpensePopUp extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("\$ Price", style: TextStyle(fontSize: 30)),
+                      Text("\$ $price", style: TextStyle(fontSize: 30)),
                     ],
                   ),
                 ),
@@ -242,8 +251,12 @@ class EditExpensePopUp extends StatelessWidget {
                       showDialog(
                         context: context,
                         builder: (BuildContext context) {
-                          return EditExpense(eb, index);
+                          return EditExpense(widget.eb, widget.index);
                         },
+                      ).then(
+                        (value) => setState(() {
+                          print("Rawr" + price);
+                        }),
                       );
                     },
                   ),

@@ -234,7 +234,7 @@ class BreedButton extends StatelessWidget {
                         breed.name,
                         style: TextStyle(
                           fontSize: 23,
-                          color: User.isDarkMode! ? Colors.white : Colors.black,
+                          color: User.isDarkMode! ? Colors.black : Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -246,7 +246,8 @@ class BreedButton extends StatelessWidget {
                           softWrap: false,
                           style: TextStyle(
                             fontSize: 15,
-                            color: User.isDarkMode! ? Colors.white : Colors.black,
+                            color:
+                                User.isDarkMode! ? Colors.black : Colors.white,
                             fontWeight: FontWeight.normal,
                           ),
                         ),

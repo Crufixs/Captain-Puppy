@@ -1,5 +1,6 @@
 import 'package:fap/components/Button.dart';
 import 'package:fap/utilities/constants.dart' as constants;
+import 'package:fap/utilities/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -14,20 +15,27 @@ class WelcomePage extends StatefulWidget {
   _WelcomePageState createState() => _WelcomePageState();
 }
 
+//ROAR
 class _WelcomePageState extends State<WelcomePage> {
   List messages = [
-    "Brief description Brief description 1Brief description 1Brief "
-        "description 1Brief description 1Brief description 1Brief "
-        "description 1Brief description 1Brief description 1Brief "
-        "description 1Brief description 1 ",
-    "Brief description Brief description 1Brief description 1Brief "
-        "description 1Brief description 1Brief description 1Brief "
-        "description 1Brief description 1Brief description 1Brief "
-        "description 1Brief description 2 ",
-    "Brief description Brief description 1Brief description 1Brief "
-        "description 1Brief description 1Brief description 1Brief "
-        "description 1Brief description 1Brief description 1Brief "
-        "description 1Brief description 3 ",
+    "I miss screaming and fighting and kissing in the rain "
+        "It's 2:00 a.m. and I'm cursing your name "
+        "So in love that I acted insane "
+        "And that's the way I loved you "
+        "Breaking down and coming undone "
+        "It's a roller coaster kinda rush ",
+    "I diss screaming and fighting and kissing in the rain "
+        "It's 2:00 a.m. and I'm cursing your name "
+        "So in love that I acted insane "
+        "And that's the way I loved you "
+        "Breaking down and coming undone "
+        "It's a roller coaster kinda rush ",
+    "I riss screaming and fighting and kissing in the rain "
+        "It's 2:00 a.m. and I'm cursing your name "
+        "So in love that I acted insane "
+        "And that's the way I loved you "
+        "Breaking down and coming undone "
+        "It's a roller coaster kinda rush ",
     "dummy"
   ];
 
@@ -78,8 +86,8 @@ class _WelcomePageState extends State<WelcomePage> {
               );
             }
           },
-          hPadding: 10,
-          vPadding: 10,
+          hPadding: 30,
+          vPadding: 30,
           text: 'Let\'s Get Started!',
         ),
       );
@@ -126,8 +134,8 @@ class _WelcomePageState extends State<WelcomePage> {
                                 // color: Colors.white,
                                 ),
                             child: Container(
-                                height: 500,
-                                width: 500,
+                                height: 400,
+                                width: 400,
                                 child: Padding(
                                   padding: const EdgeInsets.only(top: 80),
                                   child: Image.asset("images/page$i.png"),
@@ -148,8 +156,8 @@ class _WelcomePageState extends State<WelcomePage> {
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     color: _currentIndex == index
-                                        ? Color.fromRGBO(0, 0, 0, 0.8)
-                                        : Color.fromRGBO(0, 0, 0, 0.3),
+                                        ? firstColor
+                                        : Colors.grey,
                                   ),
                                 );
                               }).toList(),
