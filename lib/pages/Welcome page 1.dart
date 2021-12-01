@@ -32,14 +32,14 @@ class _WelcomePageState extends State<WelcomePage> {
         child: Container(
           width: 300,
           child: Padding(
-            padding: const EdgeInsets.only(top: 40),
+            padding: const EdgeInsets.only(top: 10),
             child: Text(messages[index]),
           ),
         ),
       );
     } else {
       return Padding(
-        padding: const EdgeInsets.only(top: 40),
+        padding: const EdgeInsets.only(top: 10),
         child: Button(
           color: constants.firstColor,
           onClicked: () {
