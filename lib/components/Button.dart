@@ -31,7 +31,7 @@ class Button extends StatelessWidget {
       ),
       child: Text(text,
           style: TextStyle(
-            color: User.isDarkMode! ? Colors.black : Colors.white,
+            color: !User.isDarkMode! ? Colors.black : Colors.white,
             fontSize: 18,
           )),
       onPressed: onClicked,

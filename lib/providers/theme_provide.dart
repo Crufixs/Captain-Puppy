@@ -1,7 +1,8 @@
+import 'package:fap/model/User.dart';
 import 'package:flutter/material.dart';
 
 class ThemeProvider extends ChangeNotifier {
-  ThemeMode themeMode = ThemeMode.light;
+  ThemeMode themeMode = User.isDarkMode! ? ThemeMode.dark : ThemeMode.light;
   bool get isDarkMode => themeMode == ThemeMode.dark;
 
   void toggleTheme(bool isOn) {

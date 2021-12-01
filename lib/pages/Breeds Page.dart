@@ -217,7 +217,7 @@ class BreedButton extends StatelessWidget {
                   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100.0),
-                    color: User.isDarkMode! ? Colors.black : Colors.white,
+                    color: !User.isDarkMode! ? Colors.black : Colors.white,
                   ),
                 ),
                 SizedBox(
@@ -232,7 +232,7 @@ class BreedButton extends StatelessWidget {
                         breed.name,
                         style: TextStyle(
                           fontSize: 23,
-                          color: User.isDarkMode! ? Colors.black : Colors.white,
+                          color: !User.isDarkMode! ? Colors.black : Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -245,7 +245,7 @@ class BreedButton extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 15,
                             color:
-                                User.isDarkMode! ? Colors.black : Colors.white,
+                                !User.isDarkMode! ? Colors.black : Colors.white,
                             fontWeight: FontWeight.normal,
                           ),
                         ),

@@ -27,6 +27,9 @@ class _EditProfileState extends State<EditProfile> {
   String selectedGender = User.pet.gender;
   final _formKey = GlobalKey<FormState>();
 
+  _EditProfileState() {
+    imgPath = User.pet.petImage;
+  }
   TextEditingController userNameController =
       new TextEditingController(text: User.userName);
   TextEditingController petNameController =
@@ -76,11 +79,13 @@ class _EditProfileState extends State<EditProfile> {
     prefs.setString('userData', json);
   }
 
+  late String imgPath;
+
   void getImage() async {
     ImageImportBrain imb = ImageImportBrain();
     ImageSource? source = await imb.showImageSource(context);
     File? img = await imb.pickImage(source!);
-    User.pet.petImage = img!.path;
+    imgPath = img!.path;
     setState(() {});
   }
 
@@ -112,7 +117,7 @@ class _EditProfileState extends State<EditProfile> {
                 ),
                 const SizedBox(height: 5),
                 EditProfileModify(
-                  petImage: User.pet.petImage,
+                  petImage: imgPath,
                   isEdit: true,
                   onClicked: () async {
                     setState(() {
@@ -265,6 +270,7 @@ class _EditProfileState extends State<EditProfile> {
         onClicked: () {
           if (_formKey.currentState!.validate()) {
             saveChanges();
+            User.pet.petImage = imgPath;
             if (isNew) {
               Navigator.of(context).push(
                 MaterialPageRoute(
