@@ -21,7 +21,7 @@ class _EditNotePageState extends State<EditNotePage> {
   void initState() {
     super.initState();
     index = widget.index;
-    if(index == -1)
+    if (index == -1)
       heading = "Add Note";
     else {
       heading = "Edit Note";
@@ -33,6 +33,7 @@ class _EditNotePageState extends State<EditNotePage> {
     contentController = TextEditingController(text: initialContent);
   }
 
+  final _formKey = GlobalKey<FormState>();
   String heading = "";
   String initialContent = "";
   String initialTitle = "";
@@ -42,20 +43,21 @@ class _EditNotePageState extends State<EditNotePage> {
   var titleController = TextEditingController();
   var contentController = TextEditingController();
 
-  validateNote() async{
+  validateNote() async {
     final now = new DateTime.now();
     String formattedDate = formatDate(now, [MM, " ", d, ",", yyyy]);
 
     String title = titleController.text;
     String content = contentController.text;
 
-    if(title == "" && content == "")
-      return;
+    if (title == "" && content == "") return;
 
-    if(index == -1){ //New Note
+    if (index == -1) {
+      //New Note
       Note note = Note(title, content, formattedDate);
       User.notes.add(note);
-    } else { //Update Note
+    } else {
+      //Update Note
       User.notes[index].title = title;
       User.notes[index].content = content;
       User.notes[index].date = formattedDate;
@@ -70,73 +72,83 @@ class _EditNotePageState extends State<EditNotePage> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async => false,
-      child: Scaffold(
-        appBar: AppBar(
-          //backgroundColor: constants.fifthColor,
-          elevation: 0,
-          title: Center(
-            child: Text(
-              heading,
-              //style: constants.TextContentHeading1,
-            ),
-          ),
-          leading: GestureDetector(
-            onTap: (){
-              Navigator.pop(context);
-            },
-            child: Icon(
-              Icons.clear,
-              color: Colors.black,
-              size: 25,
-            ),
-          ),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 16.0),
-              child: GestureDetector(
-                onTap: () async{
-                  await validateNote();
-                  Navigator.pop(context);
-                },
-                child: Icon(
-                  Icons.check,
-                  color: Colors.black,
-                  size: 25,
-                ),
+      child: Form(
+        key: _formKey,
+        child: Scaffold(
+          appBar: AppBar(
+            //backgroundColor: constants.fifthColor,
+            elevation: 0,
+            title: Center(
+              child: Text(
+                heading,
+                //style: constants.TextContentHeading1,
               ),
-            )
-          ],
-        ),
-        body: Container(
-          //color: constants.fifthColor,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                TextFormField(
-                  controller: titleController,
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: 'Enter Title',
-                   // hintStyle: constants.TextContentHeading2
+            ),
+            leading: GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Icon(
+                Icons.clear,
+                color: Colors.black,
+                size: 25,
+              ),
+            ),
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(right: 16.0),
+                child: GestureDetector(
+                  onTap: () async {
+                    if (_formKey.currentState!.validate()) {
+                      await validateNote();
+                      Navigator.pop(context);
+                    }
+                  },
+                  child: Icon(
+                    Icons.check,
+                    color: Colors.black,
+                    size: 25,
                   ),
-                  //style: constants.TextContentHeading2,
                 ),
-
-                Expanded(
-                  child: TextFormField(
-                    controller: contentController,
-                    keyboardType: TextInputType.multiline,
-                    maxLines: null,
+              )
+            ],
+          ),
+          body: Container(
+            //color: constants.fifthColor,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  TextFormField(
+                    controller: titleController,
                     decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Enter Title',
+                      // hintStyle: constants.TextContentHeading2
+                    ),
+                    validator: (String? value) {
+                      if (value != null && value!.length > 30) {
+                        return 'Title is too long.';
+                      }
+                      return null;
+                    },
+                    //style: constants.TextContentHeading2,
+                  ),
+                  Expanded(
+                    child: TextFormField(
+                      controller: contentController,
+                      keyboardType: TextInputType.multiline,
+                      maxLines: null,
+                      decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: 'Add Notes',
                         //hintStyle: constants.TextContent
+                      ),
+                      //style: constants.TextContent,
                     ),
-                    //style: constants.TextContent,
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
