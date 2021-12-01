@@ -268,12 +268,14 @@ class _ProfilePageState extends State<ProfilePage> {
                 left: MediaQuery.of(context).size.width * 0.05,
                 bottom: 16,
               ),
-              child: Text(
-                User.pet.about,
-                textAlign: TextAlign.justify,
-                style: TextStyle(
-                  fontSize: 15,
-                  height: 1.3,
+              child: Flexible(
+                child: Text(
+                  User.pet.about,
+                  textAlign: TextAlign.justify,
+                  style: TextStyle(
+                    fontSize: 15,
+                    height: 1.3,
+                  ),
                 ),
               ),
             ),
