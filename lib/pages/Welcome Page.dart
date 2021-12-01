@@ -4,6 +4,7 @@ import 'package:fap/utilities/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 import 'Edit Profile.dart';
 
@@ -82,6 +83,8 @@ class _WelcomePageState extends State<WelcomePage> {
             Button(
               color: constants.firstColor,
               onClicked: () {
+                final player = AudioCache();
+                player.play('assets/audio/dogBark.mp3');
                 if (fromHelp) {
                   Navigator.pop(context);
                 } else {
@@ -146,7 +149,7 @@ class _WelcomePageState extends State<WelcomePage> {
                                 width: 400,
                                 child: Padding(
                                   padding: const EdgeInsets.only(top: 80, bottom: 20),
-                                  child: Image.asset("images/wpage$i.png"),
+                                  child: Image.asset("assets/images/wpage$i.png"),
                                 )),
                           ),
                           generateTextOrButton(i),
