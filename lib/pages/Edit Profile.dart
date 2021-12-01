@@ -19,7 +19,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'Home Page.dart';
 
 class EditProfile extends StatefulWidget {
-
   EditProfile({required this.isNew});
   final bool isNew;
 
@@ -32,7 +31,6 @@ class _EditProfileState extends State<EditProfile> {
   String? value;
   String selectedGender = User.pet.gender;
   final _formKey = GlobalKey<FormState>();
-
 
   TextEditingController userNameController =
       new TextEditingController(text: User.userName);
@@ -95,161 +93,159 @@ class _EditProfileState extends State<EditProfile> {
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme.primary;
-    return MaterialApp(
-      home: Scaffold(
-        body: SafeArea(
-          child: SingleChildScrollView(
-            padding: EdgeInsets.symmetric(horizontal: 15),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      BackButton(
-                        onPressed: () => {
-                          Navigator.of(context).pop(),
-                        },
+    return Scaffold(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: 15),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    BackButton(
+                      onPressed: () => {
+                        Navigator.of(context).pop(),
+                      },
+                    ),
+                    Text(
+                      headerMessage,
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
                       ),
-                      Text(
-                        headerMessage,
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )
-                    ],
-                  ),
-                  const SizedBox(height: 5),
-                  EditProfileModify(
-                    petImage: User.pet.petImage,
-                    isEdit: true,
-                    onClicked: () async {
-                      setState(() {
-                        getImage();
-                      });
-                    },
-                  ),
-                  const SizedBox(height: 15),
-                  userNameInput(),
-                  const SizedBox(height: 20),
-                  petNameInput(),
-                  const SizedBox(height: 20),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        flex: 2,
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 8),
-                          child: petAgeInput(),
-                        ),
+                    )
+                  ],
+                ),
+                const SizedBox(height: 5),
+                EditProfileModify(
+                  petImage: User.pet.petImage,
+                  isEdit: true,
+                  onClicked: () async {
+                    setState(() {
+                      getImage();
+                    });
+                  },
+                ),
+                const SizedBox(height: 15),
+                userNameInput(),
+                const SizedBox(height: 20),
+                petNameInput(),
+                const SizedBox(height: 20),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 8),
+                        child: petAgeInput(),
                       ),
-                      const SizedBox(height: 20),
-                      Expanded(
-                        flex: 3,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 8),
-                          child: petBreedInput(),
-                        ),
+                    ),
+                    const SizedBox(height: 20),
+                    Expanded(
+                      flex: 3,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 8),
+                        child: petBreedInput(),
                       ),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        flex: 2,
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 8),
-                          child: petWeightInput(),
-                        ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 8),
+                        child: petWeightInput(),
                       ),
-                      const SizedBox(height: 20),
-                      Expanded(
-                        flex: 3,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 8),
-                          child: Container(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Pet\'s Gender',
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                    ),
+                    const SizedBox(height: 20),
+                    Expanded(
+                      flex: 3,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 8),
+                        child: Container(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Pet\'s Gender',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
                                 ),
-                                const SizedBox(height: 5),
-                                Container(
-                                  width: 225,
-                                  height: 59,
-                                  child: InputDecorator(
-                                    decoration: InputDecoration(
-                                        hintText: value,
-                                        border: OutlineInputBorder(
-                                            // borderRadius: BorderRadius.circular(10),
-                                            )),
-                                    // children: [
-                                    child: DropdownButtonHideUnderline(
-                                      child: DropdownButton<String>(
-                                        // validator: (value) {
-                                        //   if (value == null) {
-                                        //     return 'Choose at least one.';
-                                        //   }
-                                        // },
-                                        value: selectedGender,
-                                        iconSize: 25,
-                                        icon: Icon(Icons.arrow_drop_down,
-                                            color: Colors.black),
-                                        items: ['Male', 'Female']
-                                            .map(itemSelect)
-                                            .toList(),
-                                        onChanged: (value) => setState(() {
-                                          selectedGender = value.toString();
-                                        }),
-                                      ),
+                              ),
+                              const SizedBox(height: 5),
+                              Container(
+                                width: 225,
+                                height: 59,
+                                child: InputDecorator(
+                                  decoration: InputDecoration(
+                                      hintText: value,
+                                      border: OutlineInputBorder(
+                                          // borderRadius: BorderRadius.circular(10),
+                                          )),
+                                  // children: [
+                                  child: DropdownButtonHideUnderline(
+                                    child: DropdownButton<String>(
+                                      // validator: (value) {
+                                      //   if (value == null) {
+                                      //     return 'Choose at least one.';
+                                      //   }
+                                      // },
+                                      value: selectedGender,
+                                      iconSize: 25,
+                                      icon: Icon(Icons.arrow_drop_down,
+                                          color: Colors.black),
+                                      items: ['Male', 'Female']
+                                          .map(itemSelect)
+                                          .toList(),
+                                      onChanged: (value) => setState(() {
+                                        selectedGender = value.toString();
+                                      }),
                                     ),
-                                    // ],
                                   ),
+                                  // ],
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                        width: 150,
-                        child: Slider(
-                          value: weightValue.toDouble(),
-                          min: 1.0,
-                          max: 150.0,
-                          activeColor: thirdColor,
-                          inactiveColor: thirdTransparentColor,
-                          onChanged: (double newValue) {
-                            setState(() {
-                              weightValue = newValue.round().toDouble();
-                              petWeightController.text = weightValue.toString();
-                            });
-                          },
-                        ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 150,
+                      child: Slider(
+                        value: weightValue.toDouble(),
+                        min: 1.0,
+                        max: 150.0,
+                        activeColor: thirdColor,
+                        inactiveColor: thirdTransparentColor,
+                        onChanged: (double newValue) {
+                          setState(() {
+                            weightValue = newValue.round().toDouble();
+                            petWeightController.text = weightValue.toString();
+                          });
+                        },
                       ),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-                  petAboutInput(),
-                  const SizedBox(height: 40),
-                  saveButton(),
-                  const SizedBox(height: 15),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                petAboutInput(),
+                const SizedBox(height: 40),
+                saveButton(),
+                const SizedBox(height: 15),
+              ],
             ),
           ),
         ),
@@ -505,6 +501,8 @@ class _EditProfileState extends State<EditProfile> {
               }
               return null;
             },
+            keyboardType: TextInputType.multiline,
+            maxLines: null,
             controller: petAboutController,
             decoration: InputDecoration(
               hintStyle: TextStyle(
