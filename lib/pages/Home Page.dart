@@ -5,7 +5,7 @@ import 'package:fap/utilities/constants.dart' as constants;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'BabyPage.dart';
+import 'NavigationPage.dart';
 import 'Welcome Page.dart';
 
 class HomePage extends StatefulWidget {
@@ -28,10 +28,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-
     double portraitHeight = MediaQuery.of(context).size.height;
     Orientation currentOrientation = MediaQuery.of(context).orientation;
-    if(currentOrientation == Orientation.landscape){
+    if (currentOrientation == Orientation.landscape) {
       portraitHeight = MediaQuery.of(context).size.width;
     }
 
@@ -65,7 +64,8 @@ class _HomePageState extends State<HomePage> {
                                 child: Padding(
                                   padding: const EdgeInsets.only(left: 20.0),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'Hi, ' + User.userName.toString() + "!",
@@ -198,7 +198,8 @@ class _HomePageState extends State<HomePage> {
                                   children: [
                                     Expanded(
                                       child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: [
                                           Expanded(
                                             child: Container(
@@ -206,7 +207,8 @@ class _HomePageState extends State<HomePage> {
                                               // height: screenWidth * 0.47,
                                               child: ElevatedButton(
                                                 child: Column(
-                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
                                                   children: [
                                                     Image.asset(
                                                       "assets/images/profileIcon.png",
@@ -219,24 +221,29 @@ class _HomePageState extends State<HomePage> {
                                                     Text(
                                                       'Profile',
                                                       style: TextStyle(
-                                                        color: Color(0xffF2F2F2),
+                                                        color:
+                                                            Color(0xffF2F2F2),
                                                         fontSize: 20,
-                                                        fontWeight: FontWeight.bold,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                       ),
                                                     ),
                                                   ],
                                                 ),
                                                 style: ButtonStyle(
-                                                  shape: MaterialStateProperty.all<
-                                                      RoundedRectangleBorder>(
+                                                  shape:
+                                                      MaterialStateProperty.all<
+                                                          RoundedRectangleBorder>(
                                                     RoundedRectangleBorder(
                                                       borderRadius:
-                                                          BorderRadius.circular(25.0),
+                                                          BorderRadius.circular(
+                                                              25.0),
                                                     ),
                                                   ),
                                                   backgroundColor:
-                                                      MaterialStateProperty.all<Color>(
-                                                          constants.fourthColor),
+                                                      MaterialStateProperty
+                                                          .all<Color>(constants
+                                                              .fourthColor),
                                                 ),
                                                 onPressed: () {
                                                   changePage(context, 2);
@@ -253,7 +260,8 @@ class _HomePageState extends State<HomePage> {
                                               // height: screenWidth * 0.47,
                                               child: ElevatedButton(
                                                 child: Column(
-                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
                                                   children: [
                                                     Image.asset(
                                                       "assets/images/noteIcon.png",
@@ -266,24 +274,29 @@ class _HomePageState extends State<HomePage> {
                                                     Text(
                                                       'Notes',
                                                       style: TextStyle(
-                                                        color: Color(0xffF2F2F2),
+                                                        color:
+                                                            Color(0xffF2F2F2),
                                                         fontSize: 20,
-                                                        fontWeight: FontWeight.bold,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                       ),
                                                     ),
                                                   ],
                                                 ),
                                                 style: ButtonStyle(
-                                                  shape: MaterialStateProperty.all<
-                                                      RoundedRectangleBorder>(
+                                                  shape:
+                                                      MaterialStateProperty.all<
+                                                          RoundedRectangleBorder>(
                                                     RoundedRectangleBorder(
                                                       borderRadius:
-                                                          BorderRadius.circular(25.0),
+                                                          BorderRadius.circular(
+                                                              25.0),
                                                     ),
                                                   ),
                                                   backgroundColor:
-                                                      MaterialStateProperty.all<Color>(
-                                                          constants.secondColor),
+                                                      MaterialStateProperty
+                                                          .all<Color>(constants
+                                                              .secondColor),
                                                 ),
                                                 onPressed: () {
                                                   changePage(context, 4);
@@ -299,7 +312,8 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     Expanded(
                                       child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: [
                                           Expanded(
                                             child: Container(
@@ -307,7 +321,8 @@ class _HomePageState extends State<HomePage> {
                                               // height: screenWidth * 0.47,
                                               child: ElevatedButton(
                                                 child: Column(
-                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
                                                   children: [
                                                     Icon(
                                                       Icons.pets,
@@ -320,23 +335,28 @@ class _HomePageState extends State<HomePage> {
                                                     Text(
                                                       'Breeds',
                                                       style: TextStyle(
-                                                        color: Color(0xffF2F2F2),
+                                                        color:
+                                                            Color(0xffF2F2F2),
                                                         fontSize: 20,
-                                                        fontWeight: FontWeight.bold,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                       ),
                                                     ),
                                                   ],
                                                 ),
                                                 style: ButtonStyle(
-                                                  shape: MaterialStateProperty.all<
-                                                      RoundedRectangleBorder>(
+                                                  shape:
+                                                      MaterialStateProperty.all<
+                                                          RoundedRectangleBorder>(
                                                     RoundedRectangleBorder(
                                                       borderRadius:
-                                                          BorderRadius.circular(25.0),
+                                                          BorderRadius.circular(
+                                                              25.0),
                                                     ),
                                                   ),
                                                   backgroundColor:
-                                                      MaterialStateProperty.all<Color>(
+                                                      MaterialStateProperty.all<
+                                                              Color>(
                                                           constants.firstColor),
                                                 ),
                                                 onPressed: () {
@@ -354,7 +374,8 @@ class _HomePageState extends State<HomePage> {
                                               // height: screenWidth * 0.47,
                                               child: ElevatedButton(
                                                 child: Column(
-                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
                                                   children: [
                                                     Image.asset(
                                                       "assets/images/expensesIcon.png",
@@ -367,23 +388,28 @@ class _HomePageState extends State<HomePage> {
                                                     Text(
                                                       'Expenses',
                                                       style: TextStyle(
-                                                        color: Color(0xffF2F2F2),
+                                                        color:
+                                                            Color(0xffF2F2F2),
                                                         fontSize: 20,
-                                                        fontWeight: FontWeight.bold,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                       ),
                                                     ),
                                                   ],
                                                 ),
                                                 style: ButtonStyle(
-                                                  shape: MaterialStateProperty.all<
-                                                      RoundedRectangleBorder>(
+                                                  shape:
+                                                      MaterialStateProperty.all<
+                                                          RoundedRectangleBorder>(
                                                     RoundedRectangleBorder(
                                                       borderRadius:
-                                                          BorderRadius.circular(25.0),
+                                                          BorderRadius.circular(
+                                                              25.0),
                                                     ),
                                                   ),
                                                   backgroundColor:
-                                                      MaterialStateProperty.all<Color>(
+                                                      MaterialStateProperty.all<
+                                                              Color>(
                                                           constants.thirdColor),
                                                 ),
                                                 onPressed: () {
@@ -410,7 +436,8 @@ class _HomePageState extends State<HomePage> {
                             padding: const EdgeInsets.all(2.0),
                             child: Container(
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Column(
                                     children: [
@@ -426,13 +453,14 @@ class _HomePageState extends State<HomePage> {
                                             iconSize: 30,
                                             color: Color(0xff7D79F2),
                                             onPressed: () {
-                                              User.isDarkMode = !User.isDarkMode!;
+                                              User.isDarkMode =
+                                                  !User.isDarkMode!;
                                               final provider =
                                                   Provider.of<ThemeProvider>(
                                                       context,
                                                       listen: false);
-                                              provider
-                                                  .toggleTheme(User.isDarkMode!);
+                                              provider.toggleTheme(
+                                                  User.isDarkMode!);
 
                                               setState(() {
                                                 if (User.isDarkMode!) {
@@ -506,7 +534,7 @@ class _HomePageState extends State<HomePage> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => BabyPage(selectedPage: pageNo),
+        builder: (context) => NavigationPage(selectedPage: pageNo),
       ),
     ).then((value) => {refresh()});
   }

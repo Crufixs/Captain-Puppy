@@ -8,18 +8,18 @@ import 'Expenses Page/Expenses Page.dart';
 import 'Notes Page.dart';
 import 'Profile Page.dart';
 
-class BabyPage extends StatefulWidget {
-  BabyPage({this.selectedPage});
+class NavigationPage extends StatefulWidget {
+  NavigationPage({this.selectedPage});
   var selectedPage;
   final ExpensesBrain eb = new ExpensesBrain();
 
   @override
-  _BabyPageState createState() =>
-      _BabyPageState(selectedPage: selectedPage, eb: eb);
+  _NavigationPageState createState() =>
+      _NavigationPageState(selectedPage: selectedPage, eb: eb);
 }
 
-class _BabyPageState extends State<BabyPage> {
-  _BabyPageState({this.selectedPage, required this.eb}) {
+class _NavigationPageState extends State<NavigationPage> {
+  _NavigationPageState({this.selectedPage, required this.eb}) {
     _pageOptions = [
       Container(),
       ExpensesPage(eb: eb, key: _key),

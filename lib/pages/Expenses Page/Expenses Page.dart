@@ -9,7 +9,6 @@ import 'package:fap/utilities/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:intl/intl.dart';
 
 class ExpensesPage extends StatefulWidget {
   ExpensesPage({required this.eb, Key? key}) : super(key: key);
