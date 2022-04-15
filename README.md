@@ -1,6 +1,6 @@
 # fap
 
-A new Flutter project.
+This program is a DART program
 
 ## Getting Started
 
