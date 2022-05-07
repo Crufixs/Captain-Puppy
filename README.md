@@ -1,6 +1,8 @@
 # Captain Puppy
 <img src="Images%20Flutter/wpage3.png" width="200" height="200" title="Captain Puppy App Logo">
-Captain Puppy is a pet management application made using Dart version 2.14.4. It was implemented with the use of the Android Studio IDE and the Flutter version 2.5.3 open-source framework. 
+Captain Puppy is a pet management application created by Me @Sephiroth25
+
+made using Dart version 2.14.4. It was implemented with the use of the Android Studio IDE and the Flutter version 2.5.3 open-source framework. 
 
 ## Features
 *  Create a profile for your dog containing information about it’s name, breed, gender, age, weight, and your dog’s picture
