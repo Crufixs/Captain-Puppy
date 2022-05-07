@@ -34,5 +34,6 @@ shrmncrystl</a>. It was written using Dart version 2.14.4 and implemented with t
 <img src="Images%20Flutter/Screenshot_20211202-015312.jpg" width="200" title="Feature 4">
 </p>
 
-
+## Installation
+You can install Captain Puppy by downloading the apk file in this <a href="https://drive.google.com/file/d/17CBT-ASd81iUJLNGvdf7lG0ZG0MQmTq_/view?usp=sharing">Link</a>. Ater downloading it just open the file and it will automatically install it unto your Android device. Please use our app careully and enjoy~!
 
