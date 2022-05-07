@@ -1,5 +1,5 @@
 # Captain Puppy
-![](Images%20Flutter/wpage3.png | width=100))
+![](Images%20Flutter/wpage3.png | width=100)
 Captain Puppy is a pet management application made using Dart programming language. It was implemented with the use of the Android Studio IDE and the Flutter open-source framework. 
 
 ## Features
