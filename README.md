@@ -5,7 +5,7 @@ Captain Puppy is a pet management application made using Dart version 2.14.4. It
 ## Features
 *  Create a profile for your dog
 <img src="Images%20Flutter/Screenshot_20211202-014820.jpg" width="150" title="Feature 1">
-<img src="Images%20Flutter/Screenshot_20211205-105147.jpg" width="150" title="Feature 1" style="display: inline-block;">
+<img src="Images%20Flutter/Screenshot_20211205-105147.jpg" width="150" title="Feature 1" style="display: inline-block">
 *  Enable dark mode
 <img src="Images%20Flutter/Screenshot_20211202-015958.jpg" width="150" title="Feature 2">
 <img src="Images%20Flutter/Screenshot_20211202-014816.jpg" width="150" title="Feature 2">
