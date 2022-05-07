@@ -1,5 +1,5 @@
 # Captain Puppy
-<center><img src="Images%20Flutter/wpage3.png" width="200" height="200" title="Captain Puppy App Logo"></center>
+<p align="center"><img src="Images%20Flutter/wpage3.png" width="200" height="200" title="Captain Puppy App Logo"></p>
 Captain Puppy is a pet management application created by Me, <a href="https://github.com/Sephiroth25">Sephiroth25</a>, <a href="https://github.com/sirkobyyy">sirkobyyy</a>, and <a href="https://github.com/shrmncrystl">
 shrmncrystl</a>. It was written using Dart version 2.14.4 and implemented with the use of the Android Studio IDE and the Flutter version 2.5.3 open-source framework.
 
