@@ -4,6 +4,9 @@
 Captain Puppy is a pet management application created by me, <a href="https://github.com/Sephiroth25">Sephiroth25</a>, <a href="https://github.com/sirkobyyy">sirkobyyy</a>, and <a href="https://github.com/shrmncrystl">
 shrmncrystl</a>. It was written using Dart version 2.14.4 and implemented with the use of the Android Studio IDE and the Flutter version 2.5.3 open-source framework.
 
+## Contributions
+For this project, I was the main proponent for the expenses page, in both front-end and back-end aspect. However I also aided in the overall front-end design and its responsiveness.
+
 ## Features
 *  Create a profile for your dog containing information about it’s name, breed, gender, age, weight, and your dog’s picture
 <p>
